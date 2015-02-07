@@ -9,4 +9,10 @@ class AdminUser < ActiveRecord::Base
   def generate_apikey
     self[:apikey]=SecureRandom.uuid
   end
+
+  class << self
+    def authenticate_by_apikey(apikey)
+      find_by_apikey(apikey)
+    end
+  end
 end

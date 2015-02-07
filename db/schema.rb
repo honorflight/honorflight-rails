@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207045956) do
+ActiveRecord::Schema.define(version: 20150207182201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(version: 20150207045956) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street1"
+    t.string   "street2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "addresses", ["person_id"], name: "index_addresses_on_person_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -86,6 +99,24 @@ ActiveRecord::Schema.define(version: 20150207045956) do
 
   add_index "ranks", ["rank_type_id"], name: "index_ranks_on_rank_type_id", using: :btree
 
+  create_table "service_histories", force: :cascade do |t|
+    t.date     "start_year"
+    t.date     "end_year"
+    t.string   "activity"
+    t.text     "story"
+    t.integer  "branch_id"
+    t.integer  "rank_id"
+    t.integer  "rank_type_id"
+    t.integer  "person_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "service_histories", ["branch_id"], name: "index_service_histories_on_branch_id", using: :btree
+  add_index "service_histories", ["person_id"], name: "index_service_histories_on_person_id", using: :btree
+  add_index "service_histories", ["rank_id"], name: "index_service_histories_on_rank_id", using: :btree
+  add_index "service_histories", ["rank_type_id"], name: "index_service_histories_on_rank_type_id", using: :btree
+
   create_table "wars", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -93,5 +124,9 @@ ActiveRecord::Schema.define(version: 20150207045956) do
     t.datetime "updated_at",   null: false
   end
 
+  add_foreign_key "addresses", "people"
   add_foreign_key "ranks", "rank_types"
+  add_foreign_key "service_histories", "branches"
+  add_foreign_key "service_histories", "rank_types"
+  add_foreign_key "service_histories", "ranks"
 end

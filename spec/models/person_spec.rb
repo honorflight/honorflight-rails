@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
+  # it { should have_many(:service_histories) }
+
   describe "#uuid" do
     subject(:person) { FactoryGirl.create(:person) }
     it "assigns a uuid" do
