@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {:format => :json}  do
     namespace :v1 do
       resources :wars, only: [:index]
+      resources :rank_types, only: [:index]
+      resources :branches, only: [:index]
     end
   end
 
