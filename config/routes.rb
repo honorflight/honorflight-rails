@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :wars, only: [:index]
       resources :rank_types, only: [:index]
       resources :branches, only: [:index]
+      resources :people, only: [:create, :update]
     end
   end
 
