@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   has_one :address
 
   validates_presence_of :uuid
-  validates :birth_date, presence: true
+  # validates :birth_date, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, if: ->{self[:phone].blank?}

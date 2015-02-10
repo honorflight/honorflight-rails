@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :wars, only: [:index]
       resources :rank_types, only: [:index]
+      resources :ranks, only: [:index]
       resources :branches, only: [:index]
       resources :people, only: [:create, :update]
     end
