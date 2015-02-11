@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150207182201) do
   add_foreign_key "addresses", "people"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_histories", "branches"
+  add_foreign_key "service_histories", "people"
   add_foreign_key "service_histories", "rank_types"
   add_foreign_key "service_histories", "ranks"
 end

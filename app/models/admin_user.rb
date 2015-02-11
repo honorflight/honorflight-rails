@@ -7,7 +7,10 @@ class AdminUser < ActiveRecord::Base
 
   before_validation :generate_apikey, on: :create
   def generate_apikey
-    self[:apikey]=SecureRandom.uuid
+    begin
+      self[:apikey]=SecureRandom.uuid
+    rescue
+    end
   end
 
   class << self
