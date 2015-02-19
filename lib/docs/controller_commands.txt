@@ -1,0 +1,2 @@
+ # Change Awards to model for ref data
+ rails g controller API::V1::Awards --no-helper --no-assets --skip-template-engine

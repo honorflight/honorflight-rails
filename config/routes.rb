@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :rank_types, only: [:index]
       resources :ranks, only: [:index]
       resources :branches, only: [:index]
+      resources :awards, only: [:index]
       resources :people, only: [:create, :update]
     end
   end

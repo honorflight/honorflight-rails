@@ -1,11 +1,7 @@
-module API
-  module V1
-    class RanksController < ApplicationController
-      def index
-        @ranks = Rank.all
+class API::V1::RanksController < ApplicationController
+  def index
+    @ranks = Rank.all()
 
-        render :json => @ranks
-      end
-    end
+    render :json => @ranks 
   end
 end
