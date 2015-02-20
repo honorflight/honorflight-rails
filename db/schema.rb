@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219143540) do
+ActiveRecord::Schema.define(version: 20150220021243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,10 @@ ActiveRecord::Schema.define(version: 20150219143540) do
     t.date     "birth_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "war_id"
   end
+
+  add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
   create_table "rank_types", force: :cascade do |t|
     t.string   "name"
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 20150219143540) do
 
   add_foreign_key "addresses", "people"
   add_foreign_key "awards", "branches"
+  add_foreign_key "people", "wars"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
   add_foreign_key "service_awards", "service_histories"

@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Award, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:service_awards) }
+  it { should have_many(:service_histories).through(:service_awards) }
+  it { should belong_to(:branch) }
 end

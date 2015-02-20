@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  # it { should have_many(:service_histories) }
-  # it { should validate_presence_of(:birth_date) }
+  it { should have_many(:service_histories) }
+  it { should have_one(:address) }
+  it { should validate_presence_of(:birth_date) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
-  
+  it { should belong_to(:war) }
+
   describe "#uuid" do
     subject(:person) { FactoryGirl.create(:person) }
     it "assigns a uuid" do
