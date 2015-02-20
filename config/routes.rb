@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :wars, only: [:index]
       resources :rank_types, only: [:index]
+      resources :medical_condition_types, only: [:index]
+      resources :medical_condition_names, only: [:index]
       resources :ranks, only: [:index]
       resources :branches, only: [:index]
       resources :awards, only: [:index]

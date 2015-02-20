@@ -1,6 +1,8 @@
 class Person < ActiveRecord::Base
   has_many :service_histories
+  has_many :service_awards, through: :service_histories
   has_one :address
+  has_many :medical_conditions
   belongs_to :war
 
   validates_presence_of :uuid

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220021243) do
+ActiveRecord::Schema.define(version: 20150220195430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,38 @@ ActiveRecord::Schema.define(version: 20150220021243) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "medical_condition_names", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "medical_condition_type_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "medical_condition_names", ["medical_condition_type_id"], name: "index_medical_condition_names_on_medical_condition_type_id", using: :btree
+
+  create_table "medical_condition_types", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "medical_conditions", force: :cascade do |t|
+    t.date     "diagnosed_at"
+    t.date     "diagnosed_last"
+    t.text     "description"
+    t.integer  "person_id"
+    t.integer  "medical_condition_type_id"
+    t.integer  "medical_condition_name_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "medical_conditions", ["medical_condition_name_id"], name: "index_medical_conditions_on_medical_condition_name_id", using: :btree
+  add_index "medical_conditions", ["medical_condition_type_id"], name: "index_medical_conditions_on_medical_condition_type_id", using: :btree
+  add_index "medical_conditions", ["person_id"], name: "index_medical_conditions_on_person_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
@@ -152,6 +184,10 @@ ActiveRecord::Schema.define(version: 20150220021243) do
 
   add_foreign_key "addresses", "people"
   add_foreign_key "awards", "branches"
+  add_foreign_key "medical_condition_names", "medical_condition_types"
+  add_foreign_key "medical_conditions", "medical_condition_names"
+  add_foreign_key "medical_conditions", "medical_condition_types"
+  add_foreign_key "medical_conditions", "people"
   add_foreign_key "people", "wars"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
