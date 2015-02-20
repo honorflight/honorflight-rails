@@ -55,11 +55,12 @@ ActiveRecord::Schema.define(version: 20150220021243) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "apikey"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "apikey"
   end
 
+  add_index "admin_users", ["apikey"], name: "index_admin_users_on_apikey", unique: true, using: :btree
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 

@@ -25,6 +25,8 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
+      t.string :apikey
+
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
@@ -42,6 +44,7 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
 
     add_index :admin_users, :email,                unique: true
     add_index :admin_users, :reset_password_token, unique: true
+    add_index :admin_users, :apikey,               unique: true
     # add_index :admin_users, :confirmation_token,   unique: true
     # add_index :admin_users, :unlock_token,         unique: true
   end
