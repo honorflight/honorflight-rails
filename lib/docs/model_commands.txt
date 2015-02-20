@@ -1,0 +1,14 @@
+# Commands we ran to create the service awards
+
+rails g model Award name description:text
+
+rails g model ServiceAward quantity:integer comment:text service_history:references award:references
+
+rake db:migrate
+
+# API Creation
+rails g controller API::V1::Awards --no-helper --no-assets --skip-template-engine
+
+# Later to add branches to awards (branch has many awards)
+rails g migration add_branches_to_awards branch:references
+rake db:migrate
