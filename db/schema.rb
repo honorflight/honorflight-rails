@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219010647) do
+ActiveRecord::Schema.define(version: 20150219143540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(version: 20150219010647) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "branch_id"
   end
+
+  add_index "awards", ["branch_id"], name: "index_awards_on_branch_id", using: :btree
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150219010647) do
   end
 
   add_foreign_key "addresses", "people"
+  add_foreign_key "awards", "branches"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
   add_foreign_key "service_awards", "service_histories"

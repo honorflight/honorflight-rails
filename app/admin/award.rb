@@ -1,5 +1,5 @@
 ActiveAdmin.register Award do
-  permit_params :name, :description
+  permit_params :name, :description, :branch_id
   filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
 
