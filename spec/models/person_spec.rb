@@ -9,6 +9,7 @@ RSpec.describe Person, type: :model do
   it { should belong_to(:war) }
   it { should have_many(:medical_conditions) }
   it { should have_many(:service_awards) }
+  it { should belong_to(:shirt_size) }
 
   describe "#uuid" do
     subject(:person) { FactoryGirl.create(:person) }

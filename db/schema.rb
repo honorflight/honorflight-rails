@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220195430) do
+ActiveRecord::Schema.define(version: 20150220204132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,11 +121,13 @@ ActiveRecord::Schema.define(version: 20150220195430) do
     t.string   "phone"
     t.string   "uuid"
     t.date     "birth_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "war_id"
+    t.integer  "shirt_size_id"
   end
 
+  add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
   create_table "rank_types", force: :cascade do |t|
@@ -175,6 +177,14 @@ ActiveRecord::Schema.define(version: 20150220195430) do
   add_index "service_histories", ["rank_id"], name: "index_service_histories_on_rank_id", using: :btree
   add_index "service_histories", ["rank_type_id"], name: "index_service_histories_on_rank_type_id", using: :btree
 
+  create_table "shirt_sizes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "wars", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -188,6 +198,7 @@ ActiveRecord::Schema.define(version: 20150220195430) do
   add_foreign_key "medical_conditions", "medical_condition_names"
   add_foreign_key "medical_conditions", "medical_condition_types"
   add_foreign_key "medical_conditions", "people"
+  add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"

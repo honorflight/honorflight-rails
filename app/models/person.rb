@@ -4,6 +4,7 @@ class Person < ActiveRecord::Base
   has_one :address
   has_many :medical_conditions
   belongs_to :war
+  belongs_to :shirt_size
 
   validates_presence_of :uuid
   validates :birth_date, presence: true
