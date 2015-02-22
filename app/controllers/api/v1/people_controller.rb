@@ -1,10 +1,9 @@
 module API
   module V1
     class PeopleController < SessionController
-      # POST /pictures
-      # POST /pictures.json
+      # POST /people
+      # POST /people.json
       def create
-        request_body = ActiveSupport::JSON.decode(request.body.read)
         @person = Person.new(request_body)
         if @person.save
           render :json => @person 
@@ -13,10 +12,9 @@ module API
         end
       end
 
-      # # PATCH/PUT /pictures/1
-      # # PATCH/PUT /pictures/1.json
+      # # PATCH/PUT /people/1
+      # # PATCH/PUT /people/1.json
       def update
-        request_body = ActiveSupport::JSON.decode(request.body.read)
         @person = Person.find(params[:id])
         if @person.update_attributes(request_body)
           render :json => @person 

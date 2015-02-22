@@ -1,27 +1,29 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Honorflight Rails Repo.  This repository is the backend app which GSLHonorflight.org utilizes to run their flight scheduling and coordination efforts.
 
-Things you may want to cover:
+Application Details
 
-* Ruby version
+* Ruby version: 2.1.2
 
 * System dependencies
+	1. postgresql 
 
 * Configuration
 
 * Database creation
+  1. rake db:create
 
 * Database initialization
+  1. rake db:migrate
 
 * How to run the test suite
+	1. rspec .
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
 
-* ...
 
 
 Please feel free to use a different markup language if you do not plan to run
