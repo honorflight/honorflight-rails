@@ -15,6 +15,8 @@ class Person < ActiveRecord::Base
 
   # validates :phone_or_email
 
+  accepts_nested_attributes_for :address
+
   before_validation :generate_uuid, on: :create
   def generate_uuid
     self[:uuid]=SecureRandom.uuid
