@@ -160,8 +160,8 @@ ActiveRecord::Schema.define(version: 20150220204132) do
   add_index "service_awards", ["service_history_id"], name: "index_service_awards_on_service_history_id", using: :btree
 
   create_table "service_histories", force: :cascade do |t|
-    t.date     "start_year"
-    t.date     "end_year"
+    t.integer  "start_year"
+    t.integer  "end_year"
     t.string   "activity"
     t.text     "story"
     t.integer  "branch_id"

@@ -6,4 +6,7 @@ class ServiceHistory < ActiveRecord::Base
 
   has_many :service_awards
   has_many :awards, through: :service_awards
+
+  accepts_nested_attributes_for :service_awards
 end
+# .service_awards_attributes = [{service_award}, {service_award}]

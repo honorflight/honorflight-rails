@@ -1,8 +1,8 @@
 class CreateServiceHistories < ActiveRecord::Migration
   def change
     create_table :service_histories do |t|
-      t.date :start_year
-      t.date :end_year
+      t.integer :start_year
+      t.integer :end_year
       t.string :activity
       t.text :story
       t.references :branch, index: true
