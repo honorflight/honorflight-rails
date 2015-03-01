@@ -9,9 +9,9 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       request.headers["HTTP_X_ADMIN_APIKEY"] = @admin_user.apikey
     end
 
-		# Create
+		# Create POST /api/v1/people
 		it 'creates a person' do
-			post :create, FactoryGirl.attributes_for(:person).to_json
+			post :create, person: FactoryGirl.attributes_for(:person)
 
       expect(response).to be_success
       json = JSON.parse(response.body)
@@ -21,21 +21,20 @@ RSpec.describe API::V1::PeopleController, type: :controller do
     it 'catches validation errors' do
       invalid_person = FactoryGirl.attributes_for(:person)
       invalid_person["birth_date"] = nil
-      post :create, invalid_person.to_json
+      post :create, :person => invalid_person
 
       expect(response.status).to eq(422)
     end
 
-		# Update
+		# Update PUT /api/v1/people/:id
     describe "PUT update/:id" do
       let(:attr) do 
-        { :first_name => 'other', :last_name => 'freak' }
+        { first_name: 'other', last_name: 'freak' }
       end
 
       before(:each) do
         @person = FactoryGirl.create(:person)
-        request.env["RAW_POST_DATA"] = attr.to_json
-        put :update, :id => @person.id
+        put :update, :id => @person.id, person: attr
         @person.reload
       end
 
@@ -53,7 +52,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
 
     # Create
     it 'creates a person' do
-      post :create, FactoryGirl.attributes_for(:person).to_json
+      post :create, person: FactoryGirl.attributes_for(:person).to_json
 
       expect(response).to be_redirect
     end

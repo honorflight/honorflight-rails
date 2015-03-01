@@ -4,7 +4,7 @@ module API
       # POST /people
       # POST /people.json
       def create
-        @person = Person.new(request_body)
+        @person = Person.new(person_params)
         if @person.save
           render :json => @person 
         else
@@ -16,7 +16,7 @@ module API
       # # PATCH/PUT /people/1.json
       def update
         @person = Person.find(params[:id])
-        if @person.update_attributes(request_body)
+        if @person.update_attributes(person_params)
           render :json => @person 
         else
           render json: @person.errors, status: :unprocessable_entity

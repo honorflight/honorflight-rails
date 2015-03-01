@@ -21,4 +21,8 @@ class Person < ActiveRecord::Base
   def generate_uuid
     self[:uuid]=SecureRandom.uuid
   end
+
+  # def birth_date
+  #   self[:birth_date].iso8601
+  # end
 end

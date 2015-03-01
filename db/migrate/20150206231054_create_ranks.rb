@@ -4,6 +4,7 @@ class CreateRanks < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.references :rank_type, index: true
+      t.references :branch, index: true
 
       t.timestamps null: false
     end
