@@ -8,8 +8,9 @@ class API::V1::ServiceHistoriesController < SessionController
   	@service_history =  ServiceHistory.create(service_history_params)
   	if @person.service_histories << @service_history
   		render :json => @service_history
-  	else
-  		render json: @service_history.errors, status: :unprocessable_entity
+    # No invalid routes right now
+  	# else
+  	# 	render json: @service_history.errors, status: :unprocessable_entity
     end
   end
 
@@ -18,8 +19,9 @@ class API::V1::ServiceHistoriesController < SessionController
   def update
     if @service_history.update_attributes(service_history_params)
       render :json => @service_history
-    else
-      render json: @service_history.errors, status: :unprocessable_entity
+    # no invalid routes right now
+    # else
+    #   render json: @service_history.errors, status: :unprocessable_entity
     end
 
   end

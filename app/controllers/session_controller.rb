@@ -6,7 +6,4 @@ class SessionController < ActionController::Base
     redirect_to new_admin_user_session_path unless AdminUser.authenticate_by_apikey(request.headers['HTTP_X_ADMIN_APIKEY'])
   end
 
-  def request_body
-  	@body ||= ActiveSupport::JSON.decode(request.body.read)
-  end
 end

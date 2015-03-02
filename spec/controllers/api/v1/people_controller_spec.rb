@@ -42,6 +42,22 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       it { expect(@person.first_name).to eql attr[:first_name] }
       it { expect(@person.last_name).to eql attr[:last_name] }
     end
+
+    # Update PUT /api/v1/people/:id
+    describe "PUT update/:id invalid" do
+      let(:attr) do 
+        { first_name: nil, last_name: 'freak' }
+      end
+
+      before(:each) do
+        @person = FactoryGirl.create(:person)
+        put :update, :id => @person.id, person: attr
+        @person.reload
+      end
+
+      it { expect(response.status).to eq(422) }
+    end
+
 	end
 
   describe "unauthenticated" do
