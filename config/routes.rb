@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       resources :awards, only: [:index]
       resources :shirt_sizes, only: [:index]
       resources :people, only: [:create, :update] do
-        resources :service_histories, shallow: true, only: [:create, :update]
+        resources :service_histories, shallow: true, only: [:create, :update] do
+          resources :service_awards, shallow: true, only: [:index, :destroy]
+        end
       end
     end
   end
