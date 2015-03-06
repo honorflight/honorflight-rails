@@ -30,6 +30,8 @@ gem 'autoprefixer-rails', "~> 4.0.2.2"
 gem 'responders',  "~> 2.0"
 # gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 
+#heroku
+gem 'rails_12factor', group: :production
 
 gem 'virtus'
 
