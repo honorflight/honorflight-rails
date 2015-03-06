@@ -34,6 +34,7 @@ ActiveAdmin.register Person do
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.keys
     f.inputs do
       f.input :first_name
       f.input :middle_name
@@ -46,19 +47,6 @@ ActiveAdmin.register Person do
       f.input :shirt_size
     end
 
-    # One way for address
-    # f.inputs "Address", for: [:address, f.object.address || Address.new] do |address_form|
-    #   address_form.input :street1
-    #   address_form.input :street2
-    #   address_form.input :city  
-    #   address_form.input :state
-    #   address_form.input :zipcode
-
-    #   # meta_form.input :description
-    #   # meta_form.input :keywords
-    # end
-
-    # The other way for address
     f.inputs :name => "Address", for: [:address, f.object.address || Address.new] do |address|
       address.input :street1
       address.input :street2
@@ -67,21 +55,28 @@ ActiveAdmin.register Person do
       address.input :zipcode
     end
 
-    f.inputs "Service Histories", for: :service_histories do |service_history|
-      service_history.inputs
+    panel 'Service Histories' do
+      f.has_many :service_histories, label: false do |service_history|
+        service_history.input :start_year
+        service_history.input :end_year
+        service_history.input :activity
+        service_history.input :story
+        service_history.input :branch
+        service_history.input :rank_type      
+        service_history.input :rank
+      end
     end
 
-    # f.inputs do
-    #   f.has_many :service_histories do |b|
-    #     b.input :start_year
-    #     b.input :end_year
-    #     b.input :activity
-    #     b.input :story
-    #     b.input :branch
-    #     b.input :rank
-    #     b.input :rank_type
-    #   end
-    # end
+    panel 'Medical Conditions' do
+      f.has_many :medical_conditions, label: false do |medical_condition|
+        medical_condition.input :medical_condition_type
+        medical_condition.input :medical_condition_name
+        medical_condition.input :diagnosed_at
+        medical_condition.input :diagnosed_last
+        medical_condition.input :description
+      end
+    end
+
     f.actions do
       f.action :submit
     end

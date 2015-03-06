@@ -16,6 +16,8 @@ class Person < ActiveRecord::Base
   # validates :phone_or_email
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :service_histories
+  accepts_nested_attributes_for :medical_conditions
 
   before_validation :generate_uuid, on: :create
   def generate_uuid

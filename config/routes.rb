@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :service_histories, shallow: true, only: [:create, :update] do
           resources :service_awards, shallow: true, only: [:index, :destroy]
         end
+        resources :medical_conditions, shallow: true, only: [:create, :update]
       end
     end
   end
@@ -78,4 +79,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root to: "admin/dashboard#index"
 end
