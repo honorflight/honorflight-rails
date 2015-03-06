@@ -32,6 +32,7 @@ gem 'responders',  "~> 2.0"
 
 #heroku
 gem 'rails_12factor', group: :production
+gem 'thin'
 
 gem 'virtus'
 
@@ -64,4 +65,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
+
+ruby '2.1.2'
 
