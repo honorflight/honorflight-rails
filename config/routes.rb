@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         resources :service_histories, shallow: true, only: [:create, :update] do
           resources :service_awards, shallow: true, only: [:index, :destroy]
         end
-        resources :medical_conditions, shallow: true, only: [:create, :destroy]
+        resources :medical_conditions, shallow: true, only: [:index, :create, :destroy]
       end
     end
   end

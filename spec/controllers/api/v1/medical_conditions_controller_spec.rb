@@ -9,6 +9,16 @@ RSpec.describe API::V1::MedicalConditionsController, type: :controller do
 		@person = FactoryGirl.create(:person)
 	end
 
+  #index
+  it 'should retrieve medical conditions' do
+    @person.medical_conditions = FactoryGirl.create_list(:medical_condition, 10)
+    get :index, person_id: @person.id
+
+    expect(response).to be_success
+    json = JSON.parse(response.body)
+    expect(json.length).to eq(10)
+  end
+
   # Create
   it 'creates a person\'s medical condition' do
 		post :create, person_id: @person.id, medical_condition: FactoryGirl.attributes_for(:medical_condition)

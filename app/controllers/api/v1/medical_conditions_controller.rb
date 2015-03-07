@@ -1,6 +1,11 @@
 class API::V1::MedicalConditionsController < SessionController
-	before_filter :set_person, only: [:create]
+	before_filter :set_person, only: [:index, :create]
 	before_filter :set_medical_condition, only: [:destroy]
+
+  # GET /people/:person_id/medical_conditions
+  def index
+    render json: @person.medical_conditions
+  end
 
   # POST /people/:person_id/medical_conditions
   # POST /people/:person_id/medical_conditions.json
@@ -29,7 +34,7 @@ class API::V1::MedicalConditionsController < SessionController
 
   def destroy
     if @medical_condition.destroy
-      render :json => {id: params[:id], status: "Deleted"}
+      render json: {id: params[:id], status: "Deleted"}
     end
   end
 
