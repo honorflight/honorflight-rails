@@ -1,9 +1,9 @@
 class CreateMedicalConditions < ActiveRecord::Migration
   def change
     create_table :medical_conditions do |t|
-      t.date :diagnosed_at
-      t.date :diagnosed_last
-      t.text :description
+      t.string :encrypted_diagnosed_at
+      t.string :encrypted_diagnosed_last
+      t.text :encrypted_description
       t.references :person, index: true
       t.references :medical_condition_type, index: true
       t.references :medical_condition_name, index: true

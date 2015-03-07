@@ -19,13 +19,21 @@ RSpec.describe API::V1::MedicalConditionsController, type: :controller do
   end
 
   # Update
-  it 'updates a medical condition' do
-  	medical_condition = FactoryGirl.create(:medical_condition)
-  	attr = { description: "other_activititities" }
-  	put :update, id: medical_condition.id, medical_condition: attr
-  	medical_condition.reload
+  # it 'updates a medical condition' do
+  # 	# medical_condition = FactoryGirl.create(:medical_condition)
+  # 	# attr = { description: "other_activititities" }
+  # 	# put :update, id: medical_condition.id, medical_condition: attr
+  # 	# medical_condition.reload
 
-  	expect(response).to be_success
-  	expect(medical_condition.description).to eql(attr[:description])
+  # 	# expect(response).to be_success
+  # 	# expect(medical_condition.description).to eql(attr[:description])
+  # end
+
+  # Delete
+  it 'deletes the medical condition' do
+    mc = FactoryGirl.create(:medical_condition)
+    delete :destroy, id: mc.id
+    expect(MedicalCondition.count).to eq(0)
   end
+
 end

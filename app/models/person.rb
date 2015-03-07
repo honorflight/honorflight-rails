@@ -1,4 +1,7 @@
 class Person < ActiveRecord::Base
+  attr_encrypted :email, :phone, key: :encryption_key
+  attr_encrypted :birth_date, key: :encryption_key, marshal: true, marshaler: Marshel::Date
+
   has_many :service_histories
   has_many :service_awards, through: :service_histories
   has_one :address
@@ -21,7 +24,11 @@ class Person < ActiveRecord::Base
 
   before_validation :generate_uuid, on: :create
   def generate_uuid
-    self[:uuid]=SecureRandom.uuid
+    self[:uuid]||=SecureRandom.uuid
+  end
+
+  def encryption_key
+    generate_uuid
   end
 
   # def birth_date

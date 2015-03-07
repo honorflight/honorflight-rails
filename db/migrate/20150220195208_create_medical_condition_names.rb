@@ -1,7 +1,7 @@
 class CreateMedicalConditionNames < ActiveRecord::Migration
   def change
     create_table :medical_condition_names do |t|
-      t.string :name
+      t.string :encrypted_name
       t.text :description
       t.references :medical_condition_type, index: true
 

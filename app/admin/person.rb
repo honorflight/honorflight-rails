@@ -13,6 +13,7 @@ ActiveAdmin.register Person do
     column :middle_name
     column :last_name
     column :phone
+    column :birth_date
     column :created_at
     column :address
     actions

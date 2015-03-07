@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(version: 20150220204132) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "street1"
-    t.string   "street2"
+    t.string   "encrypted_street1"
+    t.string   "encrypted_street2"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
     t.integer  "person_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "addresses", ["person_id"], name: "index_addresses_on_person_id", using: :btree
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20150220204132) do
   end
 
   create_table "medical_condition_names", force: :cascade do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.text     "description"
     t.integer  "medical_condition_type_id"
     t.datetime "created_at",                null: false
@@ -92,16 +92,16 @@ ActiveRecord::Schema.define(version: 20150220204132) do
   add_index "medical_condition_names", ["medical_condition_type_id"], name: "index_medical_condition_names_on_medical_condition_type_id", using: :btree
 
   create_table "medical_condition_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "encrypted_name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "medical_conditions", force: :cascade do |t|
-    t.date     "diagnosed_at"
-    t.date     "diagnosed_last"
-    t.text     "description"
+    t.string   "encrypted_diagnosed_at"
+    t.string   "encrypted_diagnosed_last"
+    t.text     "encrypted_description"
     t.integer  "person_id"
     t.integer  "medical_condition_type_id"
     t.integer  "medical_condition_name_id"
@@ -117,12 +117,12 @@ ActiveRecord::Schema.define(version: 20150220204132) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "middle_name"
-    t.string   "email"
-    t.string   "phone"
+    t.string   "encrypted_email"
+    t.string   "encrypted_phone"
     t.string   "uuid"
-    t.date     "birth_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "encrypted_birth_date"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "war_id"
     t.integer  "shirt_size_id"
   end
