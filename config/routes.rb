@@ -15,6 +15,8 @@ Rails.application.routes.draw do
         end
         resources :medical_conditions, shallow: true, only: [:index, :create, :destroy]
       end
+
+      get 'simple_pages/:key', to: 'simple_pages#show', defaults: { format: 'json' }
     end
   end
 
