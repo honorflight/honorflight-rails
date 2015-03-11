@@ -4,7 +4,13 @@ ActiveAdmin.register Person do
 
   # auto_link war.name
 
-  # filter :id, as: :numeric, label: 'ID'
+
+  filter :war
+  filter :shirt_size
+  filter :first_name
+  filter :last_name
+  filter :middle_name
+  filter :created_at
 
   menu priority: 2
 
