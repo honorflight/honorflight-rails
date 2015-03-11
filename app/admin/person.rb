@@ -1,6 +1,6 @@
 ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id
+  permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id, :release_info
 
   # auto_link war.name
 
@@ -11,6 +11,7 @@ ActiveAdmin.register Person do
   filter :last_name
   filter :middle_name
   filter :created_at
+  filter :release_info
 
   menu priority: 2
 
@@ -24,6 +25,7 @@ ActiveAdmin.register Person do
     column :phone
     column :birth_date
     column :created_at
+    column :release_info
     column :address
     actions
   end
@@ -37,6 +39,7 @@ ActiveAdmin.register Person do
       row :phone
       row :email
       row :birth_date
+      row :release_info
       row :created_at
       row :updated_at
     end
@@ -55,6 +58,7 @@ ActiveAdmin.register Person do
       f.input :birth_date
       f.input :war
       f.input :shirt_size
+      f.input :release_info
     end
 
     f.inputs :name => "Address", for: [:address, f.object.address || Address.new] do |address|

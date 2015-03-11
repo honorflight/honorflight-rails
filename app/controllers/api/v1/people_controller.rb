@@ -26,7 +26,7 @@ module API
 
       private
       def person_params
-        params.require(:person).permit(:first_name, :last_name, :middle_name, :email, :phone, :birth_date, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
+        params.require(:person).permit(:first_name, :last_name, :middle_name, :email, :phone, :birth_date, :release_info, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
       end
     end
   end
