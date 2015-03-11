@@ -3,6 +3,8 @@ ActiveAdmin.register MedicalConditionType do
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
 
+  config.filters = false
+
   index do
     selectable_column
     id_column

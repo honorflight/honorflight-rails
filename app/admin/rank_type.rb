@@ -1,6 +1,10 @@
 ActiveAdmin.register RankType do
   permit_params :name, :description
   # filter :id, as: :numeric, label: 'ID'
+  filter :name
+  filter :description
+  
+
   menu parent: "Reference Data"
 
   # See permitted parameters documentation:

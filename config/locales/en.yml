@@ -19,5 +19,13 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+# en:
+#   date:
+#     formats:
+#       long: "%Y-%m-%d"
+#   time:
+#     formats:
+#       long: "%Y-%m-%d %H:%M:%S"
+
 en:
-  hello: "Hello world"
+  test: "Hello"
