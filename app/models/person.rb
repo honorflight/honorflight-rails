@@ -13,8 +13,7 @@ class Person < ActiveRecord::Base
   validates :birth_date, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, if: ->{self[:phone].blank?}
-  validates :phone, presence: true, if: ->{self[:email].blank?}
+  validates :phone, presence: true
 
   # validates :phone_or_email
 

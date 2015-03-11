@@ -1,6 +1,6 @@
 ActiveAdmin.register Branch do
   permit_params :name, :description
-  filter :id, as: :numeric, label: 'ID'
+  # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
 
 

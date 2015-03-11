@@ -3,7 +3,7 @@ ActiveAdmin.register War do
 
   menu parent: "Reference Data"
 
-  filter :id, as: :numeric, label: 'ID'
+  # filter :id, as: :numeric, label: 'ID'
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

@@ -1,6 +1,6 @@
 ActiveAdmin.register ShirtSize do
   permit_params :name, :description, :abbreviation
-  filter :id, as: :numeric, label: 'ID'
+  # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
 
 

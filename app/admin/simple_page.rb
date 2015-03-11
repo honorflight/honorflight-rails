@@ -1,6 +1,5 @@
 ActiveAdmin.register SimplePage do
   permit_params :key, :title, :markdown
-  filter :id, as: :numeric, label: 'ID'
 
 
   # See permitted parameters documentation:
