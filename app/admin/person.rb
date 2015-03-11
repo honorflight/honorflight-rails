@@ -2,6 +2,8 @@ ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id
 
+  # auto_link war.name
+
   # filter :id, as: :numeric, label: 'ID'
 
   menu priority: 2

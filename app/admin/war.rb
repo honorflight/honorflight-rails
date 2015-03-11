@@ -3,6 +3,10 @@ ActiveAdmin.register War do
 
   menu parent: "Reference Data"
 
+  filter :war_id,
+    collection: -> { Person.all() },
+    label:      'War'
+
   # filter :id, as: :numeric, label: 'ID'
 
   # See permitted parameters documentation:
