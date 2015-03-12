@@ -3,7 +3,7 @@ ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, 
     :email, :phone, :birth_date, :war_id, :shirt_size_id, 
-    :release_info, :tlc, :address_attributes
+    :release_info, :tlc, address_attributes: [:street1, :street2, :city, :state, :zipcode]
 
   # auto_link war.name
 
