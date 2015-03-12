@@ -1,6 +1,6 @@
 ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id, :release_info
+  permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id, :release_info, :tlc
 
   # auto_link war.name
 
@@ -26,6 +26,7 @@ ActiveAdmin.register Person do
     column :birth_date
     column :created_at
     column :release_info
+    column :tlc
     column :address
     actions
   end
@@ -41,6 +42,7 @@ ActiveAdmin.register Person do
       row :email
       row :birth_date
       row :release_info
+      row :tlc
       row :created_at
       row :updated_at
     end
@@ -59,6 +61,7 @@ ActiveAdmin.register Person do
       f.input :birth_date
       f.input :war
       f.input :shirt_size
+      f.input :tlc
       f.input :release_info
     end
 
