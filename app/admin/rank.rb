@@ -7,6 +7,23 @@ ActiveAdmin.register Rank do
   filter :name
   filter :description
 
+
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :branch do |b|
+      b.branch.name
+    end
+    column :rank_type do |b|
+      b.rank_type.name
+    end
+    column :created_at
+    column :updated_at
+    actions
+  end
+
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
