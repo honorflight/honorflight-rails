@@ -1,9 +1,11 @@
 ActiveAdmin.register Person do
+  decorate_with PersonDecorator
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name, :email, :phone, :birthdate, :war_id, :shirt_size_id, :release_info, :tlc
+  permit_params :first_name, :middle_name, :last_name, 
+    :email, :phone, :birth_date, :war_id, :shirt_size_id, 
+    :release_info, :tlc, :address_attributes
 
   # auto_link war.name
-
 
   filter :war
   filter :shirt_size
@@ -49,7 +51,7 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
-  form do |f|
+  form decorate: true do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
       f.input :first_name
@@ -58,7 +60,7 @@ ActiveAdmin.register Person do
       # f.input :address
       f.input :phone
       f.input :email
-      f.input :birth_date
+      f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
       f.input :war
       f.input :shirt_size
       f.input :tlc

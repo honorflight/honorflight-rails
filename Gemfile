@@ -31,6 +31,7 @@ gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'autoprefixer-rails', "~> 4.0.2.2"
 gem 'responders',  "~> 2.0"
+gem 'draper'
 # gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 
 #heroku
