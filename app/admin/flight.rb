@@ -1,4 +1,5 @@
 ActiveAdmin.register Flight do
+  actions :all, :except => [:destroy]
   permit_params :war_id, :flies_on, :special_instruction,
   flight_details_attributes: [:id, :airline_id, :flight_number, :departs_at,
     :departs_from, :departure_gate, :destination, :arrives_at, :arrival_gate,

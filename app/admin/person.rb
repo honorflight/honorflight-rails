@@ -4,10 +4,11 @@ ActiveAdmin.register Person do
   permit_params :first_name, :middle_name, :last_name,
     :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
     :release_info, :tlc, address_attributes: [:street1, :street2, :city,
-    :state, :zipcode], medical_conditions_attributes:[:medical_condition_type,
-    :medical_condition_name, :diagnosed_at, :diagnosed_last, :description],
-    service_histories_attributes:[:start_year, :end_year, :activity, :story,
-    :branch, :rank_type, :rank]
+    :state, :zipcode], medical_conditions_attributes:[:id,
+      :medical_condition_type_id, :medical_condition_name_id, :diagnosed_at,
+      :diagnosed_last, :description, :_destroy],
+    service_histories_attributes:[:id, :start_year, :end_year, :activity, :story,
+    :branch_id, :rank_type_id, :rank_id, :_destroy]
   # auto_link war.name
 
   filter :war
@@ -104,6 +105,7 @@ ActiveAdmin.register Person do
 
     panel 'Service Histories' do
       f.has_many :service_histories, label: false do |service_history|
+        service_history.input :id, as: :hidden
         service_history.input :start_year
         service_history.input :end_year
         service_history.input :activity
@@ -111,16 +113,19 @@ ActiveAdmin.register Person do
         service_history.input :branch
         service_history.input :rank_type
         service_history.input :rank
+        service_history.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
       end
     end
 
     panel 'Medical Conditions' do
       f.has_many :medical_conditions, label: false do |medical_condition|
+        medical_condition.input :id, as: :hidden
         medical_condition.input :medical_condition_type
         medical_condition.input :medical_condition_name
         medical_condition.input :diagnosed_at
         medical_condition.input :diagnosed_last
         medical_condition.input :description
+        medical_condition.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
       end
     end
 
