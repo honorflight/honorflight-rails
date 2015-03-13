@@ -1,13 +1,17 @@
 ActiveAdmin.register Person do
   decorate_with PersonDecorator
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name, 
-    :email, :phone, :birth_date, :war_id, :shirt_size_id, 
-    :release_info, :tlc, address_attributes: [:street1, :street2, :city, :state, :zipcode]
-
+  permit_params :first_name, :middle_name, :last_name,
+    :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
+    :release_info, :tlc, address_attributes: [:street1, :street2, :city,
+    :state, :zipcode], medical_conditions_attributes:[:medical_condition_type,
+    :medical_condition_name, :diagnosed_at, :diagnosed_last, :description],
+    service_histories_attributes:[:start_year, :end_year, :activity, :story,
+    :branch, :rank_type, :rank]
   # auto_link war.name
 
   filter :war
+  filter :flight
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -20,6 +24,7 @@ ActiveAdmin.register Person do
   index do
     selectable_column
     id_column
+    column :flight
     column :email
     column :first_name
     column :middle_name
@@ -36,10 +41,11 @@ ActiveAdmin.register Person do
   show do
     attributes_table do
       row :id
+      row :flight
       row :first_name
       row :middle_name
       row :last_name
-      row :address 
+      row :address
       row :phone
       row :email
       row :birth_date
@@ -47,6 +53,26 @@ ActiveAdmin.register Person do
       row :tlc
       row :created_at
       row :updated_at
+      panel "Service History" do
+        table_for person.service_histories do
+          column :start_year
+          column :end_year
+          column :activity
+          column :story
+          column :branch
+          column :rank_type
+          column :rank
+        end
+      end
+      panel "Medical Conditions" do
+        table_for person.medical_conditions do
+            column :medical_condition_type
+            column :medical_condition_name
+            column :diagnosed_at
+            column :diagnosed_last
+            column :description
+        end
+      end
     end
     active_admin_comments
   end
@@ -54,6 +80,7 @@ ActiveAdmin.register Person do
   form decorate: true do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
+      f.input :flight
       f.input :first_name
       f.input :middle_name
       f.input :last_name
@@ -70,7 +97,7 @@ ActiveAdmin.register Person do
     f.inputs :name => "Address", for: [:address, f.object.address || Address.new] do |address|
       address.input :street1
       address.input :street2
-      address.input :city  
+      address.input :city
       address.input :state
       address.input :zipcode
     end
@@ -82,7 +109,7 @@ ActiveAdmin.register Person do
         service_history.input :activity
         service_history.input :story
         service_history.input :branch
-        service_history.input :rank_type      
+        service_history.input :rank_type
         service_history.input :rank
       end
     end

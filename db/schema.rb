@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312012334) do
+ActiveRecord::Schema.define(version: 20150313014434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 20150312012334) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "airlines", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "awards", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -80,6 +87,33 @@ ActiveRecord::Schema.define(version: 20150312012334) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "flight_details", force: :cascade do |t|
+    t.string   "destination"
+    t.string   "departs_from"
+    t.datetime "arrives_at"
+    t.datetime "departs_at"
+    t.string   "flight_number"
+    t.integer  "airline_id"
+    t.integer  "flight_id"
+    t.string   "departure_gate"
+    t.string   "arrival_gate"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "flight_details", ["airline_id"], name: "index_flight_details_on_airline_id", using: :btree
+  add_index "flight_details", ["flight_id"], name: "index_flight_details_on_flight_id", using: :btree
+
+  create_table "flights", force: :cascade do |t|
+    t.date     "flies_on"
+    t.integer  "war_id"
+    t.text     "special_instruction"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "flights", ["war_id"], name: "index_flights_on_war_id", using: :btree
 
   create_table "medical_condition_names", force: :cascade do |t|
     t.string   "encrypted_name"
@@ -127,8 +161,10 @@ ActiveRecord::Schema.define(version: 20150312012334) do
     t.integer  "shirt_size_id"
     t.boolean  "release_info"
     t.boolean  "tlc"
+    t.integer  "flight_id"
   end
 
+  add_index "people", ["flight_id"], name: "index_people_on_flight_id", using: :btree
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
@@ -206,10 +242,14 @@ ActiveRecord::Schema.define(version: 20150312012334) do
 
   add_foreign_key "addresses", "people"
   add_foreign_key "awards", "branches"
+  add_foreign_key "flight_details", "airlines"
+  add_foreign_key "flight_details", "flights"
+  add_foreign_key "flights", "wars"
   add_foreign_key "medical_condition_names", "medical_condition_types"
   add_foreign_key "medical_conditions", "medical_condition_names"
   add_foreign_key "medical_conditions", "medical_condition_types"
   add_foreign_key "medical_conditions", "people"
+  add_foreign_key "people", "flights"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"
   add_foreign_key "ranks", "rank_types"
