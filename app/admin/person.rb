@@ -1,5 +1,4 @@
 ActiveAdmin.register Person do
-  decorate_with PersonDecorator
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name,
     :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
@@ -78,7 +77,7 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
-  form decorate: true do |f|
+  form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
       f.input :flight
@@ -102,6 +101,17 @@ ActiveAdmin.register Person do
       address.input :state
       address.input :zipcode
     end
+
+    f.inputs name: 'Emergency Contact', for: [:emergency_contact, f.object.emergency_contact || Contact.new] do |contact|
+      contact.input :full_name
+      contact.input :phone
+      contact.input :email
+      contact.input :address, for: [:address, f.object.address || Address.new] do |c|
+
+      end
+    end
+
+
 
     panel 'Service Histories' do
       f.has_many :service_histories, label: false do |service_history|
@@ -128,6 +138,7 @@ ActiveAdmin.register Person do
         medical_condition.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
       end
     end
+
 
     f.actions do
       f.action :submit
