@@ -1,5 +1,5 @@
 ActiveAdmin.register War do
-  permit_params :name, :abbreviation
+  permit_params :name, :abbreviation, :begin_year, :end_year
 
   menu parent: "Reference Data"
 
