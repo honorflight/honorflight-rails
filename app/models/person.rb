@@ -4,8 +4,26 @@ class Person < ActiveRecord::Base
 
   has_many :service_histories
   has_many :service_awards, through: :service_histories
+
   has_one :address
   has_many :medical_conditions
+
+  has_many :people_contacts
+  has_many :contacts, through: :people_contacts
+
+  has_one :emergency_contacts, -> { where(emergency: true) }, class_name: 'PeopleContact'
+  has_one :emergency_contact, through: :emergency_contacts, source: :contact
+
+  has_one :alternate_contacts, -> { where(alternate: true) }, class_name: 'PeopleContact'
+  has_one :alternate_contact, through: :alternate_contacts, source: :contact
+
+  has_one :physician_contacts, -> { where(other: true, other_key: 'physician') }, class_name: 'PeopleContact'
+  has_one :physician_contact, through: :physician_contacts, source: :contact
+
+  # has_one :primary_category, through: :primary_category_relation, source: :category
+  # has_many :emergency_contact, through: :people_contacts, source: :contacts
+  # has_many :alternate_contact, through: :people_contacts, source: :contacts
+
   belongs_to :war
   belongs_to :shirt_size
   belongs_to :flight

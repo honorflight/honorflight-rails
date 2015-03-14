@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314173305) do
+ActiveRecord::Schema.define(version: 20150314183825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,18 @@ ActiveRecord::Schema.define(version: 20150314173305) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "company_name"
+    t.integer  "address_id"
+    t.string   "encrypted_phone"
+    t.string   "encrypted_email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "contacts", ["address_id"], name: "index_contacts_on_address_id", using: :btree
 
   create_table "flight_details", force: :cascade do |t|
     t.string   "destination"
@@ -168,6 +180,21 @@ ActiveRecord::Schema.define(version: 20150314173305) do
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
+  create_table "people_contacts", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "contact_id"
+    t.boolean  "emergency"
+    t.boolean  "alternate"
+    t.boolean  "other"
+    t.string   "other_key"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "people_contacts", ["contact_id"], name: "index_people_contacts_on_contact_id", using: :btree
+  add_index "people_contacts", ["person_id"], name: "index_people_contacts_on_person_id", using: :btree
+
   create_table "rank_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -244,6 +271,7 @@ ActiveRecord::Schema.define(version: 20150314173305) do
 
   add_foreign_key "addresses", "people"
   add_foreign_key "awards", "branches"
+  add_foreign_key "contacts", "addresses"
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "flights"
   add_foreign_key "flights", "wars"
@@ -254,6 +282,8 @@ ActiveRecord::Schema.define(version: 20150314173305) do
   add_foreign_key "people", "flights"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"
+  add_foreign_key "people_contacts", "contacts"
+  add_foreign_key "people_contacts", "people"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
   add_foreign_key "service_awards", "service_histories"
