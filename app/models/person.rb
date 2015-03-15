@@ -39,6 +39,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :service_histories, :allow_destroy => true
   accepts_nested_attributes_for :medical_conditions, :allow_destroy => true 
+  accepts_nested_attributes_for :emergency_contact
 
 
   before_validation :generate_uuid, on: :create

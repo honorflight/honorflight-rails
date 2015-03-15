@@ -77,107 +77,62 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
-  form do |f|
-    f.semantic_errors *f.object.errors.keys
-    f.inputs do
-      f.input :flight
-      f.input :first_name
-      f.input :middle_name
-      f.input :last_name
-      # f.input :address
-      f.input :phone
-      f.input :email
-      f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
-      f.input :war
-      f.input :shirt_size
-      f.input :tlc
-      f.input :release_info
-    end
+  form partial: 'form'
+  # form do |f|
+  #   f.semantic_errors *f.object.errors.keys
 
-    f.inputs :name => "Address", for: [:address, f.object.address || Address.new] do |address|
-      address.input :street1
-      address.input :street2
-      address.input :city
-      address.input :state
-      address.input :zipcode
-    end
-
-    f.inputs name: 'Emergency Contact', for: [:emergency_contact, f.object.emergency_contact || Contact.new] do |contact|
-      contact.input :full_name
-      contact.input :phone
-      contact.input :email
-      contact.input :address, for: [:address, f.object.address || Address.new] do |c|
-
-      end
-    end
-
-
-
-    panel 'Service Histories' do
-      f.has_many :service_histories, label: false do |service_history|
-        service_history.input :id, as: :hidden
-        service_history.input :start_year
-        service_history.input :end_year
-        service_history.input :activity
-        service_history.input :story
-        service_history.input :branch
-        service_history.input :rank_type
-        service_history.input :rank
-        service_history.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
-      end
-    end
-
-    panel 'Medical Conditions' do
-      f.has_many :medical_conditions, label: false do |medical_condition|
-        medical_condition.input :id, as: :hidden
-        medical_condition.input :medical_condition_type
-        medical_condition.input :medical_condition_name
-        medical_condition.input :diagnosed_at
-        medical_condition.input :diagnosed_last
-        medical_condition.input :description
-        medical_condition.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
-      end
-    end
-
-
-    f.actions do
-      f.action :submit
-    end
-  end
-
-
-  # show do
-  #   attributes_table do
-  #     row :email
-  #     row :phone
-  #     row :full_name
-  #     row :street1
-  #     row :street2
-  #     row :city
-  #     row :state
-  #     row :zip
-  #     row :sign_in_count
-  #     row :last_sign_in_at
-  #     row :trainer
-  #     row :confirmed_at
+  #   f.inputs name: "General" do
+  #     f.input :flight
+  #     f.input :first_name
+  #     f.input :middle_name
+  #     f.input :last_name
+  #     f.input :phone
+  #     f.input :email
+  #     f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
+  #     f.input :war
+  #     f.input :shirt_size
+  #     f.input :tlc
+  #     f.input :release_info
   #   end
 
-  #   active_admin_comments
+  #   f.inputs name: "Address", for: [:address, f.object.address || Address.new] do |address|
+  #     address.input :street1
+  #     address.input :street2
+  #     address.input :city
+  #     address.input :state
+  #     address.input :zipcode
+  #   end
+
+
+  #   panel 'Service Histories' do
+  #     f.has_many :service_histories, heading: false do |service_history|
+  #       service_history.input :id, as: :hidden
+  #       service_history.input :start_year
+  #       service_history.input :end_year
+  #       service_history.input :activity
+  #       service_history.input :story
+  #       service_history.input :branch
+  #       service_history.input :rank_type
+  #       service_history.input :rank
+  #       service_history.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
+  #     end
+  #   end
+
+  #   panel 'Medical Conditions' do
+  #     f.has_many :medical_conditions, heading: false do |medical_condition|
+  #       medical_condition.input :id, as: :hidden
+  #       medical_condition.input :medical_condition_type
+  #       medical_condition.input :medical_condition_name
+  #       medical_condition.input :diagnosed_at
+  #       medical_condition.input :diagnosed_last
+  #       medical_condition.input :description
+  #       medical_condition.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
+  #     end
+  #   end
+
+
+  #   f.actions do
+  #     f.action :submit
+  #   end
   # end
-
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if resource.something?
-  #   permitted
-  # end
-
-
 end
