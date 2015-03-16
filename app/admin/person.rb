@@ -109,18 +109,18 @@ ActiveAdmin.register Person do
       f.input :release_info
     end
 
-    f.inputs "Emergency Contact" do
-      f.semantic_fields_for [:emergency_contact, f.object.emergency_contact || PeopleContact.new(emergency: true)] do |contact|
-        contact.input :emergency, as: :hidden
-        contact.input :id, as: :hidden
-        f.semantic_fields_for [[:person, :emergency_contact], contact.object.contact || contact.object.build_contact] do |info|
-          info.inputs :full_name, :email, :phone
-        end
-        # f.semantic_fields_for [[:emergency_contact, :address], contact.object.address || contact.object.build_address] do |address|
-        #   address.inputs :street1, :street2, :city
-        # end
-      end
-    end
+    # f.inputs "Emergency Contact" do
+    #   f.semantic_fields_for [:emergency_contact, f.object.emergency_contact || PeopleContact.new(emergency: true)] do |contact|
+    #     contact.input :emergency, as: :hidden
+    #     contact.input :id, as: :hidden
+    #     f.semantic_fields_for [[:person, :emergency_contact], contact.object.contact || contact.object.build_contact] do |info|
+    #       info.inputs :full_name, :email, :phone
+    #     end
+    #     # f.semantic_fields_for [[:emergency_contact, :address], contact.object.address || contact.object.build_address] do |address|
+    #     #   address.inputs :street1, :street2, :city
+    #     # end
+    #   end
+    # end
     # f.inputs "Emergency Contact" do
     #   f.semantic_fields_for [:emergency_contact, f.object.emergency_contact || PeopleContact.new(emergency: true)] do |contact|
     #     contact.input :id, as: :hidden

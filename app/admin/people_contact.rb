@@ -1,0 +1,2 @@
+ActiveAdmin.register PeopleContact do
+end
