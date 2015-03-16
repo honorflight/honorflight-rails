@@ -8,8 +8,8 @@ ActiveAdmin.register Person do
       :diagnosed_last, :description, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
     :branch_id, :rank_type_id, :rank_id, :_destroy],
-    people_contacts_attributes: [:id]
-    # emergency_contact_attributes: [:full_name, :id, :phone, :email, 
+    people_contacts_attributes: [:id, :contact_category]
+    # emergency_contact_attributes: [:full_name, :id, :phone, :email,
     #   address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
     # auto_link war.name
 
@@ -168,6 +168,13 @@ ActiveAdmin.register Person do
       #   a.input :zipcode
       # end
     # end
+
+    panel 'People Contacts' do
+      f.has_many :people_contacts, heading: false do |peoplecontact|
+        peoplecontact.input :id, as: :hidden
+        peoplecontact.input :contact_category
+      end
+    end
 
     panel 'Service Histories' do
       f.has_many :service_histories, heading: false do |service_history|

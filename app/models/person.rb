@@ -10,15 +10,16 @@ class Person < ActiveRecord::Base
 
   has_many :people_contacts
   has_many :contacts, through: :people_contacts
+  has_many :contact_categories, through: :people_contacts
 
-  has_one :emergency_contacts, -> { where(emergency: true) }, class_name: 'PeopleContact'
-  has_one :emergency_contact, through: :emergency_contacts, source: :contact
+  #has_one :emergency_contacts, -> { where(emergency: true) }, class_name: 'PeopleContact'
+  #has_one :emergency_contact, through: :emergency_contacts, source: :contact
 
-  has_one :alternate_contacts, -> { where(alternate: true) }, class_name: 'PeopleContact'
-  has_one :alternate_contact, through: :alternate_contacts, source: :contact
+  #has_one :alternate_contacts, -> { where(alternate: true) }, class_name: 'PeopleContact'
+  #has_one :alternate_contact, through: :alternate_contacts, source: :contact
 
-  has_one :physician_contacts, -> { where(other: true, other_key: 'physician') }, class_name: 'PeopleContact'
-  has_one :physician_contact, through: :physician_contacts, source: :contact
+  #has_one :physician_contacts, -> { where(other: true, other_key: 'physician') }, class_name: 'PeopleContact'
+  #has_one :physician_contact, through: :physician_contacts, source: :contact
 
   # has_one :primary_category, through: :primary_category_relation, source: :category
   # has_many :emergency_contact, through: :people_contacts, source: :contacts
@@ -38,7 +39,7 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :service_histories, :allow_destroy => true
-  accepts_nested_attributes_for :medical_conditions, :allow_destroy => true 
+  accepts_nested_attributes_for :medical_conditions, :allow_destroy => true
   accepts_nested_attributes_for :people_contacts
 
 
