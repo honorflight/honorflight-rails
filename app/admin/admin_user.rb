@@ -10,6 +10,7 @@ ActiveAdmin.register AdminUser do
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
+    column :email_on_event
     actions
   end
 
@@ -17,13 +18,14 @@ ActiveAdmin.register AdminUser do
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
+  filter :email_on_event
 
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
-      f.input :apikey
       f.input :password
       f.input :password_confirmation
+      f.input :email_on_event
     end
     f.actions
   end
