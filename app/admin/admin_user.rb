@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone, :email_on_event
-  menu priority: 99
+  menu priority: 98
 
   controller do
 
