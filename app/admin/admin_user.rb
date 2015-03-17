@@ -4,14 +4,13 @@ ActiveAdmin.register AdminUser do
 
   index do
     selectable_column
-    id_column
+    actions
     column :email
     column :apikey
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
     column :email_on_event
-    actions
   end
 
   filter :email

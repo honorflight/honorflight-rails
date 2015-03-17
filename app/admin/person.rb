@@ -40,7 +40,7 @@ ActiveAdmin.register Person do
     column :address
   end
 
-  show do
+  show title: :first_name do
 
     attributes_table do
       row :id
@@ -150,7 +150,7 @@ ActiveAdmin.register Person do
         medical_condition.input :diagnosed_at
         medical_condition.input :diagnosed_last
         medical_condition.input :description
-        medical_condition.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
+        
       end
     end
 
