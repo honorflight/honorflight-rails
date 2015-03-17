@@ -2,7 +2,6 @@ class CreateContacts < ActiveRecord::Migration
   def change
     create_table :contacts do |t|
       t.string :full_name
-      t.string :encrypted_relationship
       t.references :address, index: true
       t.references :person, index: true
       t.string :encrypted_phone

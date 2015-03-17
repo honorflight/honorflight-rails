@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316181927) do
+ActiveRecord::Schema.define(version: 20150317032902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,13 @@ ActiveRecord::Schema.define(version: 20150316181927) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "contact_relationships", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string   "full_name"
     t.string   "encrypted_relationship"
@@ -107,10 +114,12 @@ ActiveRecord::Schema.define(version: 20150316181927) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "contact_category_id"
+    t.integer  "contact_relationship_id"
   end
 
   add_index "contacts", ["address_id"], name: "index_contacts_on_address_id", using: :btree
   add_index "contacts", ["contact_category_id"], name: "index_contacts_on_contact_category_id", using: :btree
+  add_index "contacts", ["contact_relationship_id"], name: "index_contacts_on_contact_relationship_id", using: :btree
   add_index "contacts", ["person_id"], name: "index_contacts_on_person_id", using: :btree
 
   create_table "flight_details", force: :cascade do |t|
@@ -271,6 +280,7 @@ ActiveRecord::Schema.define(version: 20150316181927) do
   add_foreign_key "awards", "branches"
   add_foreign_key "contacts", "addresses"
   add_foreign_key "contacts", "contact_categories"
+  add_foreign_key "contacts", "contact_relationships"
   add_foreign_key "contacts", "people"
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "flights"

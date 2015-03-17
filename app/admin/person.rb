@@ -7,7 +7,10 @@ ActiveAdmin.register Person do
       :medical_condition_type_id, :medical_condition_name_id, :diagnosed_at,
       :diagnosed_last, :description, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
-    :branch_id, :rank_type_id, :rank_id, :_destroy]
+    :branch_id, :rank_type_id, :rank_id, :_destroy],
+    contacts_attributes: [:id, :contact_category_id, :contact_relationship_id, :full_name, :email, :phone,
+     :alternate_phone, :relationship, address_attributes: [:id, :street1,
+     :street2, :city, :state, :zipcode]]
 
 
   filter :war
@@ -23,7 +26,7 @@ ActiveAdmin.register Person do
 
   index do
     selectable_column
-    id_column
+    actions
     column :flight
     column :email
     column :first_name
@@ -35,7 +38,6 @@ ActiveAdmin.register Person do
     column :release_info
     column :tlc
     column :address
-    actions
   end
 
   show do
@@ -53,6 +55,18 @@ ActiveAdmin.register Person do
       row :tlc
       row :created_at
       row :updated_at
+      panel "Contacts" do
+        table_for person.contacts do
+        column :contact_category
+        column :full_name
+        column :email
+        column :phone
+        column :alternate_phone
+        column :contact_relationship
+        column :address
+        end
+      end
+
       panel "Service History" do
         table_for person.service_histories do
           column :start_year
@@ -111,14 +125,11 @@ ActiveAdmin.register Person do
         if contact.object.address.nil?
           contact.object.build_address
         end
-        contact.inputs :contact_category, :full_name, :email, :phone, :alternate_phone, :relationship
+        contact.input :id, as: :hidden
+        contact.inputs :contact_category, :full_name, :email, :phone, :alternate_phone, :contact_relationship
         contact.has_many :address, new_record: false, heading: false do |a|
           a.input :id, as: :hidden
-          a.input :street1
-          a.input :street2
-          a.input :city
-          a.input :state
-          a.input :zipcode
+          a.inputs :street1, :street2, :city, :state, :zipcode
         end
       end
     end
