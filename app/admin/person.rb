@@ -36,11 +36,12 @@ ActiveAdmin.register Person do
     column :birth_date
     column :created_at
     column :release_info
-    column :tlc
+    column "TLC", :tlc
     column :address
   end
 
   show do
+
     attributes_table do
       row :id
       row :flight
@@ -52,7 +53,7 @@ ActiveAdmin.register Person do
       row :email
       row :birth_date
       row :release_info
-      row :tlc
+      row "TLC", :tlc
       row :created_at
       row :updated_at
       panel "Contacts" do
