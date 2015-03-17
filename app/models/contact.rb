@@ -1,8 +1,10 @@
 class Contact < ActiveRecord::Base
-  attr_encrypted :phone, :email, key: "my key"
+  attr_encrypted :phone, :email, :alternate_phone, :relationship, key: "my key"
 
-  has_one :address
+  belongs_to :address
 
-  has_many :people_contacts
-  has_many :people, through: :people_contacts
+  belongs_to :person
+  belongs_to :contact_category
+
+  accepts_nested_attributes_for :address
 end

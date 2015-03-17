@@ -8,9 +8,12 @@ class Person < ActiveRecord::Base
   has_one :address
   has_many :medical_conditions
 
-  has_many :people_contacts
-  has_many :contacts, through: :people_contacts
-  has_many :contact_categories, through: :people_contacts
+  # has_many :people_contacts
+  # has_many :contacts, through: :people_contacts
+
+  # has_many :contact_categories, through: :people_contacts
+
+  has_many :contacts
 
   #has_one :emergency_contacts, -> { where(emergency: true) }, class_name: 'PeopleContact'
   #has_one :emergency_contact, through: :emergency_contacts, source: :contact
@@ -40,7 +43,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :service_histories, :allow_destroy => true
   accepts_nested_attributes_for :medical_conditions, :allow_destroy => true
-  accepts_nested_attributes_for :people_contacts
+  accepts_nested_attributes_for :contacts
 
 
   before_validation :generate_uuid, on: :create

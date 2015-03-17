@@ -40,10 +40,8 @@ ActiveRecord::Schema.define(version: 20150316181927) do
     t.integer  "person_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "contact_id"
   end
 
-  add_index "addresses", ["contact_id"], name: "index_addresses_on_contact_id", using: :btree
   add_index "addresses", ["person_id"], name: "index_addresses_on_person_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
@@ -100,15 +98,20 @@ ActiveRecord::Schema.define(version: 20150316181927) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "full_name"
-    t.string   "company_name"
+    t.string   "encrypted_relationship"
     t.integer  "address_id"
+    t.integer  "person_id"
     t.string   "encrypted_phone"
+    t.string   "encrypted_alternate_phone"
     t.string   "encrypted_email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "contact_category_id"
   end
 
   add_index "contacts", ["address_id"], name: "index_contacts_on_address_id", using: :btree
+  add_index "contacts", ["contact_category_id"], name: "index_contacts_on_contact_category_id", using: :btree
+  add_index "contacts", ["person_id"], name: "index_contacts_on_person_id", using: :btree
 
   create_table "flight_details", force: :cascade do |t|
     t.string   "destination"
@@ -190,19 +193,6 @@ ActiveRecord::Schema.define(version: 20150316181927) do
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
-  create_table "people_contacts", force: :cascade do |t|
-    t.integer  "person_id"
-    t.integer  "contact_id"
-    t.text     "notes"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "contact_category_id"
-  end
-
-  add_index "people_contacts", ["contact_category_id"], name: "index_people_contacts_on_contact_category_id", using: :btree
-  add_index "people_contacts", ["contact_id"], name: "index_people_contacts_on_contact_id", using: :btree
-  add_index "people_contacts", ["person_id"], name: "index_people_contacts_on_person_id", using: :btree
-
   create_table "rank_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -277,10 +267,11 @@ ActiveRecord::Schema.define(version: 20150316181927) do
     t.date     "end_year"
   end
 
-  add_foreign_key "addresses", "contacts"
   add_foreign_key "addresses", "people"
   add_foreign_key "awards", "branches"
   add_foreign_key "contacts", "addresses"
+  add_foreign_key "contacts", "contact_categories"
+  add_foreign_key "contacts", "people"
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "flights"
   add_foreign_key "flights", "wars"
@@ -291,9 +282,6 @@ ActiveRecord::Schema.define(version: 20150316181927) do
   add_foreign_key "people", "flights"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"
-  add_foreign_key "people_contacts", "contact_categories"
-  add_foreign_key "people_contacts", "contacts"
-  add_foreign_key "people_contacts", "people"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
   add_foreign_key "service_awards", "service_histories"
