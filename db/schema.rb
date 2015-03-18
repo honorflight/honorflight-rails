@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317014516) do
-
+ActiveRecord::Schema.define(version: 20150317032902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +108,6 @@ ActiveRecord::Schema.define(version: 20150317014516) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "full_name"
-    t.string   "encrypted_relationship"
     t.integer  "address_id"
     t.integer  "person_id"
     t.string   "encrypted_phone"
@@ -272,6 +270,8 @@ ActiveRecord::Schema.define(version: 20150317014516) do
   end
 
   create_table "smtp_settings", force: :cascade do |t|
+    t.boolean  "send_mail"
+    t.string   "host"
     t.string   "smtp_server"
     t.integer  "port"
     t.string   "authentication"

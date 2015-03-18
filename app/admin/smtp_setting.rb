@@ -1,13 +1,19 @@
 ActiveAdmin.register SmtpSetting do
-  # actions :edit, :show, :update
+  actions :index, :edit, :show, :update
   menu parent: "Site Settings", priority: 99
-  permit_params :id
+  permit_params :id, :send_mail, :host, :from_name, :smtp_server, 
+    :port, :authentication, :username, :password, :openssl_verify_mode, 
+    :enable_starttls_auto
   config.filters = false
   config.batch_actions = false
 
   controller do
     def resource
-      SmtpSetting.first
+      SmtpSetting.first || SmtpSetting.create()
+    end
+
+    def index
+      redirect_to :action => :show, :id => resource.id
     end
 
     def update
@@ -30,6 +36,7 @@ ActiveAdmin.register SmtpSetting do
   index do
     selectable_column
     id_column
+    column :send_mail
     column :from_name
     column :smtp_server
     column :username
@@ -38,6 +45,7 @@ ActiveAdmin.register SmtpSetting do
 
   show do
     attributes_table do
+      row :send_mail
       row :from_name
       row :smtp_server
       row :port
@@ -52,6 +60,8 @@ ActiveAdmin.register SmtpSetting do
 
   form do |f|
     f.inputs do
+      f.input :send_mail, :hint => "Do you want us to send emails? (Disable if batch creating people)"
+      f.input :host, :hint => "This should match your domain name, ex. honorflight.org"
       f.input :from_name, :hint => "This will replace the (Email Name) <...> portion of the 'From' in new emails"
       f.input :smtp_server, hint: "smtp.gmail.com"
       f.input :port, hint: "465 for SSL, 587 for open tls"

@@ -45,6 +45,14 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :medical_conditions, :allow_destroy => true
   accepts_nested_attributes_for :contacts
 
+  after_create :send_admin_emailers
+  def send_admin_emailers
+    if SmtpSetting.first.send_mail?
+      AdminUser.where(email_on_event: true).each do |admin_user|
+        AdminPersonMailer.veteran_form_submission_email(self, admin_user).deliver_later
+      end
+    end
+  end
 
   before_validation :generate_uuid, on: :create
   def generate_uuid
