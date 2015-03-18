@@ -1,8 +1,6 @@
-ActiveAdmin.register SimplePage do
-  permit_params :key, :title, :markdown
-  menu parent: "Site Settings", priority: 98
-
-
+ActiveAdmin.register ServiceAward do
+permit_params :name
+menu false
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

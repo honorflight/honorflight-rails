@@ -1,16 +1,21 @@
 ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name,
+  permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
-    :release_info, :tlc, address_attributes: [:id, :street1, :street2, :city,
-    :state, :zipcode], medical_conditions_attributes:[:id,
+    :release_info, :tlc, :person_status_id,
+    address_attributes: [:id, :street1, :street2, :city,
+    :state, :zipcode],
+    medical_conditions_attributes:[:id,
       :medical_condition_type_id, :medical_condition_name_id, :diagnosed_at,
       :diagnosed_last, :description, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
-    :branch_id, :rank_type_id, :rank_id, :_destroy],
-    contacts_attributes: [:id, :contact_category_id, :contact_relationship_id, :full_name, :email, :phone,
-     :alternate_phone, :relationship, address_attributes: [:id, :street1,
-     :street2, :city, :state, :zipcode]]
+      :branch_id, :rank_type_id, :rank_id, :service_awards_id, :_destroy,
+        service_awards_attributes: [:id, :award, :award_id, :quantity,
+          :comment, :_destroy ]],
+    contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
+     :full_name, :email, :phone,
+     :alternate_phone, :relationship,
+        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
 
 
   filter :war
@@ -19,6 +24,7 @@ ActiveAdmin.register Person do
   filter :first_name
   filter :last_name
   filter :middle_name
+  filter :person_status
   filter :created_at
   filter :release_info
 
@@ -28,6 +34,7 @@ ActiveAdmin.register Person do
     selectable_column
     actions
     column :flight
+    column :person_status
     column :email
     column :first_name
     column :middle_name
@@ -38,13 +45,14 @@ ActiveAdmin.register Person do
     column :release_info
     column "TLC", :tlc
     column :address
+    column :Veteran
   end
 
   show title: :first_name do
 
     attributes_table do
-      row :id
       row :flight
+      row :person_status
       row :first_name
       row :middle_name
       row :last_name
@@ -52,8 +60,9 @@ ActiveAdmin.register Person do
       row :phone
       row :email
       row :birth_date
+      row :Veteran
       row :release_info
-      row "TLC", :tlc
+      row :tlc
       row :created_at
       row :updated_at
       panel "Contacts" do
@@ -77,6 +86,12 @@ ActiveAdmin.register Person do
           column :branch
           column :rank_type
           column :rank
+          column :service_awards
+          column person.service_awards do |service_awards|
+            service_awards.service_awards.each do |sa|
+            sa.id
+            end
+          end
         end
       end
       panel "Medical Conditions" do
@@ -101,6 +116,7 @@ ActiveAdmin.register Person do
 
     f.inputs name: "General" do
       f.input :flight
+      f.input :person_status
       f.input :first_name
       f.input :middle_name
       f.input :last_name
@@ -115,6 +131,7 @@ ActiveAdmin.register Person do
       f.input :phone
       f.input :email
       f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
+      f.input :Veteran
       f.input :war
       f.input :shirt_size
       f.input :tlc
@@ -139,6 +156,10 @@ ActiveAdmin.register Person do
       f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
         service_history.input :id, as: :hidden
         service_history.inputs :start_year, :end_year, :activity, :story, :branch, :rank_type, :rank
+        service_history.has_many :service_awards, allow_destroy: true do |a|
+          a.input :id, as: :hidden
+          a.inputs :award, :quantity, :comment
+        end
       end
     end
 
@@ -150,7 +171,7 @@ ActiveAdmin.register Person do
         medical_condition.input :diagnosed_at
         medical_condition.input :diagnosed_last
         medical_condition.input :description
-        
+
       end
     end
 
