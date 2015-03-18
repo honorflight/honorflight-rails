@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: SmtpSetting.first.from_name
+  default from: -> { s = SmtpSetting.first.blank? ? "localhost" : s.from_name }
 
   private
   def settings
