@@ -50,11 +50,14 @@ class Person < ActiveRecord::Base
 
   after_create :send_admin_emailers
   def send_admin_emailers
-    if SmtpSetting.first.send_mail?
-      AdminUser.where(email_on_event: true).each do |admin_user|
-        AdminPersonMailer.veteran_form_submission_email(self, admin_user).deliver_later
-      end
+    @smtp_setting ||= SmtpSetting.first
+
+    return if @smtp_setting.blank? || !@smtp_setting.send_mail?
+
+    AdminUser.where(email_on_event: true).each do |admin_user|
+      AdminPersonMailer.veteran_form_submission_email(self, admin_user).deliver_later
     end
+
   end
 
   before_validation :generate_uuid, on: :create
