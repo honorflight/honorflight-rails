@@ -33,6 +33,7 @@ class Person < ActiveRecord::Base
   belongs_to :shirt_size
   belongs_to :flight
   belongs_to :person_status
+  belongs_to :robert
 
   validates :uuid, presence: true
   validates :birth_date, presence: true
