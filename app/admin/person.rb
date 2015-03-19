@@ -34,7 +34,7 @@ ActiveAdmin.register Person do
     column :id
     column(:flight) { |person| person.flight.flies_on }
     column(:birth_date)
-    column(:address) {|person| person.address.street1 + ", " + person.address.city + ", " + person.address.state}
+    column({ |address| address.blank? ? “”:address})
   end
 
   index do
@@ -55,7 +55,7 @@ ActiveAdmin.register Person do
     column :veteran
   end
 
-  show title: :first_name do
+  show do
 
     attributes_table do
       row :flight
@@ -93,12 +93,13 @@ ActiveAdmin.register Person do
           column :branch
           column :rank_type
           column :rank
-          column :service_awards
-          column person.service_awards do |service_awards|
-            service_awards.service_awards.each do |sa|
-            sa.id
-            end
+          column :service_awards do |person| #person.service_awards do |service_awards|
+            #val="hi"
+            #person.service_awards.each do |service_award|
+            #person.service_awards.collect {|sa| sa.award.name}.join(", ")
+            person.service_awards.collect {|sa| link_to(sa.award.name, admin_service_award_path)}.join(", ").html_safe
           end
+
         end
       end
       panel "Medical Conditions" do

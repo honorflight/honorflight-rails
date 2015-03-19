@@ -3,4 +3,9 @@ class Address < ActiveRecord::Base
 
   belongs_to :person
   belongs_to :contact
+
+
+  def to_s
+    self.street1 + ", " + self.city + ", " + self.state
+  end
 end

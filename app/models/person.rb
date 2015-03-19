@@ -60,6 +60,9 @@ class Person < ActiveRecord::Base
     end
 
   end
+  # def to_s
+  #   self.first_name + self.middle_name + self.last_name
+  # end
 
   before_validation :generate_uuid, on: :create
   def generate_uuid
