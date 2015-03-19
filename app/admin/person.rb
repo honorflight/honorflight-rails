@@ -30,6 +30,13 @@ ActiveAdmin.register Person do
 
   menu priority: 2
 
+  csv do
+    column :id
+    column(:flight) { |person| person.flight.flies_on }
+    column(:birth_date)
+    column(:address) {|person| person.address.street1 + ", " + person.address.city + ", " + person.address.state}
+  end
+
   index do
     selectable_column
     actions
@@ -45,7 +52,7 @@ ActiveAdmin.register Person do
     column :release_info
     column "TLC", :tlc
     column :address
-    column :Veteran
+    column :veteran
   end
 
   show title: :first_name do
@@ -60,7 +67,7 @@ ActiveAdmin.register Person do
       row :phone
       row :email
       row :birth_date
-      row :Veteran
+      row :veteran
       row :release_info
       row :tlc
       row :created_at
@@ -131,7 +138,7 @@ ActiveAdmin.register Person do
       f.input :phone
       f.input :email
       f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
-      f.input :Veteran
+      f.input :veteran
       f.input :war
       f.input :shirt_size
       f.input :tlc
