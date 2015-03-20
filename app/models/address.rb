@@ -6,6 +6,12 @@ class Address < ActiveRecord::Base
 
 
   def to_s
-    self.street1 + ", " + self.city + ", " + self.state
+    address = ""
+    address += self.street1 unless self.street1.blank?
+    address += ", " + self.street2 unless self.street2.blank?
+    address += ", " + self.city unless self.city.blank?
+    address += ", " + self.state unless self.state.blank?
+    address += ". " + self.zipcode unless self.zipcode.blank?
+    address
   end
 end

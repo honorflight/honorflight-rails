@@ -32,9 +32,21 @@ ActiveAdmin.register Person do
 
   csv do
     column :id
-    column(:flight) { |person| person.flight.flies_on }
+    column :veteran
+    column(:flight) { |person| person.try(:flight, :flies_on) }
+    column(:person_status) { |person| person.try(:person_status) }
+    column :email
+    column :full_name
+    column :first_name
+    column :middle_name
+    column :last_name
+    column :phone
     column(:birth_date)
-    column({ |address| address.blank? ? “”:address})
+    column :created_at
+    column :release_info
+    column :tlc
+    column(:address){ |person| person.try(:address) }
+    # column(:address)
   end
 
   index do
@@ -69,7 +81,7 @@ ActiveAdmin.register Person do
       row :birth_date
       row :veteran
       row :release_info
-      row :tlc
+      row :tlc, label: "TLC" 
       row :created_at
       row :updated_at
       panel "Contacts" do
@@ -142,7 +154,7 @@ ActiveAdmin.register Person do
       f.input :veteran
       f.input :war
       f.input :shirt_size
-      f.input :tlc
+      f.input :tlc, label: "TLC"
       f.input :release_info
     end
 
