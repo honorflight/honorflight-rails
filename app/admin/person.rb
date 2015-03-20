@@ -63,8 +63,8 @@ ActiveAdmin.register Person do
     #column :phone
     column :birth_date
     column :created_at
-    column :release_info
-    column "TLC", :tlc
+    bool_column :release_info
+    bool_column "TLC", :tlc
     #column :address
   end
 
@@ -80,9 +80,9 @@ ActiveAdmin.register Person do
       row :phone
       row :email
       row :birth_date
-      row :veteran
-      row :release_info
-      row :tlc, label: "TLC"
+      bool_row :veteran
+      bool_row :release_info
+      bool_row :tlc, label: "TLC"
       row :created_at
       row :updated_at
     end

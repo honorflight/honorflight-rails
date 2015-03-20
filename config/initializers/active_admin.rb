@@ -231,4 +231,18 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+  module ActiveAdmin
+    module Views
+      class TableFor
+        def bool_column(*args)
+          column(*args){ |model| model[args.last] ? '<span class="status_tag yes">Yes</span>'.html_safe : '<span class="status_tag no">No</span>'.html_safe }
+        end
+      end
+      class AttributesTable
+        def bool_row(*args)
+          row(*args){ |model| model[args.last] ? '<span class="status_tag yes">Yes</span>'.html_safe : '<span class="status_tag no">No</span>'.html_safe }
+        end
+      end
+    end
+  end
 end
