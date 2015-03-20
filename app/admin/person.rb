@@ -116,8 +116,12 @@ ActiveAdmin.register Person do
 
         end
       end
-      attributes_table do
-        row :mobility_device
+
+      panel "Medical Concerns" do
+        attributes_table_for resource.mobility_device do
+          row("Mobility Device") { resource.mobility_device.name }
+        end
+
         panel "Medical Conditions" do
           table_for person.medical_conditions do
             column :medical_condition_type

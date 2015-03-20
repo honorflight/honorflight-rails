@@ -10,5 +10,4 @@ class Flight < ActiveRecord::Base
   def to_s
     self.flies_on.to_s(:aa)
   end
-
 end

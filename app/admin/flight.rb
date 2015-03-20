@@ -31,6 +31,12 @@ ActiveAdmin.register Flight do
         end
       end
     end
+      sidebar :flights, :only => :show do
+        attributes_table_for resource do
+          row("Total on Flight")  { resource.people.count  }
+          #row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
+        end
+      end
 
   form do |f|
     f.inputs do
