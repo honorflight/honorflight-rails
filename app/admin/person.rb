@@ -2,9 +2,11 @@ ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
-    :release_info, :tlc, :person_status_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
+    medications_attributes: [:id, :medication, :dose, :frequency, :route],
+    medical_allergies_attributes: [:id, :medical_allergy],
     medical_conditions_attributes:[:id,
       :medical_condition_type_id, :medical_condition_name_id, :diagnosed_at,
       :diagnosed_last, :description, :_destroy],
@@ -54,20 +56,19 @@ ActiveAdmin.register Person do
     actions
     column :flight
     column :person_status
-    column :email
+    #column :email
     column :first_name
-    column :middle_name
+    #column :middle_name
     column :last_name
-    column :phone
+    #column :phone
     column :birth_date
     column :created_at
     column :release_info
     column "TLC", :tlc
-    column :address
-    column :veteran
+    #column :address
   end
 
-  show do
+  show title: :full_name do
 
     attributes_table do
       row :flight
@@ -81,9 +82,10 @@ ActiveAdmin.register Person do
       row :birth_date
       row :veteran
       row :release_info
-      row :tlc, label: "TLC" 
+      row :tlc, label: "TLC"
       row :created_at
       row :updated_at
+    end
       panel "Contacts" do
         table_for person.contacts do
         column :contact_category
@@ -114,16 +116,30 @@ ActiveAdmin.register Person do
 
         end
       end
-      panel "Medical Conditions" do
-        table_for person.medical_conditions do
+      attributes_table do
+        row :mobility_device
+        panel "Medical Conditions" do
+          table_for person.medical_conditions do
             column :medical_condition_type
             column :medical_condition_name
             column :diagnosed_at
             column :diagnosed_last
             column :description
+          end
         end
-      end
-    end
+        panel "Medications" do
+          table_for person.medications do
+            column :medication
+            column :dose
+            column :frequency
+            column :route
+
+        table_for person.medical_allergies do
+          column :medical_allergy
+        end
+       end
+     end
+   end
     active_admin_comments
   end
 
@@ -183,15 +199,32 @@ ActiveAdmin.register Person do
       end
     end
 
-    panel 'Medical Conditions' do
-      f.has_many :medical_conditions, heading: false, allow_destroy: true do |medical_condition|
-        medical_condition.input :id, as: :hidden
-        medical_condition.input :medical_condition_type
-        medical_condition.input :medical_condition_name
-        medical_condition.input :diagnosed_at
-        medical_condition.input :diagnosed_last
-        medical_condition.input :description
-
+    panel 'Medical Concerns' do
+      f.inputs :mobility_device
+      panel 'Medical Conditions' do
+        f.has_many :medical_conditions, heading: false, allow_destroy: true do |medical_condition|
+          medical_condition.input :id, as: :hidden
+          medical_condition.input :medical_condition_type
+          medical_condition.input :medical_condition_name
+          medical_condition.input :diagnosed_at
+          medical_condition.input :diagnosed_last
+          medical_condition.input :description
+        end
+      end
+      panel 'Medical Allergies' do
+        f.has_many :medical_allergies, heading: false, allow_destroy: true do |medical_allergy|
+          medical_allergy.input :id, as: :hidden
+          medical_allergy.input :medical_allergy
+        end
+      end
+    end
+    panel 'Medications' do
+      f.has_many :medications, heading: false, allow_destroy: true do |medication|
+        medication.input :id, as: :hidden
+        medication.input :medication
+        medication.input :dose
+        medication.input :frequency
+        medication.input :route
       end
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318182102) do
+ActiveRecord::Schema.define(version: 20150320033253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,15 @@ ActiveRecord::Schema.define(version: 20150318182102) do
 
   add_index "flights", ["war_id"], name: "index_flights_on_war_id", using: :btree
 
+  create_table "medical_allergies", force: :cascade do |t|
+    t.string   "medical_allergy"
+    t.integer  "person_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "medical_allergies", ["person_id"], name: "index_medical_allergies_on_person_id", using: :btree
+
   create_table "medical_condition_names", force: :cascade do |t|
     t.string   "encrypted_name"
     t.text     "description"
@@ -183,6 +192,25 @@ ActiveRecord::Schema.define(version: 20150318182102) do
   add_index "medical_conditions", ["medical_condition_type_id"], name: "index_medical_conditions_on_medical_condition_type_id", using: :btree
   add_index "medical_conditions", ["person_id"], name: "index_medical_conditions_on_person_id", using: :btree
 
+  create_table "medications", force: :cascade do |t|
+    t.string   "medication"
+    t.string   "dose"
+    t.string   "frequency"
+    t.string   "route"
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "medications", ["person_id"], name: "index_medications_on_person_id", using: :btree
+
+  create_table "mobility_devices", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -201,9 +229,11 @@ ActiveRecord::Schema.define(version: 20150318182102) do
     t.boolean  "veteran",              default: true
     t.boolean  "guardian"
     t.integer  "person_status_id"
+    t.integer  "mobility_device_id"
   end
 
   add_index "people", ["flight_id"], name: "index_people_on_flight_id", using: :btree
+  add_index "people", ["mobility_device_id"], name: "index_people_on_mobility_device_id", using: :btree
   add_index "people", ["person_status_id"], name: "index_people_on_person_status_id", using: :btree
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
@@ -314,11 +344,14 @@ ActiveRecord::Schema.define(version: 20150318182102) do
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "flights"
   add_foreign_key "flights", "wars"
+  add_foreign_key "medical_allergies", "people"
   add_foreign_key "medical_condition_names", "medical_condition_types"
   add_foreign_key "medical_conditions", "medical_condition_names"
   add_foreign_key "medical_conditions", "medical_condition_types"
   add_foreign_key "medical_conditions", "people"
+  add_foreign_key "medications", "people"
   add_foreign_key "people", "flights"
+  add_foreign_key "people", "mobility_devices"
   add_foreign_key "people", "person_statuses"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"

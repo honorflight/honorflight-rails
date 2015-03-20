@@ -12,6 +12,8 @@ RSpec.describe Person, type: :model do
   it { should belong_to(:shirt_size) }
   it { should belong_to(:flight)}
   it { should have_many(:contacts)}
+  it { should have_many(:medications)}
+  it { should have_many(:medical_allergies)}
 
 
   describe "#uuid" do

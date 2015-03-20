@@ -6,8 +6,12 @@ class Person < ActiveRecord::Base
   has_many :service_awards, through: :service_histories
 
   has_one :address
+  has_one :mobility_device
   has_many :person_status
   has_many :medical_conditions
+  has_many :medications
+  has_many :medical_allergies
+
 
   # has_many :people_contacts
   # has_many :contacts, through: :people_contacts
@@ -33,6 +37,7 @@ class Person < ActiveRecord::Base
   belongs_to :shirt_size
   belongs_to :flight
   belongs_to :person_status
+  belongs_to :mobility_device
 
 
   validates :uuid, presence: true
@@ -48,7 +53,8 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :medical_conditions, :allow_destroy => true
   accepts_nested_attributes_for :contacts
   accepts_nested_attributes_for :service_awards
-
+  accepts_nested_attributes_for :medications
+  accepts_nested_attributes_for :medical_allergies
   after_create :send_admin_emailers
   def send_admin_emailers
     @smtp_setting ||= SmtpSetting.first
