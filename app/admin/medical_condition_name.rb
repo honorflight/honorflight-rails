@@ -18,9 +18,9 @@ ActiveAdmin.register MedicalConditionName do
   show do
     attributes_table do
       row :id
+      row :medical_condition_type
       row :name
       row :description
-      row :medical_condition_type
       row :created_at
       row :updated_at
     end
@@ -31,9 +31,9 @@ ActiveAdmin.register MedicalConditionName do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
+      f.input :medical_condition_type
       f.input :name
       f.input :description
-      f.input :medical_condition_type
     end
     f.actions do
       f.action :submit

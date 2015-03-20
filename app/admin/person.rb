@@ -82,7 +82,7 @@ ActiveAdmin.register Person do
       row :birth_date
       bool_row :veteran
       bool_row :release_info
-      bool_row :tlc, label: "TLC"
+      bool_row "TLC", :tlc
       row :created_at
       row :updated_at
     end
