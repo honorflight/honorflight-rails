@@ -108,12 +108,12 @@ ActiveAdmin.register Person do
           column :frequency
           column :route
 
-        table_for person.medical_allergies do
-          column :medical_allergy
+          table_for person.medical_allergies do
+            column :medical_allergy
+          end
         end
       end
     end
-
 
     panel "Service History" do
       table_for person.service_histories do
@@ -146,7 +146,6 @@ ActiveAdmin.register Person do
       end
     end
 
-   end
     active_admin_comments
   end
 
