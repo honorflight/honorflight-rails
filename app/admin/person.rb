@@ -119,7 +119,7 @@ ActiveAdmin.register Person do
 
       panel "Medical Concerns" do
         attributes_table_for resource.mobility_device do
-          row("Mobility Device") { resource.mobility_device.name }
+          row("Mobility Device") { resource.try(:mobility_device, :name) }
         end
 
         panel "Medical Conditions" do

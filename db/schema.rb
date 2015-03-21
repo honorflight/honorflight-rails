@@ -219,14 +219,14 @@ ActiveRecord::Schema.define(version: 20150320033253) do
     t.string   "encrypted_phone"
     t.string   "uuid"
     t.string   "encrypted_birth_date"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "war_id"
     t.integer  "shirt_size_id"
     t.boolean  "release_info"
     t.boolean  "tlc"
     t.integer  "flight_id"
-    t.boolean  "veteran"
+    t.boolean  "veteran",              default: true
     t.boolean  "guardian"
     t.integer  "person_status_id"
     t.integer  "mobility_device_id"
