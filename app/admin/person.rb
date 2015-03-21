@@ -76,7 +76,7 @@ ActiveAdmin.register Person do
       row :first_name
       row :middle_name
       row :last_name
-      row :address
+      row(:address) { |person| "#{person.try(:address)}" }
       row :phone
       row :email
       row :birth_date
