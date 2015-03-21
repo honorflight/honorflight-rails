@@ -4,7 +4,8 @@ module API
       # POST /people
       # POST /people.json
       def create
-        @person = Person.new(person_params)
+        @person = Person.new(person_params) 
+        @person.veteran = true
         if @person.save
           render :json => @person 
         else

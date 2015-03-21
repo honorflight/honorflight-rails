@@ -16,6 +16,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json["id"]).to be_a(Integer)
+      expect(Person.last.veteran?).to eql(true)
 		end
 
     it 'catches validation errors' do
