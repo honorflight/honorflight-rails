@@ -86,8 +86,56 @@ ActiveAdmin.register Person do
       row :created_at
       row :updated_at
     end
-      panel "Contacts" do
-        table_for person.contacts do
+
+    panel "Medical Concerns" do
+      attributes_table_for resource.mobility_device do
+        row("Mobility Device") { resource.try(:mobility_device, :name) }
+      end
+
+      panel "Medical Conditions" do
+        table_for person.medical_conditions do
+          column :medical_condition_type
+          column :medical_condition_name
+          column :diagnosed_at
+          column :diagnosed_last
+          column :description
+        end
+      end
+      panel "Medications" do
+        table_for person.medications do
+          column :medication
+          column :dose
+          column :frequency
+          column :route
+
+        table_for person.medical_allergies do
+          column :medical_allergy
+        end
+      end
+    end
+
+
+    panel "Service History" do
+      table_for person.service_histories do
+        column :start_year
+        column :end_year
+        column :activity
+        column :story
+        column :branch
+        column :rank_type
+        column :rank
+        column :service_awards do |person| #person.service_awards do |service_awards|
+          #val="hi"
+          #person.service_awards.each do |service_award|
+          #person.service_awards.collect {|sa| sa.award.name}.join(", ")
+          person.service_awards.collect {|sa| link_to(sa.award.name, admin_service_award_path)}.join(", ").html_safe
+        end
+
+      end
+    end
+
+    panel "Contacts" do
+      table_for person.contacts do
         column :contact_category
         column :full_name
         column :email
@@ -95,54 +143,9 @@ ActiveAdmin.register Person do
         column :alternate_phone
         column :contact_relationship
         column :address
-        end
       end
+    end
 
-      panel "Service History" do
-        table_for person.service_histories do
-          column :start_year
-          column :end_year
-          column :activity
-          column :story
-          column :branch
-          column :rank_type
-          column :rank
-          column :service_awards do |person| #person.service_awards do |service_awards|
-            #val="hi"
-            #person.service_awards.each do |service_award|
-            #person.service_awards.collect {|sa| sa.award.name}.join(", ")
-            person.service_awards.collect {|sa| link_to(sa.award.name, admin_service_award_path)}.join(", ").html_safe
-          end
-
-        end
-      end
-
-      panel "Medical Concerns" do
-        attributes_table_for resource.mobility_device do
-          row("Mobility Device") { resource.try(:mobility_device, :name) }
-        end
-
-        panel "Medical Conditions" do
-          table_for person.medical_conditions do
-            column :medical_condition_type
-            column :medical_condition_name
-            column :diagnosed_at
-            column :diagnosed_last
-            column :description
-          end
-        end
-        panel "Medications" do
-          table_for person.medications do
-            column :medication
-            column :dose
-            column :frequency
-            column :route
-
-        table_for person.medical_allergies do
-          column :medical_allergy
-        end
-       end
-     end
    end
     active_admin_comments
   end
@@ -178,31 +181,6 @@ ActiveAdmin.register Person do
       f.input :release_info
     end
 
-    panel "Contacts" do
-      f.has_many :contacts, heading: false do |contact|
-        if contact.object.address.nil?
-          contact.object.build_address
-        end
-        contact.input :id, as: :hidden
-        contact.inputs :contact_category, :full_name, :email, :phone, :alternate_phone, :contact_relationship
-        contact.has_many :address, new_record: false, heading: false do |a|
-          a.input :id, as: :hidden
-          a.inputs :street1, :street2, :city, :state, :zipcode
-        end
-      end
-    end
-
-    panel 'Service Histories' do
-      f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
-        service_history.input :id, as: :hidden
-        service_history.inputs :start_year, :end_year, :activity, :story, :branch, :rank_type, :rank
-        service_history.has_many :service_awards, allow_destroy: true do |a|
-          a.input :id, as: :hidden
-          a.inputs :award, :quantity, :comment
-        end
-      end
-    end
-
     panel 'Medical Concerns' do
       f.inputs :mobility_device
       panel 'Medical Conditions' do
@@ -231,6 +209,32 @@ ActiveAdmin.register Person do
         medication.input :route
       end
     end
+
+    panel 'Service Histories' do
+      f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
+        service_history.input :id, as: :hidden
+        service_history.inputs :start_year, :end_year, :activity, :story, :branch, :rank_type, :rank
+        service_history.has_many :service_awards, allow_destroy: true do |a|
+          a.input :id, as: :hidden
+          a.inputs :award, :quantity, :comment
+        end
+      end
+    end
+
+    panel "Contacts" do
+      f.has_many :contacts, heading: false do |contact|
+        if contact.object.address.nil?
+          contact.object.build_address
+        end
+        contact.input :id, as: :hidden
+        contact.inputs :contact_category, :full_name, :email, :phone, :alternate_phone, :contact_relationship
+        contact.has_many :address, new_record: false, heading: false do |a|
+          a.input :id, as: :hidden
+          a.inputs :street1, :street2, :city, :state, :zipcode
+        end
+      end
+    end
+
 
 
     f.actions do
