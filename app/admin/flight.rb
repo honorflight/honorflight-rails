@@ -1,7 +1,8 @@
 ActiveAdmin.register Flight do
   actions :all, :except => [:destroy]
-  permit_params :war_id, :flies_on, :special_instruction,
-  flight_details_attributes: [:id, :airline_id, :flight_number, :departs_at,
+  permit_params :war_id, :flies_on, :special_instruction, :group_number,
+  :tickets_purchased,
+    flight_details_attributes: [:id, :airline_id, :flight_number, :departs_at,
     :departs_from, :departure_gate, :destination, :arrives_at, :arrival_gate,
     :_destroy]
 
@@ -9,6 +10,8 @@ ActiveAdmin.register Flight do
     selectable_column
     column :flies_on
     column :war
+    column :tickets_purchased
+    column :group_number
     actions
   end
 
@@ -17,6 +20,8 @@ ActiveAdmin.register Flight do
       row :war
       row :flies_on
       row :special_instruction
+      row :tickets_purchased
+      row :group_number
       panel "Flight Details" do
         table_for flight.flight_details do
           column :airline
@@ -42,6 +47,8 @@ ActiveAdmin.register Flight do
     f.inputs do
       f.input :war
       f.input :flies_on
+      f.input :tickets_purchased
+      f.input :group_number
       f.input :special_instruction
     end
 
