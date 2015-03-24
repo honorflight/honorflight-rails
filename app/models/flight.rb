@@ -7,7 +7,19 @@ class Flight < ActiveRecord::Base
 
   accepts_nested_attributes_for :flight_details, :allow_destroy => true
 
+  # t.date     "flies_on"
+  # t.integer  "war_id"
+  # t.text     "special_instruction"
+  # t.datetime "created_at",          null: false
+  # t.datetime "updated_at",          null: false
+  # t.string   "group_number"
+  # t.integer  "tickets_purchased"
+
   def to_s
     self.flies_on.to_s(:aa)
+  end
+
+  def airline_names
+    flight_details.map(&:airline).map(&:name).uniq.join(", ")
   end
 end

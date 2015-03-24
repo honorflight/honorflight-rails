@@ -21,6 +21,7 @@ ActiveAdmin.register Person do
 
 
   filter :war
+  # filter :flight_id_blank, label: "Never Flown", as: :boolean
   filter :flight
   filter :shirt_size
   filter :first_name
@@ -29,6 +30,7 @@ ActiveAdmin.register Person do
   filter :person_status
   filter :created_at
   filter :release_info
+  filter :tlc
 
   menu priority: 2
 
@@ -58,7 +60,7 @@ ActiveAdmin.register Person do
     column :person_status
     #column :email
     column :first_name
-    #column :middle_name
+    column :middle_name
     column :last_name
     #column :phone
     column :birth_date

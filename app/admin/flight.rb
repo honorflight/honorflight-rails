@@ -12,6 +12,12 @@ ActiveAdmin.register Flight do
     column :war
     column :tickets_purchased
     column :group_number
+    column "People Assigned" do |flight|
+      flight.people.count
+    end
+    column "Airlines" do |flight|
+      flight.try(:airline_names)
+    end
     actions
   end
 
