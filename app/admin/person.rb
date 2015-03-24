@@ -39,7 +39,6 @@ ActiveAdmin.register Person do
       if params[:q].present? && params[:q][:flight_id_eq]=="nil"
         params[:q][:flight_id_null]=true
         params[:q].delete(:flight_id_eq)
-        # Bind in to ransacker here I guess
       end
       super
     end
@@ -144,7 +143,7 @@ ActiveAdmin.register Person do
           #val="hi"
           #person.service_awards.each do |service_award|
           #person.service_awards.collect {|sa| sa.award.name}.join(", ")
-          person.service_awards.collect {|sa| link_to(sa.award.name, admin_service_award_path)}.join(", ").html_safe
+          person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path) : "unknown"}.join(", ").html_safe
         end
 
       end
