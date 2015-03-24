@@ -22,7 +22,7 @@ ActiveAdmin.register Person do
 
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :flight
+  filter :flight, collection: [["None", "nil"], Flight.all.map(&:to_s)]
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -33,6 +33,17 @@ ActiveAdmin.register Person do
   filter :tlc
 
   menu priority: 2
+
+  controller do
+    def index
+      if params[:q].present? && params[:q][:flight_id_eq]=="nil"
+        params[:q][:flight_id_null]=true
+        params[:q].delete(:flight_id_eq)
+        # Bind in to ransacker here I guess
+      end
+      super
+    end
+  end
 
   csv do
     column :id
