@@ -227,7 +227,7 @@ ActiveAdmin.register Person do
         end
         contact.input :id, as: :hidden
         contact.inputs :contact_category, :full_name, :email, :phone, :alternate_phone, :contact_relationship
-        contact.has_many :address, new_record: false, heading: false do |a|
+        contact.has_many :address, new_record: false, heading: false, allow_destroy: false do |a|
           a.input :id, as: :hidden
           a.inputs :street1, :street2, :city, :state, :zipcode
         end

@@ -4,8 +4,7 @@ ActiveAdmin.register War do
 
   menu parent: "Reference Data"
 
-  filter :name, label: 'Name'
-  filter :abbreviation, label: 'Abbreviation'
+config.filters = false
 
   index do
     selectable_column

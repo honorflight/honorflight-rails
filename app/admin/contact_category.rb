@@ -2,6 +2,9 @@ ActiveAdmin.register ContactCategory do
   permit_params :name, :description
   menu parent: "Reference Data"
 
+  filter :name
+  filter :description
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

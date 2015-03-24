@@ -1,11 +1,13 @@
 ActiveAdmin.register Rank do
-  permit_params :name, :description, :rank_type_id, :branch_id
+  permit_params :name, :description, :rank_type_id, :branch_id, :abbreviation
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
 
   filter :rank_type
+  filter :branch
   filter :name
   filter :description
+  filter :abbreviation
 
 
   index do
@@ -15,6 +17,7 @@ ActiveAdmin.register Rank do
     column :branch do |b|
       b.branch.name
     end
+    column :abbreviation
     column :rank_type do |b|
       b.rank_type.name
     end
