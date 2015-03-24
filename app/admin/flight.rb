@@ -6,6 +6,11 @@ ActiveAdmin.register Flight do
     :departs_from, :departure_gate, :destination, :arrives_at, :arrival_gate,
     :_destroy]
 
+  # Remove All filters except War, Special Instructions, Airline
+  filter :war
+  filter :special_instruction
+  filter :airline
+
   index do
     selectable_column
     column :flies_on
