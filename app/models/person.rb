@@ -81,6 +81,10 @@ class Person < ActiveRecord::Base
     return "#{self.first_name} #{self.middle_name} #{self.last_name}"
   end
 
+  def application_date
+    self[:application_date] || self[:created_at].to_date
+  end
+
   # def birth_date
   #   self[:birth_date].iso8601
   # end
