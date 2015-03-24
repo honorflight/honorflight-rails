@@ -1,7 +1,7 @@
 ActiveAdmin.register Person do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
-    :email, :phone, :birth_date, :war_id, :flight_id, :shirt_size_id,
+    :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
     :release_info, :tlc, :person_status_id, :mobility_device_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -49,17 +49,18 @@ ActiveAdmin.register Person do
     column :id
     column :veteran
     column(:flight) { |person| person.try(:flight, :flies_on) }
-    column(:person_status) { |person| person.try(:person_status) }
+    column(:person_status) { |person| person.try(:person_status, :name) }
     column :email
     column :full_name
     column :first_name
     column :middle_name
     column :last_name
     column :phone
-    column(:birth_date)
+    column (:birth_date)
     column :created_at
     column :release_info
     column :tlc
+    column :application_date
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
@@ -74,8 +75,8 @@ ActiveAdmin.register Person do
     column :middle_name
     column :last_name
     #column :phone
-    column :birth_date
-    column :created_at
+    column "Date of Birth", :birth_date
+    column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
     #column :address
@@ -92,11 +93,13 @@ ActiveAdmin.register Person do
       row(:address) { |person| "#{person.try(:address)}" }
       row :phone
       row :email
-      row :birth_date
+      row "Date of Birth", :birth_date
+      row :war
+      row :shirt_size
       bool_row :veteran
       bool_row :release_info
       bool_row "TLC", :tlc
-      row :created_at
+      row :application_date
       row :updated_at
     end
 
@@ -185,9 +188,10 @@ ActiveAdmin.register Person do
       end
       f.input :phone
       f.input :email
-      f.input :birth_date, as: :date_picker, :order => [:month, :day, :year]
+      f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
       f.input :veteran
       f.input :war
+      f.input :application_date
       f.input :shirt_size
       f.input :tlc, label: "TLC"
       f.input :release_info

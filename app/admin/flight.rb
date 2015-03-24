@@ -13,6 +13,7 @@ ActiveAdmin.register Flight do
 
   index do
     selectable_column
+    actions
     column :flies_on
     column :war
     column :tickets_purchased
@@ -23,7 +24,6 @@ ActiveAdmin.register Flight do
     column "Airlines" do |flight|
       flight.try(:airline_names)
     end
-    actions
   end
 
   show do
@@ -37,11 +37,11 @@ ActiveAdmin.register Flight do
         table_for flight.flight_details do
           column :airline
           column :flight_number
-          column :departs_at
+          column "Departs On", :departs_at
           column :departs_from
           column :departure_gate
           column :destination
-          column :arrives_at
+          column "Arrives On", :arrives_at
           column :arrival_gate
           end
         end
@@ -68,11 +68,11 @@ ActiveAdmin.register Flight do
         flight_detail.input :id, as: :hidden
         flight_detail.input :airline
         flight_detail.input :flight_number
-        flight_detail.input :departs_at, as: :datetime_picker
+        flight_detail.input :departs_at, label: "Departs On", as: :datetime_picker
         flight_detail.input :departs_from
         flight_detail.input :departure_gate
         flight_detail.input :destination
-        flight_detail.input :arrives_at, as: :datetime_picker
+        flight_detail.input :arrives_at, label: "Arrive On", as: :datetime_picker
         flight_detail.input :arrival_gate
         flight_detail.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
       end

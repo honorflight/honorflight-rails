@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324010031) do
+ActiveRecord::Schema.define(version: 20150324032634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,17 +221,19 @@ ActiveRecord::Schema.define(version: 20150324010031) do
     t.string   "encrypted_phone"
     t.string   "uuid"
     t.string   "encrypted_birth_date"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "war_id"
     t.integer  "shirt_size_id"
     t.boolean  "release_info"
     t.boolean  "tlc"
     t.integer  "flight_id"
-    t.boolean  "veteran",              default: true
+    t.boolean  "veteran"
     t.boolean  "guardian"
     t.integer  "person_status_id"
     t.integer  "mobility_device_id"
+    t.boolean  "applied_online"
+    t.date     "application_date"
   end
 
   add_index "people", ["flight_id"], name: "index_people_on_flight_id", using: :btree
