@@ -48,7 +48,7 @@ ActiveAdmin.register Person do
     column :id
     column :veteran
     column(:flight) { |person| person.try(:flight, :flies_on) }
-    column(:person_status) { |person| person.try(:person_status, :name) }
+    column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :email
     column :full_name
     column :first_name
