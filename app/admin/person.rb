@@ -143,9 +143,19 @@ ActiveAdmin.register Person do
           #val="hi"
           #person.service_awards.each do |service_award|
           #person.service_awards.collect {|sa| sa.award.name}.join(", ")
-          person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path) : "unknown"}.join(", ").html_safe
+          person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path(sa)) : "unknown"}.join(", ").html_safe
         end
 
+      end
+    end
+
+    panel 'Service Awards' do
+      table_for person.service_awards do
+        column :quantity
+        column :comment
+        column :award do |service_award|
+          service_award.try(:award).try(:name)
+        end
       end
     end
 
@@ -235,6 +245,7 @@ ActiveAdmin.register Person do
         end
       end
     end
+
 
     panel "Contacts" do
       f.has_many :contacts, heading: false do |contact|

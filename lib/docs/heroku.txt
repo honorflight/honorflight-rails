@@ -1,0 +1,2 @@
+# Get the latest staging database
+curl -o latest.dump `heroku pg:backups public-url b001 --app honorflight-staging`
