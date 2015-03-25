@@ -133,12 +133,17 @@ ActiveAdmin.setup do |config|
   #
   config.batch_actions = true
 
+
+
   # == Controller Filters
   #
   # You can add before, after and around filters to all of your
   # Active Admin resources and pages from here.
   #
   # config.before_filter :do_something_awesome
+  # config.before_filter do 
+  #   actions :all, :except => [:destroy]
+  # end
 
   # == Setting a Favicon
   #
@@ -231,6 +236,7 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
   module ActiveAdmin
     module Views
       class TableFor

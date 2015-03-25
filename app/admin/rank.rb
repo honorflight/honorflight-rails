@@ -1,4 +1,5 @@
 ActiveAdmin.register Rank do
+  actions :all, :except => [:destroy]
   permit_params :name, :description, :rank_type_id, :branch_id, :abbreviation
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"

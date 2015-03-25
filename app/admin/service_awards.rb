@@ -1,6 +1,7 @@
 ActiveAdmin.register ServiceAward do
-permit_params :name
-menu false
+  actions :all, :except => [:destroy]
+  permit_params :name
+  menu false
 #menu parent: "Reference Data"
 # menu false
   # See permitted parameters documentation:

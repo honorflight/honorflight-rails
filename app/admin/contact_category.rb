@@ -1,4 +1,5 @@
 ActiveAdmin.register ContactCategory do
+  actions :all, :except => [:destroy]
   permit_params :name, :description
   menu parent: "Reference Data"
 

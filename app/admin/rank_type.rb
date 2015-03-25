@@ -1,4 +1,5 @@
 ActiveAdmin.register RankType do
+  actions :all, :except => [:destroy]
   permit_params :name, :description
   # filter :id, as: :numeric, label: 'ID'
   filter :name

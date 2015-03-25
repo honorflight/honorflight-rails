@@ -1,4 +1,5 @@
 ActiveAdmin.register SimplePage do
+  actions :all, :except => [:destroy]
   permit_params :key, :title, :markdown
   menu parent: "Site Settings", priority: 98
 
