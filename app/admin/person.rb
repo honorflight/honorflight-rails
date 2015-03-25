@@ -59,6 +59,7 @@ ActiveAdmin.register Person do
     column :created_at
     column :release_info
     column :tlc
+    column :applied_online
     column :application_date
     column(:address){ |person| person.try(:address) }
     # column(:address)
@@ -78,6 +79,7 @@ ActiveAdmin.register Person do
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
+    bool_column :applied_online
     #column :address
   end
 

@@ -4,10 +4,11 @@ module API
       # POST /people
       # POST /people.json
       def create
-        @person = Person.new(person_params) 
+        @person = Person.new(person_params)
         @person.veteran = true
+        @person.applied_online = true
         if @person.save
-          render :json => @person 
+          render :json => @person
         else
           render json: @person.errors, status: :unprocessable_entity
         end
@@ -18,7 +19,7 @@ module API
       def update
         @person = Person.find(params[:id])
         if @person.update_attributes(person_params)
-          render :json => @person 
+          render :json => @person
         else
           render json: @person.errors, status: :unprocessable_entity
         end

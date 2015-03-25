@@ -16,6 +16,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json["id"]).to be_a(Integer)
+			expect(json["applied_online"]).to be(true)
       expect(Person.last.veteran?).to eql(true)
 		end
 
@@ -29,7 +30,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
 
 		# Update PUT /api/v1/people/:id
     describe "PUT update/:id" do
-      let(:attr) do 
+      let(:attr) do
         { first_name: 'other', last_name: 'freak' }
       end
 
@@ -46,7 +47,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
 
     # Update PUT /api/v1/people/:id
     describe "PUT update/:id invalid" do
-      let(:attr) do 
+      let(:attr) do
         { first_name: nil, last_name: 'freak' }
       end
 
