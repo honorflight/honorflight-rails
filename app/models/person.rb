@@ -82,7 +82,7 @@ class Person < ActiveRecord::Base
   end
 
   def application_date
-    self[:application_date] || self[:created_at];try(:to_date)
+    self[:application_date] || self[:created_at].try(:to_date)
   end
 
   # def birth_date
