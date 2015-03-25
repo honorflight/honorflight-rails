@@ -22,7 +22,7 @@ ActiveAdmin.register Person do
 
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:aa), f.id]}.insert(0,["None", "nil"]) }
+  filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
