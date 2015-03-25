@@ -12,6 +12,7 @@ ActiveAdmin.register Rank do
 
   index do
     selectable_column
+    actions
     id_column
     column :name
     column :branch do |b|
@@ -23,7 +24,6 @@ ActiveAdmin.register Rank do
     end
     column :created_at
     column :updated_at
-    actions
   end
 
 

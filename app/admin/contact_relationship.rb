@@ -5,4 +5,14 @@ ActiveAdmin.register ContactRelationship do
 
   filter :name
   filter :description
+
+  index do
+    selectable_column
+    actions
+    column :id
+    column :name
+    column :description
+    column :created_at
+  end
+
 end

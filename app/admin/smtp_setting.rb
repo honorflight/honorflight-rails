@@ -35,12 +35,12 @@ ActiveAdmin.register SmtpSetting do
 
   index do
     selectable_column
+    actions
     id_column
     column :send_mail
     column :from_name
     column :smtp_server
     column :username
-    actions
   end
 
   show do

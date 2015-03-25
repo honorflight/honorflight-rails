@@ -7,6 +7,15 @@ ActiveAdmin.register RankType do
 
   menu parent: "Reference Data"
 
+  index do
+    selectable_column
+    actions
+    column :id
+    column :name
+    column :description
+    column :created_at
+  end
+ 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

@@ -7,11 +7,11 @@ ActiveAdmin.register MedicalConditionType do
 
   index do
     selectable_column
+    actions
     id_column
     column :name
     column :description
     column :created_at
-    actions
   end
 
   show do

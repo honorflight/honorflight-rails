@@ -2,6 +2,14 @@ ActiveAdmin.register SimplePage do
   permit_params :key, :title, :markdown
   menu parent: "Site Settings", priority: 98
 
+  index do
+    selectable_column
+    actions
+    column :id
+    column :key
+    column :title
+    column :created_at
+  end
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

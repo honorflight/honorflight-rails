@@ -1,10 +1,19 @@
 ActiveAdmin.register PersonStatus do
-permit_params :name, :descriptions
+  permit_params :name, :descriptions
 
-menu parent: "Reference Data"
+  menu parent: "Reference Data"
 
-filter :name
-filter :description
+  filter :name
+  filter :description
+
+  index do
+    selectable_column
+    actions
+    column :id
+    column :name
+    column :description
+    column :created_at
+  end
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

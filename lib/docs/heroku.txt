@@ -1,2 +1,5 @@
 # Get the latest staging database
-curl -o latest.dump `heroku pg:backups public-url b001 --app honorflight-staging`
+curl -o db_backup.postgres `heroku pg:backups public-url b001 --app honorflight-staging`
+
+# Import example
+ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jancel -d honorflight-rails_development db_backup.postgres
