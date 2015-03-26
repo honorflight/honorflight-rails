@@ -55,6 +55,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :service_awards
   accepts_nested_attributes_for :medications
   accepts_nested_attributes_for :medical_allergies
+
   after_create :send_admin_emailers
   def send_admin_emailers
     @smtp_setting ||= SmtpSetting.first
@@ -64,7 +65,6 @@ class Person < ActiveRecord::Base
     AdminUser.where(email_on_event: true).each do |admin_user|
       AdminPersonMailer.veteran_form_submission_email(self, admin_user).deliver_later
     end
-
   end
 
   before_validation :generate_uuid, on: :create
@@ -76,6 +76,13 @@ class Person < ActiveRecord::Base
     generate_uuid
   end
 
+  # def first_name=(value)
+  #   self[:first_name] = "x#{value}"
+  # end
+
+  # def first_name
+  #   "#{self[:first_name]}x"
+  # end
 
   def full_name
     return "#{self.first_name} #{self.middle_name} #{self.last_name}"
