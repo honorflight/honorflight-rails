@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324032634) do
+ActiveRecord::Schema.define(version: 20150326002328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,16 +194,24 @@ ActiveRecord::Schema.define(version: 20150324032634) do
   add_index "medical_conditions", ["medical_condition_type_id"], name: "index_medical_conditions_on_medical_condition_type_id", using: :btree
   add_index "medical_conditions", ["person_id"], name: "index_medical_conditions_on_person_id", using: :btree
 
+  create_table "medication_routes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "medications", force: :cascade do |t|
     t.string   "medication"
     t.string   "dose"
     t.string   "frequency"
-    t.string   "route"
     t.integer  "person_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "medication_route_id"
   end
 
+  add_index "medications", ["medication_route_id"], name: "index_medications_on_medication_route_id", using: :btree
   add_index "medications", ["person_id"], name: "index_medications_on_person_id", using: :btree
 
   create_table "mobility_devices", force: :cascade do |t|
@@ -354,6 +362,7 @@ ActiveRecord::Schema.define(version: 20150324032634) do
   add_foreign_key "medical_conditions", "medical_condition_names"
   add_foreign_key "medical_conditions", "medical_condition_types"
   add_foreign_key "medical_conditions", "people"
+  add_foreign_key "medications", "medication_routes"
   add_foreign_key "medications", "people"
   add_foreign_key "people", "flights"
   add_foreign_key "people", "mobility_devices"
