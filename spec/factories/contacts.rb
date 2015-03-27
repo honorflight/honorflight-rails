@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  factory :contact do
+    factory :contact do
     full_name "MyString"
-company_name "MyString"
-address nil
-encrypted_phone "MyString"
-encrypted_email "MyString"
+    address nil
+    alternate_phone "MyString"
+    phone "MyString"
+    email "MyString"
   end
 
 end

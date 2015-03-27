@@ -123,7 +123,7 @@ ActiveAdmin.register Person do
           column :medication
           column :dose
           column :frequency
-          column :route
+          column :medication_route
 
           table_for person.medical_allergies do
             column :medical_allergy
@@ -233,7 +233,7 @@ ActiveAdmin.register Person do
         medication.input :medication
         medication.input :dose
         medication.input :frequency
-        medication.input :route
+        medication.input :medication_route
       end
     end
 

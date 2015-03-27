@@ -8,11 +8,13 @@ Rails.application.routes.draw do
       resources :ranks, only: [:index]
       resources :branches, only: [:index]
       resources :awards, only: [:index]
+      resources :contact_categories, only: [:index]
       resources :shirt_sizes, only: [:index]
       resources :people, only: [:create, :update] do
         resources :service_histories, shallow: true, only: [:create, :update] do
           resources :service_awards, shallow: true, only: [:index, :destroy]
         end
+        resources :contacts, shallow: true, only: [:create, :update]
         resources :medical_conditions, shallow: true, only: [:index, :create, :destroy]
       end
 
