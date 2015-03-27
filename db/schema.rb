@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327005352) do
+ActiveRecord::Schema.define(version: 20150327031959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 20150327005352) do
     t.boolean  "applied_online"
     t.date     "application_date"
     t.string   "type"
+    t.integer  "guardian_id"
   end
 
   add_index "people", ["flight_id"], name: "index_people_on_flight_id", using: :btree
