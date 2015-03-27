@@ -5,7 +5,14 @@ module API
       # POST /people.json
       def create
         @person = Person.new(person_params)
-        @person.veteran = true
+
+        if person_params[:type].blank? 
+          @person.veteran = true
+          @person.type = "Veteran"
+        elsif person_params[:type] == "Veteran"
+          @person.veteran = true
+        end
+
         @person.applied_online = true
         if @person.save
           render :json => @person
@@ -28,7 +35,7 @@ module API
 
       private
       def person_params
-        params.require(:person).permit(:first_name, :last_name, :middle_name, :email, :phone, :birth_date, :release_info, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
+        params.require(:person).permit(:first_name, :last_name, :middle_name, :email, :phone, :birth_date, :release_info, :war_id, :shirt_size_id, :type, address_attributes: [:street1, :city, :state, :zipcode])
       end
     end
   end

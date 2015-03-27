@@ -9,16 +9,27 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       request.headers["HTTP_X_ADMIN_APIKEY"] = @admin_user.apikey
     end
 
-		# Create POST /api/v1/people
-		it 'creates a person' do
-			post :create, person: FactoryGirl.attributes_for(:person)
+    # Create POST /api/v1/people
+    it 'creates a person' do
+      post :create, person: FactoryGirl.attributes_for(:person)
 
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json["id"]).to be_a(Integer)
-			expect(json["applied_online"]).to be(true)
+      expect(json["applied_online"]).to be(true)
       expect(Person.last.veteran?).to eql(true)
-		end
+    end
+
+    # Create POST /api/v1/people
+    it 'creates a veteran' do
+      post :create, person: FactoryGirl.attributes_for(:person, type: nil)
+
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json["id"]).to be_a(Integer)
+      expect(json["applied_online"]).to be(true)
+      expect(Person.last.veteran?).to eql(true)
+    end
 
     it 'catches validation errors' do
       invalid_person = FactoryGirl.attributes_for(:person)

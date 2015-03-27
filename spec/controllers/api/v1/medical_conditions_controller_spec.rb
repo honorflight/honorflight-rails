@@ -6,13 +6,13 @@ RSpec.describe API::V1::MedicalConditionsController, type: :controller do
 		request.accept = 'application/json'
 		request.headers['CONTENT_TYPE'] = 'application/json'
 		request.headers["HTTP_X_ADMIN_APIKEY"] = @admin_user.apikey
-		@person = FactoryGirl.create(:person)
+		@veteran = FactoryGirl.create(:veteran)
 	end
 
   #index
   it 'should retrieve medical conditions' do
-    @person.medical_conditions = FactoryGirl.create_list(:medical_condition, 10)
-    get :index, person_id: @person.id
+    @veteran.medical_conditions = FactoryGirl.create_list(:medical_condition, 10)
+    get :index, person_id: @veteran.id
 
     expect(response).to be_success
     json = JSON.parse(response.body)
@@ -20,8 +20,8 @@ RSpec.describe API::V1::MedicalConditionsController, type: :controller do
   end
 
   # Create
-  it 'creates a person\'s medical condition' do
-		post :create, person_id: @person.id, medical_condition: FactoryGirl.attributes_for(:medical_condition)
+  it 'creates a veteran\'s medical condition' do
+		post :create, person_id: @veteran.id, medical_condition: FactoryGirl.attributes_for(:medical_condition)
 
 		expect(response).to be_success
 		json = JSON.parse(response.body)

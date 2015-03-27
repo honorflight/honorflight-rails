@@ -1,36 +1,23 @@
 class API::V1::MedicalConditionsController < SessionController
-	before_filter :set_person, only: [:index, :create]
+	before_filter :set_veteran, only: [:index, :create]
 	before_filter :set_medical_condition, only: [:destroy]
 
   # GET /people/:person_id/medical_conditions
   def index
-    render json: @person.medical_conditions
+    render json: @veteran.medical_conditions
   end
 
   # POST /people/:person_id/medical_conditions
   # POST /people/:person_id/medical_conditions.json
   def create
   	@medical_condition =  MedicalCondition.create(medical_condition_params)
-  	if @person.medical_conditions << @medical_condition
+  	if @veteran.medical_conditions << @medical_condition
   		render :json => @medical_condition
     # No invalid routes right now
   	# else
   	# 	render json: @medical_condition.errors, status: :unprocessable_entity
     end
   end
-
-  # # # PATCH/PUT /medical_conditions/1
-  # # # PATCH/PUT /medical_conditions/1.json
-  # def update
-  #   if @medical_condition.update_attributes(medical_condition_params)
-  #     render :json => @medical_condition
-  #   # no invalid routes right now
-  #   # else
-  #   #   render json: @medical_condition.errors, status: :unprocessable_entity
-  #   end
-
-  # end
-
 
   def destroy
     if @medical_condition.destroy
@@ -39,8 +26,8 @@ class API::V1::MedicalConditionsController < SessionController
   end
 
   private
-  def set_person
-    @person = Person.find(params[:person_id])
+  def set_veteran
+    @veteran = Veteran.find(params[:person_id])
   end
 
   def medical_condition_params

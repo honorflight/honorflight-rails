@@ -7,13 +7,10 @@ RSpec.describe Person, type: :model do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
   it { should belong_to(:war) }
-  it { should have_many(:medical_conditions) }
   it { should have_many(:service_awards) }
   it { should belong_to(:shirt_size) }
   it { should belong_to(:flight)}
   it { should have_many(:contacts)}
-  it { should have_many(:medications)}
-  it { should have_many(:medical_allergies)}
 
 
   describe "#uuid" do
