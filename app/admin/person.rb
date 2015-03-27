@@ -1,5 +1,7 @@
 ActiveAdmin.register Person do
-  actions :all, :except => [:destroy]
+  actions :none
+  config.batch_actions = false
+  
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
     :release_info, :tlc, :person_status_id, :mobility_device_id,

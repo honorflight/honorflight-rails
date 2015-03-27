@@ -19,7 +19,7 @@ ActiveAdmin.register Veteran do
      :alternate_phone, :relationship,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
 
-menu parent: "People"
+  menu parent: "People", priority: 2
 
 
   filter :war
@@ -33,8 +33,6 @@ menu parent: "People"
   filter :created_at
   filter :release_info
   filter :tlc
-
-  menu priority: 2
 
   controller do
     def index
