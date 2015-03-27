@@ -141,7 +141,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   # config.before_filter :do_something_awesome
-  # config.before_filter do 
+  # config.before_filter do
   #   actions :all, :except => [:destroy]
   # end
 
@@ -243,12 +243,20 @@ ActiveAdmin.setup do |config|
         def bool_column(*args)
           column(*args){ |model| model[args.last] ? '<span class="status_tag yes">Yes</span>'.html_safe : '<span class="status_tag no">No</span>'.html_safe }
         end
+        def vet_column(*args)
+          column(*args){ |model| (model[args.last] == 'Veteran') ? '<span class="status_tag vet">Veteran</span>'.html_safe : '<span class="status_tag guardian">Guardian</span>'.html_safe }
+        end
       end
       class AttributesTable
         def bool_row(*args)
           row(*args){ |model| model[args.last] ? '<span class="status_tag yes">Yes</span>'.html_safe : '<span class="status_tag no">No</span>'.html_safe }
         end
+        def vet_row(*args)
+          rcolumn(*args){ |model| (model[args.last] == 'Veteran') ? '<span class="status_tag vet">Veteran</span>'.html_safe : '<span class="status_tag guardian">Guardian</span>'.html_safe }
+        end
       end
     end
+
+
   end
 end
