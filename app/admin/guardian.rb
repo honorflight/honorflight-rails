@@ -84,6 +84,7 @@ menu parent: "People"
 
     attributes_table do
       row :flight
+      row :veteran
       row :person_status
       row :first_name
       row :middle_name
