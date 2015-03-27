@@ -2,7 +2,7 @@ ActiveAdmin.register Veteran do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
-    :release_info, :tlc, :person_status_id, :mobility_device_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     medications_attributes: [:id, :medication, :dose, :frequency, :route],
@@ -185,6 +185,7 @@ menu parent: "People"
 
     f.inputs name: "General" do
       f.input :flight
+      f.input :guardian
       f.input :person_status
       f.input :first_name
       f.input :middle_name

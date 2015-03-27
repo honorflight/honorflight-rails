@@ -2,7 +2,7 @@ ActiveAdmin.register Guardian do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
-    :release_info, :tlc, :person_status_id, :mobility_device_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id, :veteran_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
