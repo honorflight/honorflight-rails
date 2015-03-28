@@ -1,5 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: -> { s = SmtpSetting.first.blank? ? "localhost" : s.from_name }
 
   private
   def settings
@@ -7,6 +6,8 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def configure_smtp_settings
+    ActionMailer::Base.default_url_options = { host: settings.host }
+    ActionMailer::Base.default :from => "#{settings.from_name} <#{settings.username}>"
     ActionMailer::Base.smtp_settings = {
       address: settings.smtp_server,
       port: settings.port,
