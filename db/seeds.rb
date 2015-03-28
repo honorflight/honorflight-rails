@@ -41,21 +41,21 @@ end
 
 # Import MedicalConditionTypes from csv
 file = Rails.root.join("db", "csv_imports", "medical-condition-types-2015-03-27.csv")
-CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |mct|
+CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |type|
   new_condition = MedicalConditionType.new()
-  new_condition.send(:write_attribute, :encrypted_name, MedicalConditionType.encrypt_name(mct[:name]))
+  new_condition.send(:write_attribute, :encrypted_name, MedicalConditionType.encrypt_name(type[:name]))
   new_condition.save!
 end
 
 
 # Import MedicalConditionNames from CSV - depends types
 file = Rails.root.join("db", "csv_imports", "medical-condition-names-2015-03-27.csv")
-CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |mcn|
-  mct = MedicalConditionType.find_by_encrypted_name(MedicalConditionType.encrypt_name(mcn[:medical_condition_type]))
+CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |name|
+  type = MedicalConditionType.find_by_encrypted_name(MedicalConditionType.encrypt_name(name[:medical_condition_type]))
   new_name = MedicalConditionName.new 
-  new_name.send(:write_attribute, :encrypted_name, MedicalConditionName.encrypt_name(mcn[:name]))
-  new_name.description = mcn[:description]
-  new_name.medical_condition_type_id = mct.id
+  new_name.send(:write_attribute, :encrypted_name, MedicalConditionName.encrypt_name(name[:name]))
+  new_name.description = name[:description]
+  new_name.medical_condition_type_id = type.id
   new_name.save!
 end
 
