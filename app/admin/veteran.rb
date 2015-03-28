@@ -219,8 +219,8 @@ ActiveAdmin.register Veteran do
       panel 'Medical Conditions' do
         f.has_many :medical_conditions, heading: false, allow_destroy: true do |medical_condition|
           medical_condition.input :id, as: :hidden
-          medical_condition.input :medical_condition_type
-          medical_condition.input :medical_condition_name
+          medical_condition.input :medical_condition_type, input_html: { class: "medical_condition_type_dd" }
+          medical_condition.input :medical_condition_name, input_html: { class: "medical_condition_name_dd" }
           medical_condition.input :diagnosed_at
           medical_condition.input :diagnosed_last
           medical_condition.input :description
