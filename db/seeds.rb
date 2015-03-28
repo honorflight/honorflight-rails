@@ -2,7 +2,7 @@ require 'csv'
 
 RankType.create!([
   {name: "Officer", description: ""},
-  {name: "Warrant ", description: ""},
+  {name: "Warrant", description: ""},
   {name: "Enlisted", description: ""}
 ])
 
@@ -21,7 +21,7 @@ file = Rails.root.join("db", "csv_imports", "ServiceRanksAll-3_26_2015.csv")
 CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |rank|
   # Requires a branch
   branch = Branch.where(name: rank[:branch]).first
-  rank_type = Branch.where(name: rank[:branch]).first
+  rank_type = RankType.where(name: rank[:rank_type]).first
   Rank.create(name: rank[:name], abbreviation: rank[:abbreviation], branch_id: branch.id, rank_type_id: rank_type.id)
 end
 
@@ -52,7 +52,11 @@ end
 file = Rails.root.join("db", "csv_imports", "medical-condition-names-2015-03-27.csv")
 CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |mcn|
   mct = MedicalConditionType.find_by_encrypted_name(MedicalConditionType.encrypt_name(mcn[:medical_condition_type]))
-  MedicalConditionName.create(name: mcn[:name], description: mcn[:description], medical_condition_type_id: mct.id)
+  new_name = MedicalConditionName.new 
+  new_name.send(:write_attribute, :encrypted_name, MedicalConditionName.encrypt_name(mcn[:name]))
+  new_name.description = mcn[:description]
+  new_name.medical_condition_type_id = mct.id
+  new_name.save!
 end
 
 

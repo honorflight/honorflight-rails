@@ -207,7 +207,6 @@ ActiveAdmin.register Veteran do
       f.input :phone
       f.input :email
       f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
-      f.input :veteran
       f.input :war
       f.input :application_date
       f.input :shirt_size
