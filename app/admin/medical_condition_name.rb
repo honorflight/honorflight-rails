@@ -6,6 +6,12 @@ ActiveAdmin.register MedicalConditionName do
 
   filter :medical_condition_type
 
+  csv do
+    column :name
+    column :description
+    column(:medical_condition_type){|medical_condition_name| medical_condition_name.medical_condition_type.name}
+  end
+
   index do
     selectable_column
     actions

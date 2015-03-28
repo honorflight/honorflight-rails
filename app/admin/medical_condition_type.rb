@@ -6,6 +6,11 @@ ActiveAdmin.register MedicalConditionType do
 
   config.filters = false
 
+  csv do
+    column :name
+    column :description
+  end
+
   index do
     selectable_column
     actions
