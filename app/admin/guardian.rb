@@ -2,7 +2,7 @@ ActiveAdmin.register Guardian do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
-    :release_info, :tlc, :person_status_id, :mobility_device_id, :veteran_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
@@ -44,6 +44,7 @@ ActiveAdmin.register Guardian do
     column :veteran
     column(:flight) { |person| person.try(:flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
+    column(:veteran) { |person| person.try(:veteran).try(:full_name) }
     column :email
     column :full_name
     column :first_name
@@ -65,6 +66,9 @@ ActiveAdmin.register Guardian do
     actions
     column :flight
     column :person_status
+    column :veteran do |person|
+      link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))
+    end
     #column :email
     column :first_name
     column :middle_name
@@ -151,8 +155,9 @@ ActiveAdmin.register Guardian do
     f.semantic_errors *f.object.errors.keys
 
     f.inputs name: "General" do
-      f.input :flight
       f.input :person_status
+      f.input :veteran
+      f.input :flight
       f.input :first_name
       f.input :middle_name
       f.input :last_name

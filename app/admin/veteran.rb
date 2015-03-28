@@ -48,6 +48,7 @@ ActiveAdmin.register Veteran do
     column :id
     column(:flight) { |person| person.try(:flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
+    column(:guardian) { |person| person.try(:guardian).try(:full_name) }
     column :email
     column :full_name
     column :first_name
@@ -69,6 +70,9 @@ ActiveAdmin.register Veteran do
     actions
     column :flight
     column :person_status
+    column :guardian do |person|
+      link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id)))
+    end
     #column :email
     column :first_name
     column :middle_name
