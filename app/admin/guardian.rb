@@ -41,7 +41,6 @@ ActiveAdmin.register Guardian do
 
   csv do
     column :id
-    column :veteran
     column(:flight) { |person| person.try(:flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column(:veteran) { |person| person.try(:veteran).try(:full_name) }
