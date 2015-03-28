@@ -4,7 +4,10 @@ ActiveAdmin.register War do
 
   menu parent: "Reference Data"
 
-config.filters = false
+  filter :name
+  filter :abbreviation
+  filter :begin_year
+  filter :end_year
 
   index do
     selectable_column
