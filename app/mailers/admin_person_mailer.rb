@@ -6,7 +6,7 @@ class AdminPersonMailer < ApplicationMailer
   def veteran_form_submission_email(person, admin_user)
     @person = person
     @admin_user = admin_user
-    @url = "http://#{settings.host}#{admin_person_path(@person)}"
+    @url = "http://#{settings.host}#{admin_veteran_path(@person)}"
     mail(to: @admin_user.email, subject: 'A Veteran App Has been Submitted')
   end
 end
