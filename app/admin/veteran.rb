@@ -5,7 +5,7 @@ ActiveAdmin.register Veteran do
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
-    medications_attributes: [:id, :medication, :dose, :frequency, :route],
+    medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
     medical_allergies_attributes: [:id, :medical_allergy],
     medical_conditions_attributes:[:id,
       :medical_condition_type_id, :medical_condition_name_id, :diagnosed_at,

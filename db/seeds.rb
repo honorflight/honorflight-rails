@@ -25,6 +25,10 @@ CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each
   Rank.create(name: rank[:name], abbreviation: rank[:abbreviation], branch_id: branch.id, rank_type_id: rank_type.id)
 end
 
+# file = Rails.root.join("db", "csv_imports", "ServiceRanksAll-3_26_2015.csv")
+# CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |rank|
+#   Rank.where(name: rank[:name]).first.update_attributes(abbreviation: rank[:abbrevation])
+# end
 
 
 # Import Awards from CSV - depends Branch
