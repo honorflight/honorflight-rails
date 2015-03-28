@@ -67,7 +67,10 @@ ActiveAdmin.register Guardian do
     column :flight
     column :person_status
     column :veteran do |person|
-      link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))
+      begin
+        link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))
+      rescue
+      end
     end
     #column :email
     column :first_name
