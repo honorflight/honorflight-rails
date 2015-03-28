@@ -89,7 +89,7 @@ ActiveAdmin.register Guardian do
 
     attributes_table do
       row :flight
-      row :veteran
+      row(:veteran) {|person| person.try(:veteran)}
       row :person_status
       row :first_name
       row :middle_name
@@ -159,7 +159,7 @@ ActiveAdmin.register Guardian do
 
     f.inputs name: "General" do
       f.input :person_status
-      f.input :veteran
+      # f.input :veteran
       f.input :flight
       f.input :first_name
       f.input :middle_name
