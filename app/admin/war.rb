@@ -11,11 +11,11 @@ ActiveAdmin.register War do
 
   index do
     selectable_column
+    actions
     column :name
     column :abbreviation
     column :begin_year
     column :end_year
-    actions
   end
 
   form do |f|
