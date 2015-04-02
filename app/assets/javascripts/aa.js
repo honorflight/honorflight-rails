@@ -17,7 +17,7 @@ $(function(){
       $names.val("");
       $names.children("option").attr("style", "display:none");
       $names.children("option").each(function(){
-        // data and look through it for id and if it's there, remove style
+        // data and look through it for it's there, remove style
         for(var i = 0; i < data.length; i = i + 1){
           if (parseInt($(this).val()) == data[i].id){
             $(this).removeAttr("style")

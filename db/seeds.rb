@@ -76,6 +76,7 @@ ContactCategory.create!([
   {name: "Physician", description: ""}
 ])
 ContactRelationship.create!([
+  {name: "Spouse", description: ""},
   {name: "Mother", description: ""},
   {name: "Father", description: ""},
   {name: "Son", description: ""},

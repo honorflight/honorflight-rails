@@ -32,7 +32,7 @@ class API::V1::ContactsController < SessionController
   end
 
   def contact_params
-    params.require(:contact).permit(:full_name, :phone, :email, :alternate_phone, :contact_category_id, address_attributes: [:street1, :city, :state, :zipcode])
+    params.require(:contact).permit(:full_name, :phone, :email, :alternate_phone, :contact_category_id, :contact_relationship_id, address_attributes: [:street1, :city, :state, :zipcode])
       # :first_name, :last_name, :middle_name, :email, :phone, :birth_date, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
   end
   def set_contact
