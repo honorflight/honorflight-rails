@@ -5,6 +5,13 @@ RSpec.describe Flight, type: :model do
   it { should validate_presence_of(:flies_on)}
   it { should have_many(:people)}
 
+  describe "#flies_on" do
+    it "should print as date" do
+      f = FactoryGirl.create(:flight, flies_on: Date.today)
+      expect(f.to_s).to eql(Date.today.to_s(:aa))
+    end
+  end
+
   describe "Airline names" do
     it "should return airlint names comma separated" do
       airline1 = FactoryGirl.create(:airline, name: "Southwest")

@@ -56,6 +56,10 @@ gem 'redcarpet'
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem "launchy", "~> 2.1.2"
 end
 
 group :development, :test do

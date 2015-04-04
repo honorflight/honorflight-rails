@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register SimplePage do
   actions :all, :except => [:destroy]
   permit_params :key, :title, :markdown
@@ -27,3 +28,4 @@ ActiveAdmin.register SimplePage do
 
 
 end
+# :nocov:

@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register MedicationRoute do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -33,3 +34,4 @@ ActiveAdmin.register MedicationRoute do
 
 
 end
+# :nocov:

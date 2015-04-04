@@ -22,5 +22,10 @@ RSpec.describe Marshel::Date do
     it "should gracefully handle invalid date string" do
       expect(Marshel::Date.load("some-random-non-parsable date")).to eql(nil)
     end
+
+    it "should marshel a date mm/dd/yyyy" do
+      # Date.strptime(permitted_params[:veteran][:birth_date], "%m/%d/%Y")
+      expect(Marshel::Date.load("03/20/1922")).to eql(Date.parse("1922-03-20"))
+    end
   end
 end

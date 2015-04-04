@@ -4,10 +4,12 @@ ActiveAdmin.register War do
 
   menu parent: "Reference Data"
 
+# :nocov:
   filter :name
   filter :abbreviation
   filter :begin_year
   filter :end_year
+# :nocov:
 
   index do
     selectable_column

@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register RankType do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -32,3 +33,4 @@ ActiveAdmin.register RankType do
 
 
 end
+# :nocov:

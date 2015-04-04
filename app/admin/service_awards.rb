@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register ServiceAward do
   actions :all, :except => [:destroy]
   permit_params :name
@@ -19,3 +20,4 @@ ActiveAdmin.register ServiceAward do
 
 
 end
+# :nocov:

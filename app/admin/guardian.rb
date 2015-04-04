@@ -16,7 +16,7 @@ ActiveAdmin.register Guardian do
 
   menu parent: "People", priority: 3
 
-
+# :nocov:
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
   filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
@@ -28,7 +28,9 @@ ActiveAdmin.register Guardian do
   filter :created_at
   filter :release_info
   filter :tlc
+# :nocov:
 
+# :nocov:
   controller do
     def index
       if params[:q].present? && params[:q][:flight_id_eq]=="nil"
@@ -38,7 +40,9 @@ ActiveAdmin.register Guardian do
       super
     end
   end
+# :nocov:
 
+# :nocov:
   csv do
     column :id
     column(:flight) { |person| person.try(:flight, :flies_on) }
@@ -59,6 +63,7 @@ ActiveAdmin.register Guardian do
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
+# :nocov:
 
   index do
     selectable_column

@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register PersonStatus do
   actions :all, :except => [:destroy]
   permit_params :name, :descriptions
@@ -31,3 +32,4 @@ ActiveAdmin.register PersonStatus do
 
 
 end
+# :nocov:

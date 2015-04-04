@@ -10,8 +10,4 @@ class PersonDecorator < Draper::Decorator
   #     end
   #   end
 
-  def birth_date
-    model.birth_date
-  end
-
 end

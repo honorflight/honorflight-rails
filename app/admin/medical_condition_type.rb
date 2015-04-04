@@ -6,10 +6,12 @@ ActiveAdmin.register MedicalConditionType do
 
   config.filters = false
 
+# :nocov:
   csv do
     column :name
     column :description
   end
+# :nocov:
 
   index do
     selectable_column

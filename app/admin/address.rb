@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register Address do
   actions :all, :except => [:destroy]
   permit_params :street1, :street2, :city, :state, :zipcode, :person_id, :contact_id
@@ -15,5 +16,5 @@ ActiveAdmin.register Address do
     end
   end
 
-
 end
+# :nocov:

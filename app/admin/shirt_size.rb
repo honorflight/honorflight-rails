@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register ShirtSize do
   actions :all, :except => [:destroy]
   permit_params :name, :description, :abbreviation
@@ -34,3 +35,4 @@ ActiveAdmin.register ShirtSize do
 
 
 end
+# :nocov:

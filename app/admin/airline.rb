@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register Airline do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -30,3 +31,4 @@ ActiveAdmin.register Airline do
 
 
 end
+# :nocov:

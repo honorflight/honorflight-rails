@@ -16,6 +16,7 @@ ActiveAdmin.register Person do
 
   menu priority: 2
 
+# :nocov:
   controller do
     def index
       if params[:q].present? && params[:q][:flight_id_eq]=="nil"
@@ -25,7 +26,9 @@ ActiveAdmin.register Person do
       super
     end
   end
+# :nocov:
 
+# :nocov:
   csv do
     column :id
     column :type
@@ -46,6 +49,7 @@ ActiveAdmin.register Person do
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
+# :nocov:
 
   index do
     selectable_column

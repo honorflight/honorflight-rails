@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register Award do
   actions :all, :except => [:destroy]
   permit_params :name, :description, :branch_id
@@ -32,3 +33,4 @@ ActiveAdmin.register Award do
 
 
 end
+# :nocov:

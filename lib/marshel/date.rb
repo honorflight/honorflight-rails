@@ -3,7 +3,12 @@ class Marshel::Date
     begin
       return Date.parse(date_string)
     rescue
-    end   
+    end
+
+    begin
+      return Date.strptime(date_string, "%m/%d/%Y")
+    rescue
+    end
     nil
   end
 

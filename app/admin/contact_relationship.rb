@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register ContactRelationship do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -17,3 +18,4 @@ ActiveAdmin.register ContactRelationship do
   end
 
 end
+# :nocov:

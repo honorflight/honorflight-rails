@@ -7,9 +7,12 @@ ActiveAdmin.register Flight do
     :_destroy]
 
   # Remove All filters except War, Special Instructions, Airline
+
+# :nocov:
   filter :war
   filter :special_instruction
   filter :airline
+# :nocov:
 
   index do
     selectable_column

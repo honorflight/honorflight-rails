@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register SmtpSetting do
   actions :index, :edit, :show, :update
   menu parent: "Site Settings", priority: 99
@@ -91,3 +92,4 @@ ActiveAdmin.register SmtpSetting do
 
 
 end
+# :nocov:

@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register ContactCategory do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -30,3 +31,4 @@ ActiveAdmin.register ContactCategory do
 
 
 end
+# :nocov:

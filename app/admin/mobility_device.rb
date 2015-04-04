@@ -1,3 +1,4 @@
+# :nocov:
 ActiveAdmin.register MobilityDevice do
   actions :all, :except => [:destroy]
   permit_params :name, :description
@@ -30,3 +31,4 @@ ActiveAdmin.register MobilityDevice do
 
 
 end
+# :nocov:
