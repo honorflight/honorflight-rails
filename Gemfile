@@ -34,6 +34,8 @@ gem 'responders',  "~> 2.0"
 gem 'draper'
 # gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 
+gem 'delayed_job_active_record'
+gem 'sucker_punch'
 gem 'slim-rails'
 
 #heroku
