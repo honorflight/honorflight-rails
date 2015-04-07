@@ -1,7 +1,7 @@
 # :nocov:
 ActiveAdmin.register SmtpSetting do
   actions :index, :edit, :show, :update
-  menu parent: "Site Settings", priority: 99
+  menu label: "Email Settings", parent: "Site Settings", priority: 99
   permit_params :id, :send_mail, :host, :from_name, :smtp_server, 
     :port, :authentication, :username, :password, :openssl_verify_mode, 
     :enable_starttls_auto

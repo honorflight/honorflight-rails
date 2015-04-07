@@ -78,6 +78,9 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+
+  # Security
+  gem 'brakeman', :require => false
 end
 
 ruby '2.1.2'

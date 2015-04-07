@@ -161,6 +161,10 @@ ActiveAdmin.register Guardian do
     end
     f.semantic_errors *f.object.errors.keys
 
+    f.actions do
+      f.action :submit
+    end
+
     f.inputs name: "General" do
       f.input :person_status
       # f.input :veteran

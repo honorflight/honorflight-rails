@@ -200,6 +200,10 @@ ActiveAdmin.register Veteran do
     end
     f.semantic_errors *f.object.errors.keys
 
+    f.actions do
+      f.action :submit
+    end
+
     f.inputs name: "General" do
       f.input :flight
       f.input :guardian
