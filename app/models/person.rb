@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
 
 
   validates :uuid, presence: true
-  #validates :birth_date, presence: true
+  validates :birth_date, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone, presence: true

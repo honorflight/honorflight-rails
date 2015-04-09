@@ -8,3 +8,8 @@ Feature: Login
   Then I should see "Signed in successfully."
   And I should see "People"
   And I should see "Dashboard"
+
+  Scenario: logging out
+  Given I am logged in
+  Then I click "Logout"
+  And I should see "You need to sign in or sign up before continuing."

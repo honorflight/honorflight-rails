@@ -24,7 +24,8 @@ Then(/^I should see "(.*?)"$/) do |arg1|
 end
 
 When(/^I click button "(.*?)"$/) do |arg1|
-    click_button(arg1) # "Create Veteran"
+  first(:button, arg1).click
+    # click_button(arg1) # "Create Veteran"
 end
 
 Then(/^I save_and_open_page$/) do

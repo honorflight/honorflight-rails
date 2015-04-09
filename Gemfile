@@ -58,9 +58,10 @@ gem 'redcarpet'
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem 'selenium-cucumber', require: false
   gem "launchy", "~> 2.1.2"
 end
 
@@ -80,7 +81,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   # Security
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
 end
 
 ruby '2.1.2'
