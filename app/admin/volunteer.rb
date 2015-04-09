@@ -14,7 +14,8 @@ ActiveAdmin.register Volunteer do
      :alternate_phone, :relationship,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
 
-  menu parent: "People", priority: 4
+  menu false
+  #, parent: "People", priority: 4
 
 # :nocov:
   filter :war
