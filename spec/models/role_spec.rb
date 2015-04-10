@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:volunteers).through(:volunteers_roles)}
+  it { should have_many(:volunteers_roles)}
 end

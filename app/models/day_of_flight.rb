@@ -1,6 +1,8 @@
 class DayOfFlight < ActiveRecord::Base
   has_many :people
   has_many :flight_details
+  has_many :day_of_flights_volunteers
+  has_many :volunteers, through: :day_of_flights_volunteers
   belongs_to :war
 
   validates :flies_on, presence: true
