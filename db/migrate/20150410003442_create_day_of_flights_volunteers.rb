@@ -3,10 +3,12 @@ class CreateDayOfFlightsVolunteers < ActiveRecord::Migration
     create_table :day_of_flights_volunteers do |t|
       t.references :day_of_flight, index: true
       t.references :person, index: true
+      t.references :flight_responsibility, index: true
 
       t.timestamps null: false
     end
     add_foreign_key :day_of_flights_volunteers, :day_of_flights
     add_foreign_key :day_of_flights_volunteers, :people
+    add_foreign_key :day_of_flights_volunteers, :flight_responsibilities
   end
 end

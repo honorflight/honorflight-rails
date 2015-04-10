@@ -139,11 +139,13 @@ ActiveRecord::Schema.define(version: 20150410004029) do
   create_table "day_of_flights_volunteers", force: :cascade do |t|
     t.integer  "day_of_flight_id"
     t.integer  "person_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "flight_responsibility_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "day_of_flights_volunteers", ["day_of_flight_id"], name: "index_day_of_flights_volunteers_on_day_of_flight_id", using: :btree
+  add_index "day_of_flights_volunteers", ["flight_responsibility_id"], name: "index_day_of_flights_volunteers_on_flight_responsibility_id", using: :btree
   add_index "day_of_flights_volunteers", ["person_id"], name: "index_day_of_flights_volunteers_on_person_id", using: :btree
 
   create_table "flight_details", force: :cascade do |t|
@@ -395,6 +397,7 @@ ActiveRecord::Schema.define(version: 20150410004029) do
   add_foreign_key "contacts", "people"
   add_foreign_key "day_of_flights", "wars"
   add_foreign_key "day_of_flights_volunteers", "day_of_flights"
+  add_foreign_key "day_of_flights_volunteers", "flight_responsibilities"
   add_foreign_key "day_of_flights_volunteers", "people"
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "day_of_flights"
