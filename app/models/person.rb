@@ -10,7 +10,7 @@ class Person < ActiveRecord::Base
 
   belongs_to :war
   belongs_to :shirt_size
-  belongs_to :flight
+  belongs_to :day_of_flight
   belongs_to :person_status
 
 

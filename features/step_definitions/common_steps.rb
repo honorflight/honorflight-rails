@@ -31,3 +31,8 @@ end
 Then(/^I save_and_open_page$/) do
   save_and_open_page # express the regexp above with the code you wish you had
 end
+
+Given(/^I select id "(.*?)" value "(.*?)"$/) do |arg1, arg2|
+  select arg2, from: arg1
+  # pending # express the regexp above with the code you wish you had
+end

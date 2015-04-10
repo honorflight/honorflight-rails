@@ -1,4 +1,4 @@
-class Flight < ActiveRecord::Base
+class DayOfFlight < ActiveRecord::Base
   has_many :people
   has_many :flight_details
   belongs_to :war

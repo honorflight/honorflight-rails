@@ -9,7 +9,7 @@ RSpec.describe FlightDetail, type: :model do
   it { should validate_presence_of(:airline)}
   it { should validate_presence_of(:departure_gate)}
   it { should validate_presence_of(:arrival_gate)}
-  it { should belong_to(:flight)}
+  it { should belong_to(:day_of_flight)}
   it { should belong_to(:airline)}
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327031959) do
+ActiveRecord::Schema.define(version: 20150410004029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,24 +124,7 @@ ActiveRecord::Schema.define(version: 20150327031959) do
   add_index "contacts", ["contact_relationship_id"], name: "index_contacts_on_contact_relationship_id", using: :btree
   add_index "contacts", ["person_id"], name: "index_contacts_on_person_id", using: :btree
 
-  create_table "flight_details", force: :cascade do |t|
-    t.string   "destination"
-    t.string   "departs_from"
-    t.datetime "arrives_at"
-    t.datetime "departs_at"
-    t.string   "flight_number"
-    t.integer  "airline_id"
-    t.integer  "flight_id"
-    t.string   "departure_gate"
-    t.string   "arrival_gate"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "flight_details", ["airline_id"], name: "index_flight_details_on_airline_id", using: :btree
-  add_index "flight_details", ["flight_id"], name: "index_flight_details_on_flight_id", using: :btree
-
-  create_table "flights", force: :cascade do |t|
+  create_table "day_of_flights", force: :cascade do |t|
     t.date     "flies_on"
     t.integer  "war_id"
     t.text     "special_instruction"
@@ -151,7 +134,44 @@ ActiveRecord::Schema.define(version: 20150327031959) do
     t.integer  "tickets_purchased"
   end
 
-  add_index "flights", ["war_id"], name: "index_flights_on_war_id", using: :btree
+  add_index "day_of_flights", ["war_id"], name: "index_day_of_flights_on_war_id", using: :btree
+
+  create_table "day_of_flights_volunteers", force: :cascade do |t|
+    t.integer  "day_of_flight_id"
+    t.integer  "person_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "day_of_flights_volunteers", ["day_of_flight_id"], name: "index_day_of_flights_volunteers_on_day_of_flight_id", using: :btree
+  add_index "day_of_flights_volunteers", ["person_id"], name: "index_day_of_flights_volunteers_on_person_id", using: :btree
+
+  create_table "flight_details", force: :cascade do |t|
+    t.string   "destination"
+    t.string   "departs_from"
+    t.datetime "arrives_at"
+    t.datetime "departs_at"
+    t.string   "flight_number"
+    t.integer  "airline_id"
+    t.integer  "day_of_flight_id"
+    t.string   "departure_gate"
+    t.string   "arrival_gate"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "flight_details", ["airline_id"], name: "index_flight_details_on_airline_id", using: :btree
+  add_index "flight_details", ["day_of_flight_id"], name: "index_flight_details_on_day_of_flight_id", using: :btree
+
+  create_table "flight_responsibilities", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "role_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "flight_responsibilities", ["role_id"], name: "index_flight_responsibilities_on_role_id", using: :btree
 
   create_table "medical_allergies", force: :cascade do |t|
     t.string   "medical_allergy"
@@ -235,7 +255,7 @@ ActiveRecord::Schema.define(version: 20150327031959) do
     t.integer  "shirt_size_id"
     t.boolean  "release_info"
     t.boolean  "tlc"
-    t.integer  "flight_id"
+    t.integer  "day_of_flight_id"
     t.boolean  "veteran"
     t.boolean  "guardian"
     t.integer  "person_status_id"
@@ -246,7 +266,7 @@ ActiveRecord::Schema.define(version: 20150327031959) do
     t.integer  "guardian_id"
   end
 
-  add_index "people", ["flight_id"], name: "index_people_on_flight_id", using: :btree
+  add_index "people", ["day_of_flight_id"], name: "index_people_on_day_of_flight_id", using: :btree
   add_index "people", ["mobility_device_id"], name: "index_people_on_mobility_device_id", using: :btree
   add_index "people", ["person_status_id"], name: "index_people_on_person_status_id", using: :btree
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
@@ -278,6 +298,13 @@ ActiveRecord::Schema.define(version: 20150327031959) do
 
   add_index "ranks", ["branch_id"], name: "index_ranks_on_branch_id", using: :btree
   add_index "ranks", ["rank_type_id"], name: "index_ranks_on_rank_type_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "service_awards", force: :cascade do |t|
     t.integer  "quantity"
@@ -341,6 +368,16 @@ ActiveRecord::Schema.define(version: 20150327031959) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "volunteers_roles", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "volunteers_roles", ["person_id"], name: "index_volunteers_roles_on_person_id", using: :btree
+  add_index "volunteers_roles", ["role_id"], name: "index_volunteers_roles_on_role_id", using: :btree
+
   create_table "wars", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -356,9 +393,12 @@ ActiveRecord::Schema.define(version: 20150327031959) do
   add_foreign_key "contacts", "contact_categories"
   add_foreign_key "contacts", "contact_relationships"
   add_foreign_key "contacts", "people"
+  add_foreign_key "day_of_flights", "wars"
+  add_foreign_key "day_of_flights_volunteers", "day_of_flights"
+  add_foreign_key "day_of_flights_volunteers", "people"
   add_foreign_key "flight_details", "airlines"
-  add_foreign_key "flight_details", "flights"
-  add_foreign_key "flights", "wars"
+  add_foreign_key "flight_details", "day_of_flights"
+  add_foreign_key "flight_responsibilities", "roles"
   add_foreign_key "medical_allergies", "people"
   add_foreign_key "medical_condition_names", "medical_condition_types"
   add_foreign_key "medical_conditions", "medical_condition_names"
@@ -366,7 +406,7 @@ ActiveRecord::Schema.define(version: 20150327031959) do
   add_foreign_key "medical_conditions", "people"
   add_foreign_key "medications", "medication_routes"
   add_foreign_key "medications", "people"
-  add_foreign_key "people", "flights"
+  add_foreign_key "people", "day_of_flights"
   add_foreign_key "people", "mobility_devices"
   add_foreign_key "people", "person_statuses"
   add_foreign_key "people", "shirt_sizes"
@@ -378,4 +418,6 @@ ActiveRecord::Schema.define(version: 20150327031959) do
   add_foreign_key "service_histories", "people"
   add_foreign_key "service_histories", "rank_types"
   add_foreign_key "service_histories", "ranks"
+  add_foreign_key "volunteers_roles", "people"
+  add_foreign_key "volunteers_roles", "roles"
 end

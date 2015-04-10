@@ -1,7 +1,7 @@
 ActiveAdmin.register Veteran do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
-    :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
+    :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -24,7 +24,7 @@ ActiveAdmin.register Veteran do
 # :nocov:
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -38,9 +38,9 @@ ActiveAdmin.register Veteran do
 # :nocov:
   controller do
     def index
-      if params[:q].present? && params[:q][:flight_id_eq]=="nil"
-        params[:q][:flight_id_null]=true
-        params[:q].delete(:flight_id_eq)
+      if params[:q].present? && params[:q][:day_of_flight_id_eq]=="nil"
+        params[:q][:day_of_flight_id_null]=true
+        params[:q].delete(:day_of_flight_id_eq)
       end
       super
     end
@@ -55,7 +55,7 @@ ActiveAdmin.register Veteran do
 # :nocov:
   csv do
     column :id
-    column(:flight) { |person| person.try(:flight, :flies_on) }
+    column(:day_of_flight) { |person| person.try(:day_of_flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column(:guardian) { |person| person.try(:guardian).try(:full_name) }
     column :email
@@ -79,7 +79,7 @@ ActiveAdmin.register Veteran do
   index do
     selectable_column
     actions
-    column :flight
+    column :day_of_flight
     column :person_status
     column :guardian do |person|
       begin
@@ -103,7 +103,7 @@ ActiveAdmin.register Veteran do
   show title: :full_name do
 
     attributes_table do
-      row :flight
+      row :day_of_flight
       row :guardian
       row :person_status
       row :first_name
@@ -205,7 +205,7 @@ ActiveAdmin.register Veteran do
     end
 
     f.inputs name: "General" do
-      f.input :flight
+      f.input :day_of_flight
       f.input :guardian
       f.input :person_status
       f.input :first_name

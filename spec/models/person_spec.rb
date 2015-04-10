@@ -9,7 +9,7 @@ RSpec.describe Person, type: :model do
   it { should belong_to(:war) }
   it { should have_many(:service_awards) }
   it { should belong_to(:shirt_size) }
-  it { should belong_to(:flight)}
+  it { should belong_to(:day_of_flight)}
   it { should have_many(:contacts)}
 
 

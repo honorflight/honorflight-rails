@@ -1,4 +1,4 @@
-ActiveAdmin.register Flight do
+ActiveAdmin.register DayOfFlight do
   actions :all, :except => [:destroy]
   permit_params :war_id, :flies_on, :special_instruction, :group_number,
   :tickets_purchased,
@@ -37,7 +37,7 @@ ActiveAdmin.register Flight do
       row :tickets_purchased
       row :group_number
       panel "Flight Details" do
-        table_for flight.flight_details do
+        table_for day_of_flight.flight_details do
           column :airline
           column :flight_number
           column "Departs On", :departs_at

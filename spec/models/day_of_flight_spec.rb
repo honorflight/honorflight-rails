@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Flight, type: :model do
+RSpec.describe DayOfFlight, type: :model do
   it { should belong_to(:war)}
   it { should validate_presence_of(:flies_on)}
   it { should have_many(:people)}
 
   describe "#flies_on" do
     it "should print as date" do
-      f = FactoryGirl.create(:flight, flies_on: Date.today)
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
       expect(f.to_s).to eql(Date.today.to_s(:aa))
     end
   end
@@ -17,7 +17,7 @@ RSpec.describe Flight, type: :model do
       airline1 = FactoryGirl.create(:airline, name: "Southwest")
       airline2 = FactoryGirl.create(:airline, name: "Delta")
 
-      flight = FactoryGirl.create(:flight)
+      flight = FactoryGirl.create(:day_of_flight)
       flight.flight_details << FactoryGirl.create(:flight_detail, airline: airline1)
       flight.flight_details << FactoryGirl.create(:flight_detail, airline: airline2)
 
@@ -28,7 +28,7 @@ RSpec.describe Flight, type: :model do
     it "should return airlint names comma separated" do
       airline1 = FactoryGirl.create(:airline, name: "Southwest")
 
-      flight = FactoryGirl.create(:flight)
+      flight = FactoryGirl.create(:day_of_flight)
       flight.flight_details << FactoryGirl.create(:flight_detail, airline: airline1)
       flight.flight_details << FactoryGirl.create(:flight_detail, airline: airline1)
 

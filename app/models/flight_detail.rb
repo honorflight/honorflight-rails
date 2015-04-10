@@ -1,6 +1,6 @@
 class FlightDetail < ActiveRecord::Base
   belongs_to :airline
-  belongs_to :flight
+  belongs_to :day_of_flight
 
   validates :arrival_gate, presence: true
   validates :departure_gate, presence: true
