@@ -1,5 +1,5 @@
 class MedicalConditionName < ActiveRecord::Base
-  attr_encrypted :name, key: :encryption_key
+  attr_encrypted :name, key: ENV['ENCRYPTION_KEY_MEDICALCONDITIONNAME']
   belongs_to :medical_condition_type
 
   has_many :medical_condition_names

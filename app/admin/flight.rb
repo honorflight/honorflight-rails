@@ -66,6 +66,12 @@ ActiveAdmin.register Flight do
       f.input :special_instruction
     end
 
+    panel 'Flight Volunteers' do
+      f.has_many :volunteers, label: false do |volunteer|
+        volunteer.inputs
+      end
+    end
+
     panel 'Flight Details' do
       f.has_many :flight_details, label: false do |flight_detail|
         flight_detail.input :id, as: :hidden

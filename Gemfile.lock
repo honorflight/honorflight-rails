@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/attr-encrypted/attr_encrypted.git
-  revision: 2d37ed8f255405fcd10c8c91158c086c95ec7dd1
+  revision: 54a146b3e400846df77754d13a8aee4538029030
   specs:
     attr_encrypted (1.3.3)
       encryptor (>= 1.3.0)
