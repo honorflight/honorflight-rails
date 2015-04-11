@@ -1,5 +1,5 @@
 class MedicalConditionName < ActiveRecord::Base
-  attr_encrypted :name, :key => 'future key alg'
+  attr_encrypted :name, key: :encryption_key
   belongs_to :medical_condition_type
 
   has_many :medical_condition_names

@@ -1,5 +1,5 @@
 class MedicalCondition < ActiveRecord::Base
-  attr_encrypted :diagnosed_at, :diagnosed_last, :description, :key => 'future key alg'
+  attr_encrypted :diagnosed_at, :diagnosed_last, :description, key: :encryption_key
   # attr_encrypted :diagnosed_last, :description, key: 'future key alg', marshal: true, marshaler: Marshel::Date
 
   belongs_to :person

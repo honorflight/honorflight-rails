@@ -11,7 +11,8 @@ RSpec.describe Contact, type: :model do
 
   describe "#set_contact_category" do
     it "should default to alternate contact" do
-      expect(FactoryGirl.create(:contact).contact_category.name).to eql("Alternate")
+      c = FactoryGirl.create(:contact)
+      expect(c.contact_category.name).to eql("Alternate")
     end
   end
 end

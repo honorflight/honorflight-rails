@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  attr_encrypted :street1, :street2, :key => 'future key alg'
+  attr_encrypted :street1, :street2, key: :encryption_key
 
   belongs_to :person
   belongs_to :contact

@@ -44,10 +44,6 @@ class Person < ActiveRecord::Base
     self[:uuid]||=SecureRandom.uuid
   end
 
-  def encryption_key
-    generate_uuid
-  end
-
   def full_name
     "#{self.first_name} #{self.middle_name} #{self.last_name}"
   end
