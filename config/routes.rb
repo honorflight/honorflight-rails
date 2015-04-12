@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
 
 
-
+  get 'status' => 'status#index', as: :status
 
 
   devise_for :admin_users, ActiveAdmin::Devise.config
