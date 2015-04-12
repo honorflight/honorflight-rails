@@ -8,6 +8,7 @@ class DayOfFlight < ActiveRecord::Base
   validates :flies_on, presence: true
 
   accepts_nested_attributes_for :flight_details, :allow_destroy => true
+  accepts_nested_attributes_for :day_of_flights_volunteers, allow_destroy: true
 
   # t.date     "flies_on"
   # t.integer  "war_id"

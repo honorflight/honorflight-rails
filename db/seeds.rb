@@ -127,3 +127,24 @@ War.create!([
   {name: "Korean War", abbreviation: "Korean War", begin_year: "1950-01-01", end_year: "1953-01-01"},
   {name: "World War II", abbreviation: "WWII", begin_year: "1939-01-01", end_year: "1945-01-01"}
 ])
+
+
+Role.create!([
+  {name: "Flight Leader"},
+  {name: "EMT"},
+  {name: "Photographer"}
+])
+
+flight_leader = Role.where(name: "Flight Leader").first
+emt = Role.where(name: "EMT").first
+camera = Role.where(name: "Photographer").first
+
+FlightResponsibility.create!([
+  {name: "Flight Leader 1", role: flight_leader},
+  {name: "Flight Leader 2", role: flight_leader},
+  {name: "Flight Leader 3", role: flight_leader},
+  {name: "Flight Leader 4", role: flight_leader},
+  {name: "Flight Leader 5", role: flight_leader},
+  {name: "EMT", role: emt},
+  {name: "Photographer", role: camera}
+])
