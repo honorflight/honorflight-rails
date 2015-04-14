@@ -1,10 +1,12 @@
 ActiveAdmin.register DayOfFlight do
   actions :all, :except => [:destroy]
   permit_params :war_id, :flies_on, :special_instruction, :group_number,
-  :tickets_purchased,
+    :tickets_purchased,
     flight_details_attributes: [:id, :airline_id, :flight_number, :departs_at,
     :departs_from, :departure_gate, :destination, :arrives_at, :arrival_gate,
-    :_destroy]
+    :_destroy],
+    day_of_flights_volunteers_attributes:[:id,
+      :person_id, :flight_responsibility_id, :_destroy]
 
   # Remove All filters except War, Special Instructions, Airline
 
@@ -67,8 +69,8 @@ ActiveAdmin.register DayOfFlight do
     end
 
     panel 'Flight Volunteers' do
-      f.has_many :day_of_flights_volunteers, label: false do |volunteer|
-        volunteer.inputs :volunteer, :flight_responsibility
+      f.has_many :day_of_flights_volunteers, label: false, allow_destroy: true do |volunteer|
+        volunteer.inputs :flight_responsibility, :volunteer
       end
     end
 
