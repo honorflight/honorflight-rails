@@ -4,6 +4,8 @@ RSpec.describe DayOfFlight, type: :model do
   it { should belong_to(:war)}
   it { should validate_presence_of(:flies_on)}
   it { should have_many(:people)}
+  it { should have_many(:veterans)}
+  it { should have_many(:guardians).through(:veterans)}
   it { should have_many(:day_of_flights_volunteers)}
   it { should have_many(:volunteers).through(:day_of_flights_volunteers)}
 

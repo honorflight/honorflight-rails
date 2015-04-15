@@ -12,7 +12,8 @@ ActiveAdmin.register Volunteer do
     contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
-        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
+      address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
+    volunteers_roles_attributes: [:id, :role_id, :_destroy]
 
   menu parent: "People", priority: 4
 
@@ -151,6 +152,14 @@ ActiveAdmin.register Volunteer do
       end
     end
 
+    panel "Volunteer Roles"  do
+      table_for volunteer.volunteers_roles do
+        column :role
+      end
+    end
+
+
+
     active_admin_comments
   end
 
@@ -185,6 +194,8 @@ ActiveAdmin.register Volunteer do
       #f.input :release_info
     end
 
+
+
     panel 'Service Histories' do
       f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
         service_history.input :id, as: :hidden
@@ -211,7 +222,11 @@ ActiveAdmin.register Volunteer do
       end
     end
 
-
+    panel "Volunteer Roles" do
+      f.has_many :volunteers_roles, heading: false, allow_destroy: true  do |roles|
+        roles.inputs :role
+      end
+    end
 
     f.actions do
       f.action :submit

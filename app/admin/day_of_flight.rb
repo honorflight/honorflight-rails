@@ -24,7 +24,7 @@ ActiveAdmin.register DayOfFlight do
     column :tickets_purchased
     column :group_number
     column "People Assigned" do |flight|
-      flight.people.count
+      flight.people_count
     end
     column "Airlines" do |flight|
       flight.try(:airline_names)
@@ -38,6 +38,22 @@ ActiveAdmin.register DayOfFlight do
       row :special_instruction
       row :tickets_purchased
       row :group_number
+
+      panel "Flight Responsabilities" do
+        table_for day_of_flight.day_of_flights_volunteers do
+          column :flight_responsibility
+          column :volunteer
+
+        end
+      end
+
+      panel "Veterans" do
+        table_for day_of_flight.veterans do
+          column(:full_name) { |o| link_to(o.full_name, admin_veteran_path(o))}
+          column(:guardian) { |o| link_to(o.guardian.full_name, admin_guardian_path(o.guardian))}
+        end
+      end
+
       panel "Flight Details" do
         table_for day_of_flight.flight_details do
           column :airline
@@ -51,13 +67,17 @@ ActiveAdmin.register DayOfFlight do
           end
         end
       end
+
+
+
     end
-      sidebar :flights, :only => :show do
-        attributes_table_for resource do
-          row("Total on Flight")  { resource.people.count  }
-          #row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
-        end
+
+    sidebar :flights, :only => :show do
+      attributes_table_for resource do
+        row("Total on Flight")  { resource.people_count  }
+        #row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
       end
+    end
 
   form do |f|
     f.inputs do
@@ -69,13 +89,13 @@ ActiveAdmin.register DayOfFlight do
     end
 
     panel 'Flight Volunteers' do
-      f.has_many :day_of_flights_volunteers, label: false, allow_destroy: true do |volunteer|
+      f.has_many :day_of_flights_volunteers, heading: false, allow_destroy: true do |volunteer|
         volunteer.inputs :flight_responsibility, :volunteer
       end
     end
 
     panel 'Flight Details' do
-      f.has_many :flight_details, label: false do |flight_detail|
+      f.has_many :flight_details, heading: false  do |flight_detail|
         flight_detail.input :id, as: :hidden
         flight_detail.input :airline
         flight_detail.input :flight_number

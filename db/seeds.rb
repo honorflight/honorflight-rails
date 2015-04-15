@@ -56,7 +56,7 @@ end
 file = Rails.root.join("db", "csv_imports", "medical-condition-names-2015-03-27.csv")
 CSV.open(file, headers: true, header_converters: :symbol, converters: :all).each do |name|
   type = MedicalConditionType.find_by_encrypted_name(MedicalConditionType.encrypt_name(name[:medical_condition_type]))
-  new_name = MedicalConditionName.new 
+  new_name = MedicalConditionName.new
   new_name.send(:write_attribute, :encrypted_name, MedicalConditionName.encrypt_name(name[:name]))
   new_name.description = name[:description]
   new_name.medical_condition_type_id = type.id
@@ -132,11 +132,13 @@ War.create!([
 Role.create!([
   {name: "Flight Leader"},
   {name: "EMT"},
-  {name: "Photographer"}
+  {name: "Photographer"},
+  {name: "Nurse"}
 ])
 
 flight_leader = Role.where(name: "Flight Leader").first
 emt = Role.where(name: "EMT").first
+nurse = Role.where(name: "Nurse").first
 camera = Role.where(name: "Photographer").first
 
 FlightResponsibility.create!([
@@ -146,5 +148,6 @@ FlightResponsibility.create!([
   {name: "Flight Leader 4", role: flight_leader},
   {name: "Flight Leader 5", role: flight_leader},
   {name: "EMT", role: emt},
+  {name: "Nurse", role: nurse},
   {name: "Photographer", role: camera}
 ])

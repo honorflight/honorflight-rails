@@ -4,7 +4,7 @@ ActiveAdmin.register Role do
 
   filter :name
   filter :description
-  
+
 
   menu parent: "Reference Data", label: "Volunteer Roles"
 
@@ -15,6 +15,18 @@ ActiveAdmin.register Role do
     column :name
     column :description
     column :created_at
+  end
+
+  show do
+    attributes_table  do
+      row :name
+      row :description
+      table_for role.flight_responsibilities, heading: false  do
+
+        column "Flight Responsibilities", :name
+      end
+    end
+    active_admin_comments
   end
 
   # See permitted parameters documentation:

@@ -121,34 +121,6 @@ ActiveAdmin.register Veteran do
       row :updated_at
     end
 
-    panel "Medical Concerns" do
-      attributes_table_for resource.mobility_device do
-        row("Mobility Device") { resource.try(:mobility_device, :name) }
-      end
-
-      panel "Medical Conditions" do
-        table_for veteran.medical_conditions do
-          column :medical_condition_type
-          column :medical_condition_name
-          column :diagnosed_at
-          column :diagnosed_last
-          column :description
-        end
-      end
-      panel "Medications" do
-        table_for veteran.medications do
-          column :medication
-          column :dose
-          column :frequency
-          column :medication_route
-
-          table_for veteran.medical_allergies do
-            column :medical_allergy
-          end
-        end
-      end
-    end
-
     panel "Service History" do
       table_for veteran.service_histories do
         column :start_year
@@ -190,6 +162,34 @@ ActiveAdmin.register Veteran do
       end
     end
 
+    panel "Medical Concerns" do
+      attributes_table_for resource.mobility_device do
+        row("Mobility Device") { resource.try(:mobility_device, :name) }
+      end
+
+      panel "Medical Conditions" do
+        table_for veteran.medical_conditions do
+          column :medical_condition_type
+          column :medical_condition_name
+          column :diagnosed_at
+          column :diagnosed_last
+          column :description
+        end
+      end
+      # panel "Medications" do
+      #   table_for veteran.medications do
+      #     column :medication
+      #     column :dose
+      #     column :frequency
+      #     column :medication_route
+      #
+      #     table_for veteran.medical_allergies do
+      #       column :medical_allergy
+      #     end
+      #   end
+      # end
+    end
+
     active_admin_comments
   end
 
@@ -229,35 +229,6 @@ ActiveAdmin.register Veteran do
       f.input :release_info
     end
 
-    panel 'Medical Concerns' do
-      f.inputs :mobility_device
-      panel 'Medical Conditions' do
-        f.has_many :medical_conditions, heading: false, allow_destroy: true do |medical_condition|
-          medical_condition.input :id, as: :hidden
-          medical_condition.input :medical_condition_type, input_html: { class: "medical_condition_type_dd" }
-          medical_condition.input :medical_condition_name, input_html: { class: "medical_condition_name_dd" }
-          medical_condition.input :diagnosed_at
-          medical_condition.input :diagnosed_last
-          medical_condition.input :description
-        end
-      end
-      panel 'Medical Allergies' do
-        f.has_many :medical_allergies, heading: false, allow_destroy: true do |medical_allergy|
-          medical_allergy.input :id, as: :hidden
-          medical_allergy.input :medical_allergy
-        end
-      end
-    end
-    panel 'Medications' do
-      f.has_many :medications, heading: false, allow_destroy: true do |medication|
-        medication.input :id, as: :hidden
-        medication.input :medication
-        medication.input :dose
-        medication.input :frequency
-        medication.input :medication_route
-      end
-    end
-
     panel 'Service Histories' do
       f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
         service_history.input :id, as: :hidden
@@ -284,6 +255,34 @@ ActiveAdmin.register Veteran do
       end
     end
 
+    panel 'Medical Concerns' do
+      f.inputs :mobility_device
+      panel 'Medical Conditions' do
+        f.has_many :medical_conditions, heading: false, allow_destroy: true do |medical_condition|
+          medical_condition.input :id, as: :hidden
+          medical_condition.input :medical_condition_type, input_html: { class: "medical_condition_type_dd" }
+          medical_condition.input :medical_condition_name, input_html: { class: "medical_condition_name_dd" }
+          medical_condition.input :diagnosed_at
+          medical_condition.input :diagnosed_last
+          medical_condition.input :description
+        end
+      end
+      panel 'Medical Allergies' do
+        f.has_many :medical_allergies, heading: false, allow_destroy: true do |medical_allergy|
+          medical_allergy.input :id, as: :hidden
+          medical_allergy.input :medical_allergy
+        end
+      end
+    end
+    # panel 'Medications' do
+    #   f.has_many :medications, heading: false, allow_destroy: true do |medication|
+    #     medication.input :id, as: :hidden
+    #     medication.input :medication
+    #     medication.input :dose
+    #     medication.input :frequency
+    #     medication.input :medication_route
+    #   end
+    # end
 
 
     f.actions do

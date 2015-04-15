@@ -1,5 +1,7 @@
 class DayOfFlight < ActiveRecord::Base
   has_many :people
+  has_many :veterans
+  has_many :guardians, through: :veterans
   has_many :flight_details
   has_many :day_of_flights_volunteers
   has_many :volunteers, through: :day_of_flights_volunteers
@@ -24,5 +26,11 @@ class DayOfFlight < ActiveRecord::Base
 
   def airline_names
     flight_details.map(&:airline).map(&:name).uniq.join(", ")
+  end
+
+  def people_count
+    veterans.map(&:guardian_id).count +
+    veterans.count +
+    volunteers.count
   end
 end
