@@ -13,6 +13,8 @@ module API
           @person.veteran = true
         end
 
+        @person.type.capitalize!
+
         @person.applied_online = true
         if @person.save
           render :json => @person
