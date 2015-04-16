@@ -7,13 +7,16 @@ module API
         @person = Person.new(person_params)
 
         if person_params[:type].blank? 
-          @person.veteran = true
           @person.type = "Veteran"
-        elsif person_params[:type] == "Veteran"
+        end 
+        
+        @person.type.capitalize!
+
+
+        if @person.type == "Veteran"
           @person.veteran = true
         end
 
-        @person.type.capitalize!
 
         @person.applied_online = true
         if @person.save
