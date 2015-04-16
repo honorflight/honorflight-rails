@@ -16,3 +16,16 @@ Feature: Create volunteer
     Then I should see "Volunteer was successfully created."
     And I should see "Jeff"
     And I should see "Ancel"
+
+
+
+  Scenario: Entering incomplete or missing Volunteer's information
+    Given I am logged in
+    And I click "Volunteers"
+    Then I should see "New Volunteer"
+    And I click "New Volunteer"
+    And I click button "Create Volunteer"
+    Then I should see "Birth date can't be blank"
+    And I should see "First name can't be blank"
+    And I should see "Last name can't be blank"
+    And I should see "Phone can't be blank"
