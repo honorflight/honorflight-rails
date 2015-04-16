@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  attr_encrypted :email, :phone, key: :encryption_key
+  attr_encrypted :email, :phone, key: ENV['ENCRYPTION_KEY_PERSON']
   attr_encrypted :birth_date, key: :encryption_key, marshal: true, marshaler: Marshel::Date
 
   has_many :service_histories
