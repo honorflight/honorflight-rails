@@ -195,7 +195,10 @@ ActiveAdmin.register Guardian do
     panel 'Service Histories' do
       f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
         service_history.input :id, as: :hidden
-        service_history.inputs :start_year, :end_year, :activity, :story, :branch, :rank_type, :rank
+        service_history.inputs :start_year, :end_year, :activity, :story
+        service_history.input :branch, input_html: {class: "branch_dd"}
+        service_history.input :rank_type, input_html: {class: "rank_type_dd"}
+        service_history.input :rank, input_html: {class: "rank_dd"}
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden
           a.inputs :award, :quantity, :comment
