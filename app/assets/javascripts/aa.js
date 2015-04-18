@@ -31,6 +31,47 @@ $(function(){
 });
 
 
+
+$(function(){
+  var narrowList = function(values, select){
+    $names = $(select);
+    $names.val("");
+    $names.children("option").attr("style", "display:none");
+    $names.children("option").each(function(){
+      // data and look through it for it's there, remove style
+      for(var i = 0; i < values.length; i = i + 1){
+        if (parseInt($(this).val()) == values[i].id){
+          $(this).removeAttr("style")
+        }
+      }
+    });
+  };
+
+  $(document).on("change", "select.rank_type_dd", function(){});
+
+
+  $(document).on("change", "select.branch_dd,select.rank_type_dd", function(){
+    var $nameSelect = $(this).parent("li").siblings("li").find(".rank_dd");
+
+    var $dd = $(this);
+
+    if ($dd.hasClass("branch_dd")){
+      var branchId = $dd.val();
+      var rankTypeId = $(this).parent("li").siblings("li").find(".rank_type_dd").val();
+    } else {
+      var branchId = $(this).parent("li").siblings("li").find(".branch_dd").val();
+      var rankTypeId = $dd.val();
+    }
+
+    $.get("/admin/ranks.json?q%5Brank_type_id_eq%5D="+ rankTypeId +"&q%5Bbranch_id_eq%5D=" + branchId, "", function(data){ 
+      narrowList(data, $nameSelect); 
+    });
+  });
+});
+
+//    /admin/ranks.json?utf8=✓&q%5Brank_type_id_eq%5D=1&q%5Bbranch_id_eq%5D=1
+
+
 $(function(){
   $(document).on("change", "select.flight_responsibility_type_dd", function(){
     var $select = $(this);
