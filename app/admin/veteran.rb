@@ -220,7 +220,10 @@ ActiveAdmin.register Veteran do
         a.input :zipcode
       end
       f.input :phone
+      f.input :cell_phone
+      f.input :work_phone
       f.input :email
+      f.input :work_email
       f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
       f.input :war
       f.input :application_date

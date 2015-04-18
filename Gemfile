@@ -66,11 +66,26 @@ group :test do
   gem "launchy", "~> 2.1.2"
 end
 
+group :development do
+  gem "better_errors"
+  # gem "meta_request"
+  gem "quiet_assets"
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
   gem 'pry-remote'
+  gem "faker"
+  # gem "poltergeist"
+  gem "pry-nav"
+  gem "pry-rails"
+  gem "pry-stack_explorer"
+  gem "pry-theme"
+  # gem "rubocop"
+  gem "spring-commands-rspec"
+  gem 'coercible'
   gem 'seed_dump'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

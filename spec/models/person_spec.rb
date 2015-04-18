@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
+  it "should have a factory" do
+    expect(FactoryGirl.build(:person)).to be_valid
+  end
+
+
   it { should have_many(:service_histories) }
   it { should have_one(:address) }
   it { should validate_presence_of(:birth_date) }

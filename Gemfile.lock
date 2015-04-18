@@ -72,6 +72,10 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bourbon (4.2.1)
@@ -162,6 +166,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    faker (1.4.3)
+      i18n (~> 0.5)
     fastercsv (1.5.5)
     ffi (1.9.8)
     formtastic (3.1.3)
@@ -221,9 +227,21 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
+    pry-theme (1.1.3)
+      coderay (~> 1.1)
+      json (~> 1.8)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -334,6 +352,8 @@ GEM
       slim (~> 3.0)
     slop (3.6.0)
     spring (1.3.3)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -386,8 +406,10 @@ DEPENDENCIES
   activeadmin!
   attr_encrypted!
   autoprefixer-rails (~> 4.0.2.2)
+  better_errors
   brakeman
   byebug
+  coercible
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
@@ -396,12 +418,18 @@ DEPENDENCIES
   dotenv-rails
   draper
   factory_girl_rails
+  faker
   jbuilder (~> 2.0)
   jquery-rails
   launchy (~> 2.1.2)
   pg
   pry
+  pry-nav
+  pry-rails
   pry-remote
+  pry-stack_explorer
+  pry-theme
+  quiet_assets
   rails (= 4.2.0)
   rails_12factor
   redcarpet
@@ -416,6 +444,7 @@ DEPENDENCIES
   simplecov
   slim-rails
   spring
+  spring-commands-rspec
   sucker_punch
   thin
   turbolinks
