@@ -29,6 +29,7 @@ ActiveAdmin.register Volunteer do
   filter :created_at
   filter :release_info
   filter :tlc
+  filter :roles
 # :nocov:
 
 # :nocov:
