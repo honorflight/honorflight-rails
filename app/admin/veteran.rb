@@ -17,7 +17,8 @@ ActiveAdmin.register Veteran do
     contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
-        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
+        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment]
 
   menu parent: "People", priority: 2
 
@@ -194,7 +195,7 @@ ActiveAdmin.register Veteran do
   end
 
   # form partial: 'form'
-  form do |f|
+  form(:html => { :multipart => true }) do |f|
     if f.object.address.nil?
       f.object.build_address
     end
@@ -289,7 +290,17 @@ ActiveAdmin.register Veteran do
     #     medication.input :medication_route
     #   end
     # end
+    panel "Attachments" do
+      f.has_many :people_attachments do |attachment|
+        attachment.input :person_id, as: :hidden
+        attachment.input :attachemnt, as: :file
+        attachment.input :name
+        attachment.input :comments
+      end
 
+
+
+    end
 
     f.actions do
       f.action :submit
