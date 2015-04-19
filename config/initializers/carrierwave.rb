@@ -7,23 +7,17 @@ if Rails.env.development? or Rails.env.test? or Rails.env.cucumber?
     config.ignore_download_errors = false
   end
 else #Production, staging, etc.
+
   CarrierWave.configure do |config|
-    config.storage = :fog
-    config.fog_provider = 'fog-aws'                        # required
-    config.fog_credentials = {
-      provider:              'AWS',                        # required
-      aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        # required
-      aws_secret_access_key: ENV['AWS_SECRET_KEY'],                        # required
-      # region:                'eu-west-1',                  # optional, defaults to 'us-east-1'
-      # host:                  's3.example.com',             # optional, defaults to nil
-      # endpoint:              'https://s3.example.com:8080' # optional, defaults to nil
+    config.storage    = :aws
+    config.aws_bucket = ENV.fetch('AWS_S3_BUCKET_NAME')
+    # config.aws_acl    = :public_read
+    # config.asset_host = 'http://example.com'
+    config.aws_authenticated_url_expiration = 60 * 60 * 24 * 365
+
+    config.aws_credentials = {
+      access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_KEY')
     }
-    config.fog_directory  = 'admin'                          # required
-    config.fog_public     = false                                        # optional, defaults to true
-    config.fog_attributes = { 
-      'Cache-Control' => "max-age=#{365.day.to_i}", 
-      'x-amz-server-side-encryption' => 'AES256'
-    } # optional, defaults to {}
   end
 end
-

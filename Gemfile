@@ -25,9 +25,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Attachments
-gem "fog"
-gem "fog-aws"
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave-aws'
+gem 'carrierwave'
 
 
 # Encryption
