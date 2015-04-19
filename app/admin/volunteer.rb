@@ -2,6 +2,7 @@ ActiveAdmin.register Volunteer do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
+    :cell_phone, :work_phone, :work_email,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -13,7 +14,9 @@ ActiveAdmin.register Volunteer do
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
       address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
-    volunteers_roles_attributes: [:id, :role_id, :_destroy]
+    volunteers_roles_attributes: [:id, :role_id, :_destroy],
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+      :_destroy]
 
   menu parent: "People", priority: 4
 
@@ -159,6 +162,15 @@ ActiveAdmin.register Volunteer do
       end
     end
 
+    panel "Attachments" do
+      table_for volunteer.people_attachments do 
+        column :name
+        column :comments
+        column :attachment do |attachment|
+          link_to(attachment.attachment.to_s.split("/").last, attachment.attachment_url, target: "_blank")
+        end
+      end
+    end
 
 
     active_admin_comments
@@ -233,6 +245,15 @@ ActiveAdmin.register Volunteer do
     panel "Volunteer Roles" do
       f.has_many :volunteers_roles, heading: false, allow_destroy: true  do |roles|
         roles.inputs :role
+      end
+    end
+
+    panel "Attachments" do
+      f.has_many :people_attachments,  heading: false, allow_destroy: true do |attachment|
+        attachment.input :person_id, as: :hidden
+        attachment.input :attachment, as: :file
+        attachment.input :name
+        attachment.input :comments
       end
     end
 

@@ -13,5 +13,7 @@
 /tmp
 /coverage
 
+public/uploads
+
 .DS_Store
 .idea

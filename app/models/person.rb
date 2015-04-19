@@ -27,10 +27,10 @@ class Person < ActiveRecord::Base
   # validates :phone_or_email
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :service_histories, :allow_destroy => true
+  accepts_nested_attributes_for :service_histories, allow_destroy: true
   accepts_nested_attributes_for :contacts
   accepts_nested_attributes_for :service_awards
-  accepts_nested_attributes_for :people_attachments
+  accepts_nested_attributes_for :people_attachments, allow_destroy: true
 
   after_create :send_admin_emailers
   def send_admin_emailers
@@ -55,4 +55,14 @@ class Person < ActiveRecord::Base
   def application_date
     self[:application_date] || self[:created_at].try(:to_date)
   end
+
+# after_save :store_avatar!
+# before_save :write_avatar_identifier
+  # after_save :store_attachment!
+  # def store_attachment!
+  #   binding.remote_pry
+  #   super
+  # end
+
+
 end
