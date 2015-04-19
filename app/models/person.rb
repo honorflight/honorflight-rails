@@ -4,9 +4,12 @@ class Person < ActiveRecord::Base
 
   has_many :service_histories
   has_many :service_awards, through: :service_histories
+  
   has_one :address
   has_many :person_status
   has_many :contacts
+
+  has_many :people_attachments
 
   belongs_to :war
   belongs_to :shirt_size
@@ -27,6 +30,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :service_histories, :allow_destroy => true
   accepts_nested_attributes_for :contacts
   accepts_nested_attributes_for :service_awards
+  accepts_nested_attributes_for :people_attachments
 
   after_create :send_admin_emailers
   def send_admin_emailers

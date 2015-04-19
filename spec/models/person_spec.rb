@@ -16,6 +16,9 @@ RSpec.describe Person, type: :model do
   it { should belong_to(:shirt_size) }
   it { should belong_to(:day_of_flight)}
   it { should have_many(:contacts)}
+  it { should have_many(:people_attachments)}
+
+  it { should accept_nested_attributes_for(:people_attachments)}
 
 
   describe "#uuid" do

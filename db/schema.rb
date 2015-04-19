@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418203920) do
+ActiveRecord::Schema.define(version: 20150419184143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,17 @@ ActiveRecord::Schema.define(version: 20150418203920) do
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
 
+  create_table "people_attachments", force: :cascade do |t|
+    t.integer  "person_id"
+    t.string   "attachment"
+    t.string   "name"
+    t.string   "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "people_attachments", ["person_id"], name: "index_people_attachments_on_person_id", using: :btree
+
   create_table "person_statuses", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -417,6 +428,7 @@ ActiveRecord::Schema.define(version: 20150418203920) do
   add_foreign_key "people", "person_statuses"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"
+  add_foreign_key "people_attachments", "people"
   add_foreign_key "ranks", "rank_types"
   add_foreign_key "service_awards", "awards"
   add_foreign_key "service_awards", "service_histories"
