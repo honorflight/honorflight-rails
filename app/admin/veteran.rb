@@ -19,7 +19,8 @@ ActiveAdmin.register Veteran do
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
-    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment]
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+      :_destroy]
 
   menu parent: "People", priority: 2
 
@@ -192,6 +193,17 @@ ActiveAdmin.register Veteran do
       # end
     end
 
+    panel "Attachments" do
+      table_for veteran.people_attachments do 
+        column :name
+        column :comments
+        column :attachment do |attachment|
+          link_to(attachment.attachment.to_s.split("/").last, attachment.attachment_url, target: "_blank")
+        end
+      end
+    end
+
+
     active_admin_comments
   end
 
@@ -292,9 +304,8 @@ ActiveAdmin.register Veteran do
     #   end
     # end
     panel "Attachments" do
-      f.has_many :people_attachments do |attachment|
+      f.has_many :people_attachments,  heading: false, allow_destroy: true do |attachment|
         attachment.input :person_id, as: :hidden
-        attachment.input :attachment_url, input_html: { :disabled => true }
         attachment.input :attachment, as: :file
         attachment.input :name
         attachment.input :comments

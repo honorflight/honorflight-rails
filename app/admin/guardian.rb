@@ -2,6 +2,7 @@ ActiveAdmin.register Guardian do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
+    :cell_phone, :work_phone, :work_email,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -12,7 +13,9 @@ ActiveAdmin.register Guardian do
     contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
-        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]]
+        address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+      :_destroy]
 
   menu parent: "People", priority: 3
 
@@ -151,6 +154,16 @@ ActiveAdmin.register Guardian do
       end
     end
 
+    panel "Attachments" do
+      table_for guardian.people_attachments do 
+        column :name
+        column :comments
+        column :attachment do |attachment|
+          link_to(attachment.attachment.to_s.split("/").last, attachment.attachment_url, target: "_blank")
+        end
+      end
+    end
+
     active_admin_comments
   end
 
@@ -220,7 +233,14 @@ ActiveAdmin.register Guardian do
         end
       end
     end
-
+    panel "Attachments" do
+      f.has_many :people_attachments,  heading: false, allow_destroy: true do |attachment|
+        attachment.input :person_id, as: :hidden
+        attachment.input :attachment, as: :file
+        attachment.input :name
+        attachment.input :comments
+      end
+    end
 
 
     f.actions do
