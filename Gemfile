@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Attachments
 gem "fog"
 gem "fog-aws"
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 
 # Encryption
