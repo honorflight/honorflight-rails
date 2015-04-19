@@ -26,7 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Attachments
 gem 'carrierwave'
-gem "fog"
 gem "fog-aws"
 
 # Encryption
@@ -79,6 +78,7 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem "fog"
   gem 'byebug'
   gem 'pry'
   gem 'pry-remote'
