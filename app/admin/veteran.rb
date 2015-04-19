@@ -2,6 +2,7 @@ ActiveAdmin.register Veteran do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
+    :cell_phone, :work_phone, :work_email,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -293,13 +294,11 @@ ActiveAdmin.register Veteran do
     panel "Attachments" do
       f.has_many :people_attachments do |attachment|
         attachment.input :person_id, as: :hidden
-        attachment.input :attachemnt, as: :file
+        attachment.input :attachment_url, input_html: { :disabled => true }
+        attachment.input :attachment, as: :file
         attachment.input :name
         attachment.input :comments
       end
-
-
-
     end
 
     f.actions do

@@ -55,4 +55,14 @@ class Person < ActiveRecord::Base
   def application_date
     self[:application_date] || self[:created_at].try(:to_date)
   end
+
+# after_save :store_avatar!
+# before_save :write_avatar_identifier
+  # after_save :store_attachment!
+  # def store_attachment!
+  #   binding.remote_pry
+  #   super
+  # end
+
+
 end

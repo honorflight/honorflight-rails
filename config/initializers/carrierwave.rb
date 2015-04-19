@@ -2,6 +2,9 @@ if Rails.env.development? or Rails.env.test? or Rails.env.cucumber?
   CarrierWave.configure do |config|
     config.storage = :file
     # config.enable_processing = false
+    config.ignore_integrity_errors = false
+    config.ignore_processing_errors = false
+    config.ignore_download_errors = false
   end
 else #Production, staging, etc.
   CarrierWave.configure do |config|
