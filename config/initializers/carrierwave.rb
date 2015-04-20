@@ -18,7 +18,8 @@ else #Production, staging, etc.
 
     config.aws_credentials = {
       access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_KEY')
+      secret_access_key: ENV.fetch('AWS_SECRET_KEY'),
+      config: AWS.config(s3_server_side_encryption: :aes256)
     }
   end
 end
