@@ -48,8 +48,8 @@ ActiveAdmin.register Veteran do
       super
     end
 
-    # def create
-    #   binding.pry
+    # def update
+    #   binding.remote_pry
     #   super
     # end
   end
@@ -198,7 +198,7 @@ ActiveAdmin.register Veteran do
         column :name
         column :comments
         column :attachment do |attachment|
-          link_to(attachment.attachment.to_s.split("/").last, attachment.attachment_url, target: "_blank")
+          link_to(attachment.attachment.to_s.split("/").last.split("?").first, attachment.attachment_url, target: "_blank")
         end
       end
     end
