@@ -105,7 +105,10 @@ ActiveAdmin.register Volunteer do
       row :last_name
       row(:address) { |person| "#{person.try(:address)}" }
       row :phone
+      row :cell_phone
+      row :work_phone
       row :email
+      row :work_email
       row("Date of Birth"){ |person| person.birth_date }
       #row :war
       row :shirt_size
