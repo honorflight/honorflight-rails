@@ -8,6 +8,9 @@ RSpec.describe DayOfFlight, type: :model do
   it { should have_many(:guardians).through(:veterans)}
   it { should have_many(:day_of_flights_volunteers)}
   it { should have_many(:volunteers).through(:day_of_flights_volunteers)}
+  it { should have_many(:flight_attachments)}
+
+  it { should accept_nested_attributes_for(:flight_attachments)}
 
 
   describe "#flies_on" do

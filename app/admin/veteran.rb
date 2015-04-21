@@ -201,7 +201,9 @@ ActiveAdmin.register Veteran do
         column :name
         column :comments
         column :attachment do |attachment|
-          # link_to(attachment.attachment.to_s.split("/").last.split("?").first, attachment.attachment_url, target: "_blank")
+          unless attachment.nil?
+            link_to(attachment.attachment.file.try(:basename), attachment.attachment_url, target: "_blank")
+          end
         end
       end
     end
