@@ -120,13 +120,13 @@ ActiveAdmin.register Volunteer do
 
     panel "Service History" do
       table_for volunteer.service_histories do
+        column :branch
         column :start_year
         column :end_year
+        column :rank_type
+        column :rank        
         column :activity
         column :story
-        column :branch
-        column :rank_type
-        column :rank
         column :service_awards do |person| #person.service_awards do |service_awards|
           #val="hi"
           #person.service_awards.each do |service_award|
@@ -218,10 +218,11 @@ ActiveAdmin.register Volunteer do
     panel 'Service Histories' do
       f.has_many :service_histories, heading: false, allow_destroy: true do |service_history|
         service_history.input :id, as: :hidden
-        service_history.inputs :start_year, :end_year, :activity, :story
         service_history.input :branch, input_html: {class: "branch_dd"}
+        service_history.inputs :start_year, :end_year
         service_history.input :rank_type, input_html: {class: "rank_type_dd"}
-        service_history.input :rank, input_html: {class: "rank_dd"}
+        service_history.input :rank, input_html: {class: "rank_dd"}       
+        service_history.inputs :activity, :story
 
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden
