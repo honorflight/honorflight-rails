@@ -48,7 +48,6 @@ ActiveAdmin.register Guardian do
 # :nocov:
   csv do
     column :id
-    column(:day_of_flight) { |person| person.try(:day_of_flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column(:veteran) { |person| person.try(:veteran).try(:full_name) }
     column :email
@@ -71,7 +70,6 @@ ActiveAdmin.register Guardian do
   index do
     selectable_column
     actions
-    column :day_of_flight
     column :person_status
     column :veteran do |person|
       begin
@@ -95,7 +93,6 @@ ActiveAdmin.register Guardian do
   show title: :full_name do
 
     attributes_table do
-      row :day_of_flight
       row(:veteran) {|person| person.try(:veteran)}
       row :person_status
       row :first_name
@@ -182,9 +179,10 @@ ActiveAdmin.register Guardian do
     end
 
     f.inputs name: "General" do
-      f.input :person_status
-      # f.input :veteran
-      f.input :day_of_flight
+      if !f.object.new_record?
+        f.input :person_status
+      end
+
       f.input :first_name
       f.input :middle_name
       f.input :last_name

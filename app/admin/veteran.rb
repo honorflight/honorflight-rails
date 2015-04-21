@@ -220,11 +220,13 @@ ActiveAdmin.register Veteran do
     f.actions do
       f.action :submit
     end
-
+    #binding.remote_pry
     f.inputs name: "General" do
-      f.input :day_of_flight
-      f.input :guardian
-      f.input :person_status
+      if !f.object.new_record?
+        f.input :day_of_flight
+        f.input :guardian
+        f.input :person_status
+      end
       f.input :first_name
       f.input :middle_name
       f.input :last_name
