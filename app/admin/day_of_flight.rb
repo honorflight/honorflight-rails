@@ -6,7 +6,9 @@ ActiveAdmin.register DayOfFlight do
     :departs_from, :departure_gate, :destination, :arrives_at, :arrival_gate,
     :_destroy],
     day_of_flights_volunteers_attributes:[:id,
-      :person_id, :flight_responsibility_id, :_destroy]
+      :person_id, :flight_responsibility_id, :_destroy],
+    flight_attachments_attributes: [:id, :name, :comments, :day_of_flight_id, :attachment, 
+      :_destroy]
 
   # Remove All filters except War, Special Instructions, Airline
 
@@ -68,6 +70,17 @@ ActiveAdmin.register DayOfFlight do
         end
       end
 
+      panel "Attachments" do
+      table_for day_of_flight.flight_attachments do 
+        column :name
+        column :comments
+        column :attachment do |attachment|
+          unless attachment.nil?
+            link_to(attachment.attachment.file.try(:basename), attachment.attachment_url, target: "_blank")
+          end
+        end
+      end
+    end
 
 
     end
@@ -107,6 +120,15 @@ ActiveAdmin.register DayOfFlight do
         flight_detail.input :arrives_at, label: "Arrive On", as: :datetime_picker
         flight_detail.input :arrival_gate
         flight_detail.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
+      end
+    end
+
+    panel "Attachments" do
+      f.has_many :flight_attachments,  heading: false, allow_destroy: true do |attachment|
+        attachment.input :day_of_flight_id, as: :hidden
+        attachment.input :attachment, as: :file
+        attachment.input :name
+        attachment.input :comments
       end
     end
 

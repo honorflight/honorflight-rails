@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421225329) do
+ActiveRecord::Schema.define(version: 20150421234118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150421225329) do
     t.string   "comments"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "attachment"
   end
 
   add_index "flight_attachments", ["day_of_flight_id"], name: "index_flight_attachments_on_day_of_flight_id", using: :btree
