@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419184143) do
+ActiveRecord::Schema.define(version: 20150421225329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,16 @@ ActiveRecord::Schema.define(version: 20150419184143) do
   add_index "day_of_flights_volunteers", ["day_of_flight_id"], name: "index_day_of_flights_volunteers_on_day_of_flight_id", using: :btree
   add_index "day_of_flights_volunteers", ["flight_responsibility_id"], name: "index_day_of_flights_volunteers_on_flight_responsibility_id", using: :btree
   add_index "day_of_flights_volunteers", ["person_id"], name: "index_day_of_flights_volunteers_on_person_id", using: :btree
+
+  create_table "flight_attachments", force: :cascade do |t|
+    t.integer  "day_of_flight_id"
+    t.string   "name"
+    t.string   "comments"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "flight_attachments", ["day_of_flight_id"], name: "index_flight_attachments_on_day_of_flight_id", using: :btree
 
   create_table "flight_details", force: :cascade do |t|
     t.string   "destination"
@@ -413,6 +423,7 @@ ActiveRecord::Schema.define(version: 20150419184143) do
   add_foreign_key "day_of_flights_volunteers", "day_of_flights"
   add_foreign_key "day_of_flights_volunteers", "flight_responsibilities"
   add_foreign_key "day_of_flights_volunteers", "people"
+  add_foreign_key "flight_attachments", "day_of_flights"
   add_foreign_key "flight_details", "airlines"
   add_foreign_key "flight_details", "day_of_flights"
   add_foreign_key "flight_responsibilities", "roles"
