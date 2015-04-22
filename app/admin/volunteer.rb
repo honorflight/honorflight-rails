@@ -208,8 +208,8 @@ ActiveAdmin.register Volunteer do
     f.input :work_email
     f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
       #f.input :war
-      f.input :application_date
-      f.input :shirt_size
+    f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
+    f.input :shirt_size
       #f.input :release_info
     end
 
