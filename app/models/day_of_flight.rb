@@ -25,7 +25,7 @@ class DayOfFlight < ActiveRecord::Base
   # t.integer  "tickets_purchased"
 
   def to_s
-    self.flies_on.to_s(:aa)
+    self.flies_on.to_s(:long)
   end
 
   def airline_names
