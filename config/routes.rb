@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :ranks, only: [:index]
       resources :branches, only: [:index]
       resources :awards, only: [:index]
+      resources :name_suffixes, only: [:index]
       resources :contact_relationships, only: [:index]
       resources :contact_categories, only: [:index]
       resources :shirt_sizes, only: [:index]

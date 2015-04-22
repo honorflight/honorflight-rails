@@ -15,6 +15,7 @@ RSpec.describe Person, type: :model do
   it { should have_many(:service_awards) }
   it { should belong_to(:shirt_size) }
   it { should belong_to(:day_of_flight)}
+  it { should belong_to(:name_suffix)}
   it { should have_many(:contacts)}
   it { should have_many(:people_attachments)}
 

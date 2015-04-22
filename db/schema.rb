@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421234118) do
+ActiveRecord::Schema.define(version: 20150422002830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,13 @@ ActiveRecord::Schema.define(version: 20150421234118) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "name_suffixes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -280,10 +287,12 @@ ActiveRecord::Schema.define(version: 20150421234118) do
     t.string   "encrypted_cell_phone"
     t.string   "encrypted_work_phone"
     t.string   "encrypted_work_email"
+    t.integer  "name_suffix_id"
   end
 
   add_index "people", ["day_of_flight_id"], name: "index_people_on_day_of_flight_id", using: :btree
   add_index "people", ["mobility_device_id"], name: "index_people_on_mobility_device_id", using: :btree
+  add_index "people", ["name_suffix_id"], name: "index_people_on_name_suffix_id", using: :btree
   add_index "people", ["person_status_id"], name: "index_people_on_person_status_id", using: :btree
   add_index "people", ["shirt_size_id"], name: "index_people_on_shirt_size_id", using: :btree
   add_index "people", ["war_id"], name: "index_people_on_war_id", using: :btree
@@ -437,6 +446,7 @@ ActiveRecord::Schema.define(version: 20150421234118) do
   add_foreign_key "medications", "people"
   add_foreign_key "people", "day_of_flights"
   add_foreign_key "people", "mobility_devices"
+  add_foreign_key "people", "name_suffixes"
   add_foreign_key "people", "person_statuses"
   add_foreign_key "people", "shirt_sizes"
   add_foreign_key "people", "wars"

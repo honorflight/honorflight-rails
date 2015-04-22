@@ -3,7 +3,7 @@ ActiveAdmin.register Veteran do
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email,
-    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
@@ -232,6 +232,7 @@ ActiveAdmin.register Veteran do
       f.input :first_name
       f.input :middle_name
       f.input :last_name
+      f.input :name_suffix
       f.semantic_fields_for :address do |a|
         a.input :id, as: :hidden
         a.input :street1

@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
   belongs_to :shirt_size
   belongs_to :day_of_flight
   belongs_to :person_status
-
+  belongs_to :name_suffix
 
   validates :uuid, presence: true
   validates :birth_date, presence: true
