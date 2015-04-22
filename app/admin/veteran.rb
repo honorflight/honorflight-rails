@@ -66,6 +66,7 @@ ActiveAdmin.register Veteran do
     column :first_name
     column :middle_name
     column :last_name
+    column :name_suffix
     column :phone
     column (:birth_date)
     column :created_at
@@ -112,6 +113,7 @@ ActiveAdmin.register Veteran do
       row :first_name
       row :middle_name
       row :last_name
+      row :name_suffix
       row(:address) { |person| "#{person.try(:address)}" }
       row :phone
       row :cell_phone

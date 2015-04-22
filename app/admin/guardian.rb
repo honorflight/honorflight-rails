@@ -3,7 +3,7 @@ ActiveAdmin.register Guardian do
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email,
-    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id,
+    :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
@@ -55,6 +55,7 @@ ActiveAdmin.register Guardian do
     column :first_name
     column :middle_name
     column :last_name
+    column :name_suffix
     column :phone
     column (:birth_date)
     column :created_at
@@ -98,6 +99,7 @@ ActiveAdmin.register Guardian do
       row :first_name
       row :middle_name
       row :last_name
+      row :name_suffix
       row(:address) { |person| "#{person.try(:address)}" }
       row :phone
       row :cell_phone
@@ -186,6 +188,7 @@ ActiveAdmin.register Guardian do
       f.input :first_name
       f.input :middle_name
       f.input :last_name
+      f.input :name_suffix
       f.semantic_fields_for :address do |a|
         a.input :id, as: :hidden
         a.input :street1
