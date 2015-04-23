@@ -63,6 +63,19 @@ class Person < ActiveRecord::Base
   #   binding.remote_pry
   #   super
   # end
+  def text_phone
+    ret = cell_phone.gsub(/[^0-9]*/, "")
+    
+    if ret[0] != 1
+      ret = "1" + ret
+    end
+
+    ret
+  end
+
+  def text_name
+    "#{first_name[0].upcase}. #{last_name.capitalize}"
+  end
 
 
 end

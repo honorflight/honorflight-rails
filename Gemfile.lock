@@ -215,6 +215,7 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.2)
+    jwt (1.4.1)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -391,6 +392,10 @@ GEM
       hitimes
     turbolinks (2.5.3)
       coffee-rails
+    twilio-ruby (4.0.0)
+      builder (>= 2.1.2)
+      jwt (~> 1.0)
+      multi_json (>= 1.3.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -463,6 +468,7 @@ DEPENDENCIES
   sucker_punch
   thin
   turbolinks
+  twilio-ruby
   uglifier (>= 1.3.0)
   virtus
   web-console (~> 2.0)

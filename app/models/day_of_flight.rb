@@ -1,7 +1,7 @@
 class DayOfFlight < ActiveRecord::Base
   has_many :people
   has_many :veterans
-  has_many :guardians, through: :veterans
+  # has_many :guardians, through: :veterans, foreign_key: :guardian_id
   has_many :flight_details
   has_many :day_of_flights_volunteers
   has_many :volunteers, through: :day_of_flights_volunteers
@@ -32,9 +32,57 @@ class DayOfFlight < ActiveRecord::Base
     flight_details.map(&:airline).map(&:name).uniq.join(", ")
   end
 
+  def guardians
+    veterans.map(&:guardian)
+    # veterans.map() { |v| v.guardian_id }
+  end
+
   def people_count
-    veterans.map(&:guardian_id).count +
+    guardians.count +
     veterans.count +
     volunteers.count
+  end
+
+  def phone_on_flight(in_phone)
+    guardians.each do |guardian|
+      return guardian if guardian.text_phone == in_phone
+    end
+
+    volunteers.each do |volunteer|
+      return volunteer if volunteer.text_phone == in_phone
+    end
+    nil
+  end
+
+  def volunteers_phones
+    volunteers.map(&:text_phone)
+  end
+
+  def guardians_phones
+    guardians.map(&:text_phone)
+  end
+
+  def volunteers_guardians_phones
+    volunteers_phones.concat(guardians_phones)
+  end
+
+  def build_response(number, message = nil)
+    if person = phone_on_flight(number)
+      # Build hash with list of numbers and a message to send
+      if person.class == Volunteer
+        response = { numbers: volunteers_guardians_phones,
+          message: "(Vol) #{person.text_name}: #{message}"
+        }
+      elsif person.class == Guardian
+        response = { numbers: volunteers_phones, 
+          message: "(G) #{person.text_name}, (V) #{person.veteran.text_name}: #{message}" }
+      end
+    else
+      # Respond with not-availabe message
+      response = { numbers: [number], message: "This number is not available for texting right now. Please try later."}
+    end
+
+    # Return messages sscheduled count???
+    response
   end
 end

@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave-aws'
 gem 'carrierwave'
 
+# Flight Notifications
+gem 'twilio-ruby'
+
 
 # Encryption
 gem 'attr_encrypted', github: 'attr-encrypted/attr_encrypted'

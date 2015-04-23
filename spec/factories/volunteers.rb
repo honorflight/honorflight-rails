@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :guardian do
+  factory :volunteer do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     middle_name { Faker::Name.name }
@@ -9,6 +9,6 @@ FactoryGirl.define do
     cell_phone { Faker::PhoneNumber.phone_number }
     work_phone { Faker::PhoneNumber.phone_number }
     birth_date { Faker::Date.birthday(48, 91) }
-    type "Guardian"
+    type "Volunteer"
   end
 end

@@ -6,4 +6,5 @@ class Volunteer < Person
   has_many :roles, through: :volunteers_roles
 
   accepts_nested_attributes_for :volunteers_roles, allow_destroy: true
+
 end
