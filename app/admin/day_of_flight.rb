@@ -95,7 +95,7 @@ ActiveAdmin.register DayOfFlight do
   form do |f|
     f.inputs do
       f.input :war
-      f.input :flies_on
+      f.input :flies_on,label: "Flies on*", as: :date_picker, :order => [:month, :day, :year]
       f.input :tickets_purchased
       f.input :group_number
       f.input :special_instruction
