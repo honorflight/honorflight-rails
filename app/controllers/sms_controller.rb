@@ -61,9 +61,7 @@ class SmsController < ActionController::Base
     else
       # Return invalid response to flying today
       twiml = Twilio::TwiML::Response.new do |r|
-        r.Message do |message|
-          message.Body = "This number is not available for texting right now. Please try later."
-        end
+        r.Message "This number is not available for texting right now. Please try later."
       end
     end
 
