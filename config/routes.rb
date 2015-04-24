@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
 
-
+  post 'sms/receiver' => 'sms#receiver', as: :sms
   get 'status' => 'status#index', as: :status
 
 

@@ -95,6 +95,7 @@ group :development, :test do
   gem "spring-commands-rspec"
   gem 'coercible'
   gem 'seed_dump'
+  gem "fakeweb"
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
