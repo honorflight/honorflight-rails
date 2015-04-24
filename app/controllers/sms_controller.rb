@@ -67,8 +67,6 @@ class SmsController < ActionController::Base
       end
     end
 
-
-
-    render text: twiml
+    render text: twiml.text
   end
 end
