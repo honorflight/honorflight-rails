@@ -16,7 +16,25 @@ RSpec.describe DayOfFlight, type: :model do
   describe "#flies_on" do
     it "should print as date" do
       f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
-      expect(f.to_s).to eql(Date.today.to_s(:aa))
+      expect(f.to_s).to eql(Date.today.to_s(:long))
+    end
+  end
+
+  describe "#is_notifiable?" do
+    it "should be notifiable on day before, of and day after" do
+      days = [Date.today, Date.today - 1.day, Date.today + 1.day]
+      days.each do |day|
+        f = FactoryGirl.create(:day_of_flight, flies_on: day)
+        expect(f.is_notifiable?).to eql(true)
+      end
+    end
+
+    it "should not be notifiable 2 days after or before flight" do
+      days = [Date.today - 2.days, Date.today + 2.days]
+      days.each do |day|
+        f = FactoryGirl.create(:day_of_flight, flies_on: day)
+        expect(f.is_notifiable?).to eql(false)
+      end
     end
   end
 

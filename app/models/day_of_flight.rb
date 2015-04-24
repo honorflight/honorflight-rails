@@ -85,4 +85,8 @@ class DayOfFlight < ActiveRecord::Base
     # Return messages sscheduled count???
     response
   end
+
+  def is_notifiable?
+    [Date.today, Date.yesterday, Date.tomorrow].include?(flies_on)
+  end
 end

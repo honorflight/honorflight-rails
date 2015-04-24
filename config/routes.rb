@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
 
   post 'sms/receiver' => 'sms#receiver', as: :sms
+  post 'sms/receiver2' => 'sms#receiver', as: :sms2
   get 'status' => 'status#index', as: :status
 
 
