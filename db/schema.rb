@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425203122) do
+ActiveRecord::Schema.define(version: 20150425203729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -410,6 +410,8 @@ ActiveRecord::Schema.define(version: 20150425203122) do
     t.integer  "person_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "account_sid"
+    t.string   "error_url"
   end
 
   add_index "sms_messages", ["day_of_flight_id"], name: "index_sms_messages_on_day_of_flight_id", using: :btree
