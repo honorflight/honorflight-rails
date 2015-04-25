@@ -82,14 +82,14 @@ class DayOfFlight < ActiveRecord::Base
     end
 
     response[:numbers].each do |number|
-      SmsJob.new.async.send_sms(number: number, message: response[:message])
+      SmsJob.new.send_sms(number: number, message: response[:message]).deliver_later
     end
     response
   end
 
   def build_response(number, message = nil)
     if person = phone_on_flight(number)
-      # Build hash with list of numbers and a message to send
+      # Build hash with list of numbers and a message to send mean words
       if person.class == Volunteer
         response = { numbers: volunteers_guardians_phones,
           message: "(Vol) #{person.text_name}: #{message}"
