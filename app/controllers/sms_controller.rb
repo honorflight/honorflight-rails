@@ -6,7 +6,7 @@ class SmsController < ActionController::Base
     # If DayOfFlight is notifiable and the person sending message is on flight
     # then go ahead and send stuff out
     # Else build a invalid responder
-    if flight = DayOfFlight.find_by(flies_on: [Date.tomorrow, Date.today, Date.yesterday])
+    if flight = DayOfFlight.current
       if flight.phone_on_flight(sms_hash[:from])
         # Legit... GO GO GO
         # Persist the incoming message, 

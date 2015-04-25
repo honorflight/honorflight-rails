@@ -69,7 +69,7 @@ class DayOfFlight < ActiveRecord::Base
 
   def build_response_from_sms(sms_message)
     response = {}
-    if sms.person.class == Volunteer
+    if sms_message.person.class == Volunteer
       response[:numbers] = volunteers_guardians_phones
       response[:message] = "(Vol) #{sms_message.person.text_name}: #{sms_body}"
     else
