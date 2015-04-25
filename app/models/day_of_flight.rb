@@ -75,6 +75,7 @@ class DayOfFlight < ActiveRecord::Base
     else
       response[:numbers] = volunteers_phones
       response[:message] = "(G) #{sms_message.person.text_name}, (V) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
+    end
 
     response.numbers.each do |number|
       SmsJob.new.send_sms(number: number, message: response[:message]).deliver_later
