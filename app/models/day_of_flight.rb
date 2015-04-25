@@ -89,7 +89,7 @@ class DayOfFlight < ActiveRecord::Base
 
   def build_response(number, message = nil)
     if person = phone_on_flight(number)
-      # Build hash with list of numbers and a message to sendtest
+      # Build hash with list of numbers and a message to send
       if person.class == Volunteer
         response = { numbers: volunteers_guardians_phones,
           message: "(Vol) #{person.text_name}: #{message}"
