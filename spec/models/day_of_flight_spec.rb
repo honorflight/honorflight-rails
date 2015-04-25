@@ -20,6 +20,18 @@ RSpec.describe DayOfFlight, type: :model do
     end
   end
 
+  describe "#current" do
+    it "should return the current flight" do
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
+      expect(DayOfFlight.current).to eql(f)
+    end
+
+    it "should not return any flight" do
+      FactoryGirl.create(:day_of_flight)
+      expect(DayOfFlight.current).to equal(nil)
+    end
+  end
+
   describe "#is_notifiable?" do
     it "should be notifiable on day before, of and day after" do
       days = [Date.today, Date.today - 1.day, Date.today + 1.day]
@@ -124,8 +136,8 @@ RSpec.describe DayOfFlight, type: :model do
         # 333-333-3333
         # "314-555-1212"
         # => "13145551212"
-        phone = "1" + @guardian_first.cell_phone.gsub(/-/, "")
-        expect(phone).to eql("13145551212")
+        phone = "+1" + @guardian_first.cell_phone.gsub(/-/, "")
+        expect(phone).to eql("+13145551212")
         expect(@flight.phone_on_flight(phone)).to eql(@guardians.first)
       end
 
@@ -133,8 +145,8 @@ RSpec.describe DayOfFlight, type: :model do
       #   expect(@flight.phone_on_flight(@guardians.first.phone)).to eql(@guardians.first)
       # end
 
-      it "13148675309 should not be on flight" do
-        expect(@flight.phone_on_flight("13148675309")).to be(nil)
+      it "+13148675309 should not be on flight" do
+        expect(@flight.phone_on_flight("+13148675309")).to be(nil)
       end
     end
 

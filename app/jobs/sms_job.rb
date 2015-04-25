@@ -1,7 +1,7 @@
 class SmsJob
   include SuckerPunch::Job
 
-  def perform(options) # Should be a sms-able number and a message
+  def send_sms(options) # Should be a sms-able number and a message
     raise "Please pass a phone number" if options[:number].blank?
     raise "Please pass a message" if options[:message].blank?
 

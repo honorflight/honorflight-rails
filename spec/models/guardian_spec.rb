@@ -7,7 +7,7 @@ RSpec.describe Guardian, type: :model do
     it "should have a text cleansed number" do
       x = FactoryGirl.create(:guardian, :cell_phone => "314-555-1212")
 
-      expect(x.text_phone).to eql("13145551212")
+      expect(x.text_phone).to eql("+13145551212")
     end
   end
 

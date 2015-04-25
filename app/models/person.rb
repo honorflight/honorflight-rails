@@ -11,6 +11,8 @@ class Person < ActiveRecord::Base
 
   has_many :people_attachments
 
+  has_many :sms_messages
+
   belongs_to :war
   belongs_to :shirt_size
   belongs_to :day_of_flight
@@ -70,7 +72,7 @@ class Person < ActiveRecord::Base
       ret = "1" + ret
     end
 
-    ret
+    "+#{ret}"
   end
 
   def text_name

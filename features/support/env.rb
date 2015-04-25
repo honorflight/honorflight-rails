@@ -74,7 +74,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 
 After do |scenario|
-  save_and_open_page if scenario.failed?save_and_open_page if scenario.failed? and (ENV["debug"] == "open")
+  save_and_open_page if scenario.failed? save_and_open_page if scenario.failed? and (ENV["debug"] == "open")
 end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422002830) do
+ActiveRecord::Schema.define(version: 20150425174651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -388,6 +388,33 @@ ActiveRecord::Schema.define(version: 20150422002830) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sms_messages", force: :cascade do |t|
+    t.string   "to_country"
+    t.string   "to_state"
+    t.string   "sms_message_sid"
+    t.string   "num_media"
+    t.string   "to_city"
+    t.string   "from_zip"
+    t.string   "sms_sid"
+    t.string   "from_state"
+    t.string   "sms_status"
+    t.string   "from_city"
+    t.text     "body"
+    t.string   "from_country"
+    t.string   "to"
+    t.string   "to_zip"
+    t.string   "message_sid"
+    t.string   "from"
+    t.string   "api_version"
+    t.integer  "day_of_flight_id"
+    t.integer  "person_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "sms_messages", ["day_of_flight_id"], name: "index_sms_messages_on_day_of_flight_id", using: :btree
+  add_index "sms_messages", ["person_id"], name: "index_sms_messages_on_person_id", using: :btree
+
   create_table "smtp_settings", force: :cascade do |t|
     t.boolean  "send_mail"
     t.string   "host"
@@ -458,6 +485,8 @@ ActiveRecord::Schema.define(version: 20150422002830) do
   add_foreign_key "service_histories", "people"
   add_foreign_key "service_histories", "rank_types"
   add_foreign_key "service_histories", "ranks"
+  add_foreign_key "sms_messages", "day_of_flights"
+  add_foreign_key "sms_messages", "people"
   add_foreign_key "volunteers_roles", "people"
   add_foreign_key "volunteers_roles", "roles"
 end

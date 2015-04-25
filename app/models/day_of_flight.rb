@@ -6,6 +6,7 @@ class DayOfFlight < ActiveRecord::Base
   has_many :day_of_flights_volunteers
   has_many :volunteers, through: :day_of_flights_volunteers
   has_many :flight_attachments
+  has_many :sms_messages
 
   belongs_to :war
 
@@ -66,6 +67,22 @@ class DayOfFlight < ActiveRecord::Base
     volunteers_phones.concat(guardians_phones)
   end
 
+  def build_response_from_sms(sms_message)
+    response = {}
+    if sms.person.class == Volunteer
+      response[:numbers] = volunteers_guardians_phones
+      response[:message] = "(Vol) #{sms_message.person.text_name}: #{sms_body}"
+    else
+      response[:numbers] = volunteers_phones
+      response[:message] = "(G) #{sms_message.person.text_name}, (V) #{sms_message.person.veteran.text_name}: #{message}"
+    end
+
+    response.numbers.each do |number|
+      SmsJob.new.send_sms(number: number, message: response[:message]).deliver_later
+    end
+    response
+  end
+
   def build_response(number, message = nil)
     if person = phone_on_flight(number)
       # Build hash with list of numbers and a message to send
@@ -88,5 +105,11 @@ class DayOfFlight < ActiveRecord::Base
 
   def is_notifiable?
     [Date.today, Date.yesterday, Date.tomorrow].include?(flies_on)
+  end
+
+  class << self
+    def current
+      where(flies_on: [Date.today, Date.yesterday, Date.tomorrow]).first
+    end
   end
 end
