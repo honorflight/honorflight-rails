@@ -82,7 +82,7 @@ class DayOfFlight < ActiveRecord::Base
     end
 
     response[:numbers].each do |number|
-      SmsJob.new.asynch.send_sms(number: number, message: response[:message])
+      SmsJob.new.async.send_sms(number: number, message: response[:message])
     end
     response
   end
