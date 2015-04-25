@@ -71,11 +71,10 @@ class DayOfFlight < ActiveRecord::Base
     response = {}
     if sms_message.person.class == Volunteer
       response[:numbers] = volunteers_guardians_phones
-      response[:message] = "(Vol) #{sms_message.person.text_name}: #{sms_body}"
+      response[:message] = "(Vol) #{sms_message.person.text_name}: #{sms_message.body}"
     else
       response[:numbers] = volunteers_phones
-      response[:message] = "(G) #{sms_message.person.text_name}, (V) #{sms_message.person.veteran.text_name}: #{message}"
-    end
+      response[:message] = "(G) #{sms_message.person.text_name}, (V) #{sms_message.person.veteran.text_name}: #{sms_message.body
 
     response.numbers.each do |number|
       SmsJob.new.send_sms(number: number, message: response[:message]).deliver_later
