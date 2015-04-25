@@ -9,6 +9,9 @@ class SmsController < ActionController::Base
     if flight = DayOfFlight.current
       if flight.phone_on_flight(sms_hash[:from])
         # Legit... GO GO GO
+        # Blecht
+        # flight = DayOfFlight.current;sms_message = SmsMessage.last; flight.build_response_from_sms(sms_message)
+        #
         # Persist the incoming message, 
         if sms_message = flight.sms_messages.create(sms_hash)
           flight.build_response_from_sms(sms_message)
