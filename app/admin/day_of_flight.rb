@@ -40,37 +40,37 @@ ActiveAdmin.register DayOfFlight do
       row :special_instruction
       row :tickets_purchased
       row :group_number
+    end
 
-      panel "Flight Responsabilities" do
-        table_for day_of_flight.day_of_flights_volunteers do
-          column :flight_responsibility
-          column :volunteer
-
-        end
+    panel "Flight Details" do
+      table_for day_of_flight.flight_details do
+        column :airline
+        column :flight_number
+        column "Departs On", :departs_at
+        column :departs_from
+        column :departure_gate
+        column :destination
+        column "Arrives On", :arrives_at
+        column :arrival_gate
+        #end
       end
+    end
 
-      panel "Veterans" do
-        table_for day_of_flight.veterans do
-          column(:full_name) { |o| link_to(o.full_name, admin_veteran_path(o))}
-          column(:guardian) { |o| link_to(o.guardian.full_name, admin_guardian_path(o.guardian))}
-        end
+    panel "Flight Responsabilities" do
+      table_for day_of_flight.day_of_flights_volunteers do
+        column :flight_responsibility
+        column :volunteer
       end
+    end
 
-      panel "Flight Details" do
-        table_for day_of_flight.flight_details do
-          column :airline
-          column :flight_number
-          column "Departs On", :departs_at
-          column :departs_from
-          column :departure_gate
-          column :destination
-          column "Arrives On", :arrives_at
-          column :arrival_gate
-          end
-        end
+    panel "Veterans" do
+      table_for day_of_flight.veterans do
+        column(:full_name) { |o| link_to(o.full_name, admin_veteran_path(o))}
+        column(:guardian) { |o| link_to(o.guardian.full_name, admin_guardian_path(o.guardian))}
       end
+    end
 
-      panel "Attachments" do
+    panel "Attachments" do
       table_for day_of_flight.flight_attachments do 
         column :name
         column :comments
@@ -81,16 +81,14 @@ ActiveAdmin.register DayOfFlight do
         end
       end
     end
+  end
 
-
+  sidebar :flights, :only => :show do
+    attributes_table_for resource do
+      row("Total on Flight")  { resource.people_count  }
+      #row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
     end
-
-    sidebar :flights, :only => :show do
-      attributes_table_for resource do
-        row("Total on Flight")  { resource.people_count  }
-        #row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
-      end
-    end
+  end
 
   form do |f|
     f.inputs do
@@ -99,13 +97,6 @@ ActiveAdmin.register DayOfFlight do
       f.input :tickets_purchased
       f.input :group_number
       f.input :special_instruction
-    end
-
-    panel 'Flight Volunteers' do
-      f.has_many :day_of_flights_volunteers, heading: false, allow_destroy: true do |volunteer|
-        volunteer.input :flight_responsibility, input_html: { class: "flight_responsibility_type_dd" }
-        volunteer.input :volunteer, input_html: { class: "volunteer_type_dd" }
-      end
     end
 
     panel 'Flight Details' do
@@ -120,6 +111,13 @@ ActiveAdmin.register DayOfFlight do
         flight_detail.input :arrives_at, label: "Arrive On", as: :datetime_picker
         flight_detail.input :arrival_gate
         flight_detail.input :_destroy, :as => :boolean, :required => false, :label=>'Remove'
+      end
+    end
+
+    panel 'Flight Volunteers' do
+      f.has_many :day_of_flights_volunteers, heading: false, allow_destroy: true do |volunteer|
+        volunteer.input :flight_responsibility, input_html: { class: "flight_responsibility_type_dd" }
+        volunteer.input :volunteer, input_html: { class: "volunteer_type_dd" }
       end
     end
 
