@@ -183,6 +183,9 @@ ActiveAdmin.register Volunteer do
 
   # form partial: 'form'
   form do |f|
+    f.actions do
+      f.action :submit
+    end
     if f.object.address.nil?
       f.object.build_address
     end
