@@ -33,7 +33,8 @@ ActiveAdmin.register DayOfFlight do
     end
   end
 
-  show do
+  #show :title => :flies_on.to_date.strftime("%m/%d/%Y") do
+  show :title => "Day of Flight #{:flies_on}" do
     attributes_table do
       row :war
       row :flies_on
