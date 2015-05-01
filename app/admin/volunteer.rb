@@ -183,18 +183,18 @@ ActiveAdmin.register Volunteer do
 
   # form partial: 'form'
   form do |f|
-    f.actions do
-      f.action :submit
-    end
+
     if f.object.address.nil?
       f.object.build_address
     end
+
     f.semantic_errors *f.object.errors.keys
 
+    f.actions do
+      f.action :submit
+    end
+
     f.inputs name: "General" do
-      #f.input :person_status
-      # f.input :veteran
-      #f.input :flight
       f.input :first_name
       f.input :middle_name
       f.input :last_name
@@ -213,10 +213,8 @@ ActiveAdmin.register Volunteer do
     f.input :email
     f.input :work_email
     f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
-      #f.input :war
     f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
     f.input :shirt_size
-      #f.input :release_info
     end
 
 
