@@ -29,6 +29,10 @@ class DayOfFlight < ActiveRecord::Base
     self.flies_on.to_s(:long)
   end
 
+  def dof_title
+    "Day of Flight #{to_s}"
+  end
+
   def airline_names
     flight_details.map(&:airline).map(&:name).uniq.join(", ")
   end
