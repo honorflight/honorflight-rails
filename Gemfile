@@ -49,6 +49,7 @@ gem 'slim-rails'
 
 # PDF Generation
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-heroku', group: :production
 
 #heroku
