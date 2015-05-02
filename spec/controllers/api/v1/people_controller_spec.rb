@@ -28,6 +28,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       json = JSON.parse(response.body)
       expect(json["id"]).to be_a(Integer)
       expect(json["applied_online"]).to be(true)
+      expect(json["name_suffix_id"]).to eql(1)
       expect(Person.last.veteran?).to eql(true)
     end
 
