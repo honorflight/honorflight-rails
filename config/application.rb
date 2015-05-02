@@ -8,6 +8,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require 'wicked_pdf'
 
 # require "rails/test_unit/railtie"
 
@@ -37,5 +38,8 @@ module HonorflightRails
 
     # For mailer and other long running tasks
     config.active_job.queue_adapter = :sucker_punch
+
+    # PDF
+    config.middleware.use WickedPdf::Middleware
   end
 end

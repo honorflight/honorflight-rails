@@ -47,6 +47,10 @@ gem 'delayed_job_active_record'
 gem 'sucker_punch'
 gem 'slim-rails'
 
+# PDF Generation
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-heroku', group: :production
+
 #heroku
 gem 'rails_12factor', group: :production
 gem 'thin'

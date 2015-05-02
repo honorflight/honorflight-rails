@@ -22,13 +22,14 @@ RSpec.describe API::V1::PeopleController, type: :controller do
 
     # Create POST /api/v1/people
     it 'creates a veteran' do
-      post :create, person: FactoryGirl.attributes_for(:person, type: nil)
+      name_suffix = FactoryGirl.create(:name_suffix)
+      post :create, person: FactoryGirl.attributes_for(:person, type: nil, name_suffix_id: name_suffix.id)
 
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json["id"]).to be_a(Integer)
       expect(json["applied_online"]).to be(true)
-      expect(json["name_suffix_id"]).to eql(1)
+      expect(json["name_suffix_id"]).to eql(name_suffix.id)
       expect(Person.last.veteran?).to eql(true)
     end
 
