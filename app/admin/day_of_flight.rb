@@ -18,6 +18,18 @@ ActiveAdmin.register DayOfFlight do
   filter :airline
 # :nocov:
 
+  # /admin/day_of_flights/:id/flight.pdf.slim
+  member_action :flight, method: :get do
+    @day_of_flight = resource
+
+    respond_to do |format|
+      format.pdf do
+        render pdf: "day_of_flight-#{resource.flies_on}"
+      end
+    end
+    # This will render app/views/admin/day_of_flights/flight.pdf.slim
+  end
+
   index do
     selectable_column
     actions

@@ -40,6 +40,9 @@ module HonorflightRails
     config.active_job.queue_adapter = :sucker_punch
 
     # PDF
-    config.middleware.use WickedPdf::Middleware
+    # config.middleware.use WickedPdf::Middleware
+
+    # Assets for PDF need to be set
+    config.action_controller.asset_host = ENV["ASSET_HOST"] || "http://honorflight-rails.dev"
   end
 end
