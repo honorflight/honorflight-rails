@@ -75,10 +75,11 @@ class DayOfFlight < ActiveRecord::Base
     response = {}
     if sms_message.person.class == Volunteer
       response[:numbers] = volunteers_guardians_phones
-      response[:message] = "(Vol) #{sms_message.person.text_name}: #{sms_message.body}"
+      #self.day_of_flights_volunteers.where(person_id: sms_message.person.id).first.flight_responsibility.role.short_code
+      response[:message] = "(#{short_code}) #{sms_message.person.text_name}: #{sms_message.body}"
     else
       response[:numbers] = volunteers_phones
-      response[:message] = "(G) #{sms_message.person.text_name}, (V) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
+      response[:message] = "(Guard) #{sms_message.person.text_name}, (Vet) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
     end
 
     response[:numbers].each do |number|
@@ -87,25 +88,25 @@ class DayOfFlight < ActiveRecord::Base
     response
   end
 
-  def build_response(number, message = nil)
-    if person = phone_on_flight(number)
-      # Build hash with list of numbers and a message to send mean words
-      if person.class == Volunteer
-        response = { numbers: volunteers_guardians_phones,
-          message: "(Vol) #{person.text_name}: #{message}"
-        }
-      elsif person.class == Guardian
-        response = { numbers: volunteers_phones, 
-          message: "(G) #{person.text_name}, (V) #{person.veteran.text_name}: #{message}" }
-      end
-    else
-      # Respond with not-availabe message
-      response = { numbers: [number], message: "This number is not available for texting right now. Please try later."}
-    end
+  # def build_response(number, message = nil)
+  #   if person = phone_on_flight(number)
+  #     # Build hash with list of numbers and a message to send mean words
+  #     if person.class == Volunteer
+  #       response = { numbers: volunteers_guardians_phones,
+  #         message: "(Vol) #{person.text_name}: #{message}"
+  #       }
+  #     elsif person.class == Guardian
+  #       response = { numbers: volunteers_phones, 
+  #         message: "(G) #{person.text_name}, (V) #{person.veteran.text_name}: #{message}" }
+  #     end
+  #   else
+  #     # Respond with not-availabe message
+  #     response = { numbers: [number], message: "This number is not available for texting right now. Please try later."}
+  #   end
 
-    # Return messages sscheduled count???
-    response
-  end
+  #   # Return messages sscheduled count???
+  #   response
+  # end
 
   def is_notifiable?
     [Date.today, Date.yesterday, Date.tomorrow].include?(flies_on)

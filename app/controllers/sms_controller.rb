@@ -7,7 +7,7 @@ class SmsController < ActionController::Base
     # then go ahead and send stuff out
     # Else build a invalid responder
     if flight = DayOfFlight.current
-      if flight.phone_on_flight(sms_hash[:from])
+      if person = flight.phone_on_flight(sms_hash[:from])
         # Legit... GO GO GO
         # Blecht
         # flight = DayOfFlight.current;sms_message = SmsMessage.last; flight.build_response_from_sms(sms_message)
@@ -15,7 +15,7 @@ class SmsController < ActionController::Base
         # Persist the incoming message, 
         if sms_message = flight.sms_messages.create(sms_hash)
           flight.build_response_from_sms(sms_message)
-          twiml = build_twiml_response "Message was received and processed. Thank you!"
+          twiml = build_twiml_response "Message was received and processed. Thank you!" if person.class == Guardian
         else
           twiml = build_twiml_response
         end

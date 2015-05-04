@@ -98,14 +98,35 @@ RSpec.describe DayOfFlight, type: :model do
         @flight.veterans << vet
       end
 
+      @role = FactoryGirl.create(:role, short_code: "Rob")
+      flight_responsibility = FactoryGirl.create(:flight_responsibility, role: @role)
+
+
+
       @flight.volunteers = @volunteers.sample(3)
 
       @flight_volunteer_first = @flight.volunteers.first
+      @flight_volunteer_first.roles << @role
       @flight_volunteer_first.cell_phone = "413-555-1212"
       @flight_volunteer_first.save
       @flight.save
 
-      expect(@flight.people_count).to eql(23)
+      #@flight.day_of_flights_volunteers << 
+      FactoryGirl.create( :day_of_flights_volunteer,
+        person_id: @flight_volunteer_first.id, 
+        day_of_flight_id: @flight.id,
+        flight_responsibility_id: flight_responsibility.id)
+
+      #expect(@flight.people_count).to eql(23)
+      @guardian_sms_message = FactoryGirl.create(
+        :sms_message, 
+        from: @guardian_first.text_phone,
+        day_of_flight_id: @flight.id)
+      @flight_volunteer_sms_message = FactoryGirl.create(
+        :sms_message,
+         from: @flight_volunteer_first.text_phone,
+         day_of_flight_id: @flight.id)
+
       # binding.pry
 
     end
@@ -158,31 +179,24 @@ RSpec.describe DayOfFlight, type: :model do
 
     describe "#volunteers_guardians_phones" do
       it "should return 13 combined phones" do
-        message = "Hello World!"
-        resp = @flight.build_response(@flight_volunteer_first.text_phone, message)
+        resp = @flight.build_response_from_sms(@flight_volunteer_sms_message)
         expect(resp[:numbers].count).to eql(13)
         expect(resp[:message].class).to eql(String)
-        expect(resp[:message]).to eql("(Vol) #{@flight_volunteer_first.text_name}: #{message}")
+        expect(resp[:message]).to eql("(#{@role.short_code}) #{@flight_volunteer_first.text_name}: #{@flight_volunteer_sms_message.body}")
         # (G)F. Lastname, (V)F.Lastname): {in_message}
       end
     end
 
-    describe "build_response" do
+    describe "build_response_from_sms" do
       it "guardian should respond to flight volunteers" do
         message = "Hello World!"
-        resp = @flight.build_response(@guardian_first.text_phone, message)
+        resp = @flight.build_response_from_sms(@guardian_sms_message)
         expect(resp[:numbers].count).to eql(3)
         expect(resp[:message].class).to eql(String)
-        expect(resp[:message]).to eql("(G) #{@guardian_first.text_name}, (V) #{@guardian_first.veteran.text_name}: #{message}")
+        expect(resp[:message]).to eql("(Guard) #{@guardian_first.text_name}, (Vet) #{@guardian_first.veteran.text_name}: #{@guardian_sms_message.body}")
       end
 
       it "volunteer should respond to flight guardians and volunteers"
-      it "invalid in number should respond with friendly notice not to send me messages" do
-        resp = @flight.build_response("12222222222")
-        expect(resp[:numbers].count).to eql(1)
-        expect(resp[:message].class).to eql(String)
-        expect(resp[:message]).to eql("This number is not available for texting right now. Please try later.")
-      end
     end
   end
 end
