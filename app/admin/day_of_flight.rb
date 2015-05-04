@@ -18,6 +18,17 @@ ActiveAdmin.register DayOfFlight do
   filter :airline
 # :nocov:
 
+  controller do
+    def show
+      super do |format|
+        format.pdf do
+          render pdf: "day_of_flight-#{resource.flies_on}"
+        end
+      end
+    end
+  end
+
+  # Too Custom?
   # /admin/day_of_flights/:id/flight.pdf.slim
   member_action :flight, method: :get do
     @day_of_flight = resource

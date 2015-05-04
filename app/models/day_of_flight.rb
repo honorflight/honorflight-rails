@@ -87,7 +87,7 @@ class DayOfFlight < ActiveRecord::Base
     response
   end
 
-  #TODO: Spec this
+  #TODO: Spec this, then refactor it... #jeesh
   def role_short_code(person_id)
     self.day_of_flights_volunteers.where(person_id: person_id).first.flight_responsibility.role.short_code
   end
