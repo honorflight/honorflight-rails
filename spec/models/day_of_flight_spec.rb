@@ -112,12 +112,9 @@ RSpec.describe DayOfFlight, type: :model do
       @flight.save
 
       #@flight.day_of_flights_volunteers << 
-      FactoryGirl.create( :day_of_flights_volunteer,
-        person_id: @flight_volunteer_first.id, 
-        day_of_flight_id: @flight.id,
-        flight_responsibility_id: flight_responsibility.id)
+      DayOfFlightsVolunteer.where(person_id: @flight_volunteer_first.id, day_of_flight_id: @flight.id).first.update_attributes(flight_responsibility_id: flight_responsibility.id)
 
-      #expect(@flight.people_count).to eql(23)
+      expect(@flight.people_count).to eql(23)
       @guardian_sms_message = FactoryGirl.create(
         :sms_message, 
         from: @guardian_first.text_phone,

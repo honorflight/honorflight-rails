@@ -75,8 +75,7 @@ class DayOfFlight < ActiveRecord::Base
     response = {}
     if sms_message.person.class == Volunteer
       response[:numbers] = volunteers_guardians_phones
-      #self.day_of_flights_volunteers.where(person_id: sms_message.person.id).first.flight_responsibility.role.short_code
-      response[:message] = "(#{short_code}) #{sms_message.person.text_name}: #{sms_message.body}"
+      response[:message] = "(#{role_short_code(sms_message.person.id)}) #{sms_message.person.text_name}: #{sms_message.body}"
     else
       response[:numbers] = volunteers_phones
       response[:message] = "(Guard) #{sms_message.person.text_name}, (Vet) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
@@ -86,6 +85,11 @@ class DayOfFlight < ActiveRecord::Base
       SmsJob.new.async.send_sms(number: number, message: response[:message])
     end
     response
+  end
+
+  #TODO: Spec this
+  def role_short_code(person_id)
+    self.day_of_flights_volunteers.where(person_id: person_id).first.flight_responsibility.role.short_code
   end
 
   # def build_response(number, message = nil)
