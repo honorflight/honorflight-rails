@@ -128,6 +128,10 @@ RSpec.describe DayOfFlight, type: :model do
 
     end
 
+    it "flight volunteer should be role short code Rob" do
+      expect(@flight.role_short_code(@flight_volunteer_first.id)).to eql("Rob")
+    end
+
     it "should have 10 guardians" do
       expect(@guardians.count).to eql(10)
       expect(@guardians.first.class).to be(Guardian)
