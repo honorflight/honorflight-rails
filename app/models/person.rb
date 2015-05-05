@@ -79,5 +79,11 @@ class Person < ActiveRecord::Base
     "#{first_name[0].upcase}. #{last_name.capitalize}"
   end
 
+  #def flight_date
+    #self[:application_date]
+    #:day_of_flight[:group_number]
+
+
+  #end
 
 end

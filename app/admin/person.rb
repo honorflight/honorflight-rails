@@ -54,7 +54,9 @@ ActiveAdmin.register Person do
   index do
     selectable_column
     actions
-    column :flight
+    column :flight_date do |person| 
+      person.try(:day_of_flight, :to_s)
+    end
     column :person_status
     #column :email
     column :first_name
