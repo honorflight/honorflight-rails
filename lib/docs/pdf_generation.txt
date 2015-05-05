@@ -1,0 +1,5 @@
+Generate a PDF from command line
+wkhtmltopdf --custom-header X_ADMIN_APIKEY fc90834d-e0ef-4bc9-a475-8fd1d4815f05 --custom-header-propagation --print-media-type http://honorflight-rails.dev/admin/day_of_flights/1 dof.pdf
+
+This is to help troubleshoot why the default PDF generator won't just DO it!
+
