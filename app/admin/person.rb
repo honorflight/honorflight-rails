@@ -32,7 +32,7 @@ ActiveAdmin.register Person do
   csv do
     column :id
     column :type
-    column(:flight) { |person| person.try(:flight, :flies_on) }
+    column(:flight) { |person| person.try(:day_of_flight, :to_s) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :email
     column :full_name
