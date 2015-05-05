@@ -190,9 +190,7 @@ ActiveAdmin.register Volunteer do
 
     f.semantic_errors *f.object.errors.keys
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions 
 
     f.inputs name: "General" do
       f.input :first_name
@@ -265,8 +263,6 @@ ActiveAdmin.register Volunteer do
       end
     end
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions 
   end
 end

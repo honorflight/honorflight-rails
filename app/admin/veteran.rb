@@ -221,9 +221,8 @@ ActiveAdmin.register Veteran do
     end
     f.semantic_errors *f.object.errors.keys
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions 
+
     #binding.remote_pry
     f.inputs name: "General" do
       if !f.object.new_record?
@@ -324,8 +323,6 @@ ActiveAdmin.register Veteran do
       end
     end
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions
   end
 end

@@ -114,6 +114,9 @@ ActiveAdmin.register DayOfFlight do
   end
 
   form do |f|
+    
+    f.actions 
+
     f.inputs do
       f.input :war
       f.input :flies_on, as: :date_picker, :order => [:month, :day, :year]
@@ -153,8 +156,6 @@ ActiveAdmin.register DayOfFlight do
       end
     end
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions 
   end
 end
