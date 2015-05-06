@@ -293,8 +293,8 @@ ActiveAdmin.register Veteran do
           medical_condition.input :id, as: :hidden
           medical_condition.input :medical_condition_type, label: "Condition Type", input_html: { class: "medical_condition_type_dd" }
           medical_condition.input :medical_condition_name, label: "Condition Name", input_html: { class: "medical_condition_name_dd" }
-          medical_condition.input :diagnosed_at
-          medical_condition.input :last_occurrence
+          medical_condition.input :diagnosed_at, label: "Diagnosed At"
+          medical_condition.input :last_occurrence, label: "Last Occurrence"
           medical_condition.input :comment
         end
       end
