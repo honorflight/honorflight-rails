@@ -22,11 +22,11 @@
 en:
   date:
     formats:
-      long: "%Y-%m-%d"
+      long: "%m/%d/%Y"
       aa: "%m/%d/%Y"
-#   time:
-#     formats:
-#       long: "%Y-%m-%d %H:%M:%S"
+    time:
+      formats:
+        long: "%m/%d/%Y %H:%M:%S"
 
 en:
   test: "Hello"
