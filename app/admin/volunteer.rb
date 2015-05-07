@@ -21,18 +21,16 @@ ActiveAdmin.register Volunteer do
   menu parent: "People", priority: 4
 
 # :nocov:
-  filter :war
-  # filter :flight_id_blank, label: "Never Flown", as: :boolean
   filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
   filter :middle_name
-  filter :person_status
+  filter :birth_date
   filter :created_at
   filter :release_info
-  filter :tlc
   filter :roles
+
 # :nocov:
 
 # :nocov:
@@ -119,6 +117,11 @@ ActiveAdmin.register Volunteer do
       row :updated_at
     end
 
+def row(row_name, &block)
+  # run arbitrary code
+  yield(block) if block_given?
+  # run arbitrary code  
+end
 
     panel "Service History" do
       table_for volunteer.service_histories do

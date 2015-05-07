@@ -67,7 +67,9 @@ ActiveAdmin.register Person do
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
-    column (:veteran)     {|person| status_tag(person.type) }
+    column "People", (:veteran)  do |person| 
+      status_tag(person.type)
+    end 
     bool_column :applied_online
     #column :address
   end
