@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 class Person < ActiveRecord::Base
   attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON']
   attr_encrypted :birth_date, key: ENV['ENCRYPTION_KEY_PERSON'], marshal: true, marshaler: Marshel::Date
@@ -66,13 +68,31 @@ class Person < ActiveRecord::Base
   #   super
   # end
   def text_phone
-    ret = cell_phone.gsub(/[^0-9]*/, "")
-    
-    if ret[0] != 1
-      ret = "1" + ret
-    end
+    "+1" + cell_phone.gsub(/[^0-9]*/, "")
+  end
 
-    "+#{ret}"
+  def phone
+    number_to_phone(self.class.decrypt_phone(self[:encrypted_phone]), area_code: true)
+  end
+
+  def phone=(p)
+    self[:encrypted_phone] = self.class.encrypt_phone(wash_phone(p))
+  end
+
+  def cell_phone
+    number_to_phone(self.class.decrypt_cell_phone(self[:encrypted_cell_phone]), area_code: true)
+  end
+
+  def cell_phone=(p)
+    self[:encrypted_cell_phone] = self.class.encrypt_cell_phone(wash_phone(p))
+  end
+
+  def work_phone
+    number_to_phone(self.class.decrypt_work_phone(self[:encrypted_work_phone]), area_code: true)
+  end
+
+  def work_phone=(p)
+    self[:encrypted_work_phone] = self.class.encrypt_work_phone(wash_phone(p))
   end
 
   def text_name
@@ -86,4 +106,12 @@ class Person < ActiveRecord::Base
 
   #end
 
+private 
+  def wash_phone(p)
+    p.gsub!(/\s?x.*$/, "")
+    p.gsub!(/[^0-9]*/, "")
+    p.gsub!(/^1/, "") if p.length == 11
+    p
+  end
 end
+

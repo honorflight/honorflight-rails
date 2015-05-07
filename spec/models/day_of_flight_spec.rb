@@ -154,15 +154,6 @@ RSpec.describe DayOfFlight, type: :model do
         expect(@flight.phone_on_flight(@flight_volunteer_first.text_phone)).to eql(@flight_volunteer_first)
       end
 
-      it "guardian should be on flight with dashes removed and a 1 in front" do
-        # 333-333-3333
-        # "314-555-1212"
-        # => "13145551212"
-        phone = "+1" + @guardian_first.cell_phone.gsub(/-/, "")
-        expect(phone).to eql("+13145551212")
-        expect(@flight.phone_on_flight(phone)).to eql(@guardians.first)
-      end
-
       # it "guardian should be on flight" do
       #   expect(@flight.phone_on_flight(@guardians.first.phone)).to eql(@guardians.first)
       # end

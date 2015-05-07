@@ -67,19 +67,15 @@ ActiveAdmin.register Veteran do
     column :middle_name
     column :last_name
     column :name_suffix
-    column :phone, :phone do |person|
-      if person.phone.to_s.length == 10
-        number_to_phone(person.phone, area_code: true)
-      else
-        number_to_phone(person.phone)
-      end
-    end
-    column ("Date of Birth"){ |person| person.birth_date.strftime("%m/%d/%Y") }
+    column :phone
+    column :cell_phone
+    column :work_phone
+    column ("Date of Birth"){ |person| formatDate(person.birth_date) }
     column :created_at
     column :release_info
     column :tlc
     column :applied_online
-    column ("Application Date") { |person| person.application_date.strftime("%m/%d/%Y") }
+    column ("Application Date") { |person| formatDate(person.application_date) }
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
@@ -121,27 +117,9 @@ ActiveAdmin.register Veteran do
       row :last_name
       row :name_suffix
       row(:address) { |person| "#{person.try(:address)}" }
-      row :phone, :phone do |person|
-        if person.phone.to_s.length == 10
-          number_to_phone(person.phone, area_code: true)
-        else
-          number_to_phone(person.phone)
-        end
-      end
-      row :cell_phone, :cell_phone  do |person|
-        if person.cell_phone.to_s.length == 10
-          number_to_phone(person.cell_phone, area_code: true)
-        else
-          number_to_phone(person.cell_phone)
-        end
-      end
-      row :work_phone, :work_phone  do |person|
-        if person.work_phone.to_s.length == 10
-          number_to_phone(person.work_phone, area_code: true)
-        else
-          number_to_phone(person.work_phone)
-        end
-      end
+      row :phone
+      row :cell_phone
+      row :work_phone
       row :email
       row :work_email
       row("Date of Birth"){ |person| person.birth_date.strftime("%m/%d/%Y") }
@@ -149,8 +127,8 @@ ActiveAdmin.register Veteran do
       row :shirt_size
       bool_row :release_info
       bool_row "TLC", :tlc
-      row ("Application Date") { |person| person.application_date.strftime("%m/%d/%Y") }
-      row ("Update At") { |person| person.updated_at.strftime("%m/%d/%Y %H:%M:%S") }
+      row ("Application Date") { |person| formatDate(person.application_date) }
+      row ("Update At") { |person| formatDateTime(person.updated_at) }
     end
 
     panel "Service History" do
@@ -187,13 +165,7 @@ ActiveAdmin.register Veteran do
         column :contact_category
         column :full_name
         column :email
-        column :phone, :phone do |person|
-          if person.phone.to_s.length == 10
-            number_to_phone(person.phone, area_code: true)
-          else
-            number_to_phone(person.phone)
-          end
-        end
+        column :phone
         column :alternate_phone
         column :contact_relationship
         column :address
@@ -357,6 +329,10 @@ ActiveAdmin.register Veteran do
   end
 end
 
+def formatDate(date)
+  date.strftime("%m/%d/%Y")
+end 
 
-
-
+def formatDateTime(date)
+  date.strftime("%m/%d/%Y %H:%M:%S")
+end

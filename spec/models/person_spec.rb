@@ -21,7 +21,23 @@ RSpec.describe Person, type: :model do
 
   it { should accept_nested_attributes_for(:people_attachments)}
 
-
+  describe "phone" do
+    before(:each) do
+      @veteran = FactoryGirl.create(:veteran, 
+        phone: Faker::PhoneNumber.phone_number, 
+        cell_phone: Faker::PhoneNumber.cell_phone, 
+        work_phone: Faker::PhoneNumber.phone_number)
+    end
+    it "should validate phone as 14 digits" do
+      expect(@veteran.phone.length).to eql(14)
+    end
+    it "should validate cell_phone as 14 digits" do
+      expect(@veteran.cell_phone.length).to eql(14)
+    end
+    it "should validate work_phone as 14 digits" do
+      expect(@veteran.work_phone.length).to eql(14)
+    end
+  end
   describe "#uuid" do
     subject(:person) { FactoryGirl.create(:person) }
     it "assigns a uuid" do
@@ -45,3 +61,5 @@ RSpec.describe Person, type: :model do
     end
   end
 end
+
+
