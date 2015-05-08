@@ -78,7 +78,7 @@ class DayOfFlight < ActiveRecord::Base
       response[:message] = "(#{role_short_code(sms_message.person.id)}) #{sms_message.person.text_name}: #{sms_message.body}"
     else
       response[:numbers] = volunteers_phones
-      response[:message] = "(Guard) #{sms_message.person.text_name}, (Vet) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
+      response[:message] = "(Guard) #{sms_message.person.text_name}:(#{sms_message.person.text_phone}), (Vet) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
     end
 
     response[:numbers].each do |number|
