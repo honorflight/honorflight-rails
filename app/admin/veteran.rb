@@ -328,11 +328,3 @@ ActiveAdmin.register Veteran do
     f.actions
   end
 end
-
-def formatDate(date)
-  date.strftime("%m/%d/%Y")
-end 
-
-def formatDateTime(date)
-  date.strftime("%m/%d/%Y %H:%M:%S")
-end

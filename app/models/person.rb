@@ -1,4 +1,5 @@
 include ActionView::Helpers::NumberHelper
+include ApplicationHelper
 
 class Person < ActiveRecord::Base
   attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON']
@@ -105,13 +106,4 @@ class Person < ActiveRecord::Base
 
 
   #end
-
-private 
-  def wash_phone(p)
-    p.gsub!(/\s?x.*$/, "")
-    p.gsub!(/[^0-9]*/, "")
-    p.gsub!(/^1/, "") if p.length == 11
-    p
-  end
 end
-
