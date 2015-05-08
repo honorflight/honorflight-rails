@@ -9,7 +9,7 @@ ActiveAdmin.register Veteran do
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
     medical_allergies_attributes: [:id, :medical_allergy],
     medical_conditions_attributes:[:id,
-      :medicat_condition_type_id, :medical_condition_name_id, :diagnosed_at,
+      :medicat_condition_type_id, :medical_condition_name_id, 
       :last_occurrence, :comment, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
       :branch_id, :rank_type_id, :rank_id, :service_awards_id, :_destroy,
@@ -141,9 +141,6 @@ ActiveAdmin.register Veteran do
         column :activity
         column :story
         column :service_awards do |person| #person.service_awards do |service_awards|
-          #val="hi"
-          #person.service_awards.each do |service_award|
-          #person.service_awards.collect {|sa| sa.award.name}.join(", ")
           person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path(sa)) : "unknown"}.join(", ").html_safe
         end
 
@@ -181,7 +178,8 @@ ActiveAdmin.register Veteran do
         table_for veteran.medical_conditions do
           column :condition_type
           column :condition_name
-          column :diagnosed_at
+          column :medical_condition_type
+          column :medical_condition_name
           column :last_occurrence
           column :comment
         end
@@ -295,7 +293,6 @@ ActiveAdmin.register Veteran do
           medical_condition.input :id, as: :hidden
           medical_condition.input :medical_condition_type, label: "Condition Type", input_html: { class: "medical_condition_type_dd" }
           medical_condition.input :medical_condition_name, label: "Condition Name", input_html: { class: "medical_condition_name_dd" }
-          medical_condition.input :diagnosed_at, label: "Diagnosed At"
           medical_condition.input :last_occurrence, label: "Last Occurrence"
           medical_condition.input :comment
         end
