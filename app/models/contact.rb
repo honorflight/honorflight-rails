@@ -1,5 +1,8 @@
+include ActionView::Helpers::NumberHelper
+include ApplicationHelper
+
 class Contact < ActiveRecord::Base
-  attr_encrypted :phone, :email, :alternate_phone, key: :encryption_key
+  attr_encrypted :phone, :email, :alternate_phone, key: ENV['ENCRYPTION_KEY_CONTACT']
   belongs_to :contact_relationship
   belongs_to :address
 
@@ -17,6 +20,21 @@ class Contact < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
 
+  def phone
+    number_to_phone(self.class.decrypt_phone(self[:encrypted_phone]), area_code: true)
+  end
+
+  def phone=(p)
+    self[:encrypted_phone] = self.class.encrypt_phone(wash_phone(p))
+  end
+
+  def alternate_phone
+    number_to_phone(self.class.decrypt_alternate_phone(self[:encrypted_alternate_phone]), area_code: true)
+  end
+
+  def alternate_phone=(p)
+    self[:encrypted_alternate_phone] = self.class.encrypt_alternate_phone(wash_phone(p))
+  end
 
   def as_json(options={})
     super(:only => [:id, :full_name, :email, :phone, :alternate_phone])
