@@ -30,7 +30,6 @@ ActiveAdmin.register Guardian do
   filter :person_status
   filter :created_at
   filter :release_info
-  filter :tlc
 # :nocov:
 
 # :nocov:
