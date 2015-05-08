@@ -58,7 +58,7 @@ class Person < ActiveRecord::Base
   end
 
   def application_date
-    self[:application_date] || self[:created_at].try(:to_date)
+    formatDate(self[:application_date] || self[:created_at].try(:to_date))
   end
 
 # after_save :store_avatar!
@@ -100,6 +100,13 @@ class Person < ActiveRecord::Base
     "#{first_name[0].upcase}. #{last_name.capitalize}"
   end
 
+  def birth_date
+    formatDate(self.class.decrypt_birth_date(self[:encrypted_birth_date]))
+  end
+
+  def updated_at
+    formatDate(self[:updated_at])
+  end
   #def flight_date
     #self[:application_date]
     #:day_of_flight[:group_number]

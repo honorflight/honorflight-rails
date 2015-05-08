@@ -70,12 +70,12 @@ ActiveAdmin.register Veteran do
     column :phone
     column :cell_phone
     column :work_phone
-    column ("Date of Birth"){ |person| formatDate(person.birth_date) }
+    column ("Date of Birth"){ |person| person.birth_date }
     column :created_at
     column :release_info
     column :tlc
     column :applied_online
-    column ("Application Date") { |person| formatDate(person.application_date) }
+    column :application_date
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
@@ -98,8 +98,8 @@ ActiveAdmin.register Veteran do
     column :middle_name
     column :last_name
     #column :phone
-    column ("Date of Birth"){ |person| person.birth_date.strftime("%m/%d/%Y") }
-    column ("Application Date") { |person| person.application_date.strftime("%m/%d/%Y") }
+    column ("Date of Birth"){ |person| person.birth_date}
+    column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
     bool_column :applied_online
@@ -122,13 +122,13 @@ ActiveAdmin.register Veteran do
       row :work_phone
       row :email
       row :work_email
-      row("Date of Birth"){ |person| person.birth_date.strftime("%m/%d/%Y") }
+      row("Date of Birth"){ |person| person.birth_date}
       row :war
       row :shirt_size
       bool_row :release_info
       bool_row "TLC", :tlc
-      row ("Application Date") { |person| formatDate(person.application_date) }
-      row ("Update At") { |person| formatDateTime(person.updated_at) }
+      row :application_date
+      row ("Update At") { |person| person.updated_at }
     end
 
     panel "Service History" do

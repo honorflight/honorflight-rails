@@ -1,10 +1,10 @@
 module ApplicationHelper
 	def formatDate(date)
-	  date.strftime("%m/%d/%Y")
+	  date.strftime("%m/%d/%Y") if date
 	end 
 
 	def formatDateTime(date)
-	  date.strftime("%m/%d/%Y %H:%M:%S")
+	  date.strftime("%m/%d/%Y %H:%M:%S") if date
 	end
 
 	def wash_phone(p)
