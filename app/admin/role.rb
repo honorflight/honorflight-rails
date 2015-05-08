@@ -1,6 +1,6 @@
 ActiveAdmin.register Role do
   actions :all, :except => [:destroy]
-  permit_params :name, :description
+  permit_params :name, :description, :short_code
 
   filter :name
   filter :description
@@ -21,6 +21,7 @@ ActiveAdmin.register Role do
     attributes_table  do
       row :name
       row :description
+      row :short_code
       table_for role.flight_responsibilities, heading: false  do
 
         column "Flight Responsibilities", :name
