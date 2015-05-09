@@ -82,8 +82,8 @@ class DayOfFlight < ActiveRecord::Base
     end
 
     response[:numbers].each do |number|
-      SmsJob.new.async.send_sms(number: number, message: response[:message])
-      # SmsWorker.perform_async(number: number, message: response[:message])
+      # SmsJob.new.async.send_sms(number: number, message: response[:message])
+      SmsWorker.perform_async(number: number, message: response[:message])
     end
     response
   end
