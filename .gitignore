@@ -8,6 +8,7 @@
 /.bundle
 
 .env*
+latest.dump
 
 # Ignore all logfiles and tempfiles.
 /log/*
