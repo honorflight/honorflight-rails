@@ -61,39 +61,18 @@ class Person < ActiveRecord::Base
     formatDate(self[:application_date] || self[:created_at].try(:to_date))
   end
 
-# after_save :store_avatar!
-# before_save :write_avatar_identifier
-  # after_save :store_attachment!
-  # def store_attachment!
-  #   binding.remote_pry
-  #   super
-  # end
   def text_phone
     "+1" + cell_phone.gsub(/[^0-9]*/, "")
   end
 
-  def phone
-    number_to_phone(self.class.decrypt_phone(self[:encrypted_phone]), area_code: true)
-  end
+  ["cell_", "work_", ""].each do |phone|
+    define_method("#{phone}phone") do 
+      number_to_phone(self.class.send("decrypt_#{phone}phone", self["encrypted_#{phone}phone".to_sym]), area_code: true)
+    end
 
-  def phone=(p)
-    self[:encrypted_phone] = self.class.encrypt_phone(wash_phone(p))
-  end
-
-  def cell_phone
-    number_to_phone(self.class.decrypt_cell_phone(self[:encrypted_cell_phone]), area_code: true)
-  end
-
-  def cell_phone=(p)
-    self[:encrypted_cell_phone] = self.class.encrypt_cell_phone(wash_phone(p))
-  end
-
-  def work_phone
-    number_to_phone(self.class.decrypt_work_phone(self[:encrypted_work_phone]), area_code: true)
-  end
-
-  def work_phone=(p)
-    self[:encrypted_work_phone] = self.class.encrypt_work_phone(wash_phone(p))
+    define_method("#{phone}phone=") do |p|
+      self["encrypted_#{phone}phone".to_sym] = self.class.send("encrypt_#{phone}phone", wash_phone(p))
+    end
   end
 
   def text_name
@@ -105,12 +84,7 @@ class Person < ActiveRecord::Base
   end
 
   def updated_at
-    formatDate(self[:updated_at])
+    formatDateTime(self[:updated_at])
   end
-  #def flight_date
-    #self[:application_date]
-    #:day_of_flight[:group_number]
 
-
-  #end
 end
