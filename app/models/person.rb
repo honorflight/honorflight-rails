@@ -58,7 +58,7 @@ class Person < ActiveRecord::Base
   end
 
   def application_date
-    formatDate(self[:application_date] || self[:created_at].try(:to_date))
+    self[:application_date] || self[:created_at].try(:to_date)
   end
 
   def text_phone
@@ -79,12 +79,13 @@ class Person < ActiveRecord::Base
     "#{first_name[0].upcase}. #{last_name.capitalize}"
   end
 
-  def birth_date
-    formatDate(self.class.decrypt_birth_date(self[:encrypted_birth_date]))
-  end
+  # def birth_date
 
-  def updated_at
-    formatDateTime(self[:updated_at])
-  end
+  #   # formatDate(self.class.decrypt_birth_date(self[:encrypted_birth_date]))
+  # end
+
+  # def updated_at
+  #   formatDateTime(self[:updated_at])
+  # end
 
 end

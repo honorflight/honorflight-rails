@@ -85,7 +85,7 @@ ActiveAdmin.register Veteran do
   index do
     selectable_column
     actions
-    column :day_of_flight
+    column(:day_of_flight)
     column :person_status
     column :guardian do |person|
       begin
@@ -98,8 +98,8 @@ ActiveAdmin.register Veteran do
     column :middle_name
     column :last_name
     #column :phone
-    column ("Date of Birth"){ |person| person.birth_date}
-    column :application_date
+    column("Date of Birth"){ |person| person.birth_date.to_s(:aa)}
+    column(:application_date) { |p| p.application_date.to_s(:aa)}
     bool_column :release_info
     bool_column "TLC", :tlc
     bool_column :applied_online
@@ -122,7 +122,7 @@ ActiveAdmin.register Veteran do
       row :work_phone
       row :email
       row :work_email
-      row("Date of Birth"){ |person| person.birth_date}
+      row("Date of Birth"){ |person| person.birth_date.to_s(:aa) }
       row :war
       row :shirt_size
       bool_row :release_info
