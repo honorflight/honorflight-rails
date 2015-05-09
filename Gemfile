@@ -56,6 +56,10 @@ gem 'wkhtmltopdf-heroku', group: :production
 gem 'rails_12factor', group: :production
 gem 'thin'
 
+# process runner
+gem 'sidekiq'
+gem 'sinatra', require: false
+
 gem 'virtus'
 
 gem 'redcarpet'

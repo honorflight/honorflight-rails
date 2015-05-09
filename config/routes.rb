@@ -87,4 +87,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root to: "admin/dashboard#index"
+
+  #Mount Sidekiq at '/jobs' if they are an admin user
+  require 'sidekiq/web'
+  authenticate :admin_user do
+    mount Sidekiq::Web, at: '/jobs'
+  end
 end
