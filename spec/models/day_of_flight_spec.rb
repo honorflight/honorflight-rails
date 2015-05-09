@@ -185,7 +185,7 @@ RSpec.describe DayOfFlight, type: :model do
         resp = @flight.build_response_from_sms(@guardian_sms_message)
         expect(resp[:numbers].count).to eql(3)
         expect(resp[:message].class).to eql(String)
-        expect(resp[:message]).to eql("(Guard) #{@guardian_first.text_name}:(#{@guardian_first.text_phone}), (Vet) #{@guardian_first.veteran.text_name}: #{@guardian_sms_message.body}")
+        expect(resp[:message]).to eql("(Guard) #{@guardian_first.text_name}:#{@guardian_first.cell_phone}, (Vet) #{@guardian_first.veteran.text_name}: #{@guardian_sms_message.body}")
       end
 
       it "volunteer should respond to flight guardians and volunteers"
