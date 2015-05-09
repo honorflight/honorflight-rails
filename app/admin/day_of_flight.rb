@@ -99,7 +99,7 @@ ActiveAdmin.register DayOfFlight do
         column :comments
         column :attachment do |attachment|
           unless attachment.nil?
-            link_to(attachment.attachment.file.try(:basename), attachment.attachment_url, target: "_blank")
+            link_to(attachment.attachment.file.try(:basename) || attachment.attachment.file.path.split("/").last, attachment.attachment_url, target: "_blank")
           end
         end
       end
