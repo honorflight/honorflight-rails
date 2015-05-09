@@ -31,7 +31,7 @@ class API::V1::MedicalConditionsController < SessionController
   end
 
   def medical_condition_params
-    params.require(:medical_condition).permit(:diagnosed_at, :last_occurence, :description, :medical_condition_type_id, :medical_condition_name_id)
+    params.require(:medical_condition).permit(:diagnosed_at, :last_occurrence, :comment, :medical_condition_type_id, :medical_condition_name_id)
       # :first_name, :last_name, :middle_name, :email, :phone, :birth_date, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
   end
   def set_medical_condition
