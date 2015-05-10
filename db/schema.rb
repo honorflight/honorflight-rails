@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 20150504235055) do
 
   create_table "medical_conditions", force: :cascade do |t|
     t.string   "encrypted_diagnosed_at"
-    t.string   "encryted_last_occurrence"
+    t.string   "encrypted_last_occurrence"
     t.text     "encrypted_comment"
     t.integer  "person_id"
     t.integer  "medical_condition_type_id"
