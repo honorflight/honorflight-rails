@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504235055) do
+ActiveRecord::Schema.define(version: 20150510141418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20150504235055) do
     t.datetime "updated_at",          null: false
     t.string   "group_number"
     t.integer  "tickets_purchased"
+    t.string   "notification_key"
   end
 
   add_index "day_of_flights", ["war_id"], name: "index_day_of_flights_on_war_id", using: :btree

@@ -81,6 +81,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'selenium-cucumber', require: false
   gem "launchy", "~> 2.1.2"
+  gem 'shoulda-callback-matchers', '~> 1.1.1'
 end
 
 group :development do

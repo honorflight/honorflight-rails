@@ -12,11 +12,31 @@ RSpec.describe DayOfFlight, type: :model do
 
   it { should accept_nested_attributes_for(:flight_attachments)}
 
+  it { is_expected.to callback(:schedule_notification).after(:save) }
 
   describe "#flies_on" do
+    require 'sidekiq/testing'
+    Sidekiq::Testing.fake!
+
+    before(:each) do
+      expect {
+        @f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
+      }.to change(DofNotificationWorker.jobs, :size).by(1)
+    end
+
     it "should print as date" do
+      expect(@f.to_s).to eql(Date.today.to_s(:aa))
+    end
+
+    it "should persist a notification_key" do
+      expect(@f.notification_key.nil?).to eql false
+    end
+  end
+
+  describe "#notify_at" do
+    it "should be 6PM night before" do
       f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
-      expect(f.to_s).to eql(Date.today.to_s(:long))
+      expect(f.notify_at).to eql(Date.today.at_midnight - 6.hours)
     end
   end
 

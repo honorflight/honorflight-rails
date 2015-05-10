@@ -49,7 +49,7 @@ RSpec.describe Person, type: :model do
     describe "auto-generated" do
       it "should use created_at" do
         p = FactoryGirl.create(:person)
-        expect(p.application_date).to eql(formatDate(p.created_at.to_date))
+        expect(p.application_date).to eql(p.created_at.to_date)
       end
     end
 

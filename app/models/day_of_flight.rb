@@ -16,6 +16,12 @@ class DayOfFlight < ActiveRecord::Base
   accepts_nested_attributes_for :day_of_flights_volunteers, allow_destroy: true
   accepts_nested_attributes_for :flight_attachments, allow_destroy: true
 
+  after_save :schedule_notification
+  def schedule_notification
+    if self.flies_on_changed?
+      update_column(:notification_key, DofNotificationWorker.perform_at(notify_at, id))
+    end
+  end
 
   # t.date     "flies_on"
   # t.integer  "war_id"
@@ -71,6 +77,20 @@ class DayOfFlight < ActiveRecord::Base
     volunteers_phones.concat(guardians_phones)
   end
 
+  def build_welcome_for_volunteer
+    response[:numbers] = volunteers_phones
+    response[:message] = "Welcome to Greater St. Louis Honor Flight. Replying to this message will send all Guardians and Volunteers the message. Please use for important broadcasts only."
+
+    send_sms(response)
+  end
+
+  def build_welcome_for_guardian
+    response[:numbers] = guardians_phones
+    response[:message] = "Welcome to Greater St. Louis Honor Flight.  Thank you for flying with our veterans. If for any reason you need to reach the flight volunteers, reply to this message. In the case of medical emergency, please dial 911."
+    
+    send_sms(response)
+  end
+
   def build_response_from_sms(sms_message)
     response = {}
     if sms_message.person.class == Volunteer
@@ -81,6 +101,10 @@ class DayOfFlight < ActiveRecord::Base
       response[:message] = "(Guard) #{sms_message.person.text_name}:#{sms_message.person.cell_phone}, (Vet) #{sms_message.person.veteran.text_name}: #{sms_message.body}"
     end
 
+    send_sms(response)
+  end
+
+  def send_sms(response)
     response[:numbers].each do |number|
       # SmsJob.new.async.send_sms(number: number, message: response[:message])
       SmsWorker.perform_async(number: number, message: response[:message])
@@ -88,33 +112,18 @@ class DayOfFlight < ActiveRecord::Base
     response
   end
 
+
   #TODO: Spec this, then refactor it... #jeesh
   def role_short_code(person_id)
     self.day_of_flights_volunteers.where(person_id: person_id).first.flight_responsibility.role.short_code
   end
 
-  # def build_response(number, message = nil)
-  #   if person = phone_on_flight(number)
-  #     # Build hash with list of numbers and a message to send mean words
-  #     if person.class == Volunteer
-  #       response = { numbers: volunteers_guardians_phones,
-  #         message: "(Vol) #{person.text_name}: #{message}"
-  #       }
-  #     elsif person.class == Guardian
-  #       response = { numbers: volunteers_phones, 
-  #         message: "(G) #{person.text_name}, (V) #{person.veteran.text_name}: #{message}" }
-  #     end
-  #   else
-  #     # Respond with not-availabe message
-  #     response = { numbers: [number], message: "This number is not available for texting right now. Please try later."}
-  #   end
-
-  #   # Return messages sscheduled count???
-  #   response
-  # end
-
   def is_notifiable?
     [Date.today, Date.yesterday, Date.tomorrow].include?(flies_on)
+  end
+
+  def notify_at
+    self.flies_on.at_midnight - 6.hours
   end
 
   class << self
