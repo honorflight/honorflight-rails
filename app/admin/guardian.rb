@@ -182,9 +182,9 @@ ActiveAdmin.register Guardian do
         f.input :person_status
       end
 
+      f.input :last_name
       f.input :first_name
       f.input :middle_name
-      f.input :last_name
       f.input :name_suffix
       f.semantic_fields_for :address do |a|
         a.input :id, as: :hidden
