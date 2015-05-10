@@ -2,7 +2,6 @@ class DofNotificationWorker
   include Sidekiq::Worker
 
   def perform(day_of_flight_id)
-    binding.pry
     flight = DayOfFlight.where({id: day_of_flight_id, notification_key: jid}).first
     if flight.present?
       # Set notifications for Guardians and Volunteers on flight

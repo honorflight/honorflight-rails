@@ -99,6 +99,9 @@ RSpec.describe DayOfFlight, type: :model do
   describe "#guardians"
 
   describe "#valid_number" do
+    require 'sidekiq/testing'
+    Sidekiq::Testing.fake!
+
     before(:each) do
       @veterans = FactoryGirl.create_list(:veteran, 10)
 
@@ -146,6 +149,12 @@ RSpec.describe DayOfFlight, type: :model do
 
       # binding.pry
 
+    end
+
+    it "should send welcome message" do
+      expect_any_instance_of(DayOfFlight).to receive(:build_welcome_for_volunteer)
+      expect_any_instance_of(DayOfFlight).to receive(:build_welcome_for_guardian)
+      DofNotificationWorker.drain
     end
 
     it "flight volunteer should be role short code Rob" do
