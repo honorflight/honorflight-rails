@@ -33,6 +33,20 @@ RSpec.describe DayOfFlight, type: :model do
     end
   end
 
+  describe '#next_months' do
+    it "should display all flights occurring within 3 months" do
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow)
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 3.months + 2.days)
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 1.months)
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 2.months)
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 3.months - 2.days)
+
+      expect(DayOfFlight.next_months(3).length).to eql(4)
+      expect(DayOfFlight.next_months(2).length).to eql(3)
+      expect(DayOfFlight.next_months.length).to eql(2)
+    end
+  end
+
   describe "#notify_at" do
     it "should be 6PM night before" do
       f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)

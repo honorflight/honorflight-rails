@@ -10,6 +10,10 @@ Given(/^I click "(.*?)"$/) do |arg1|
   click_link(arg1)
 end
 
+Given(/^I click first "(.*?)"$/) do |arg1|
+  click_link(arg1)
+end
+
 
 When(/^I have a user account "(.*?)" with password "(.*?)"$/) do |arg1, arg2|
   AdminUser.create(email: arg1, password: arg2, password_confirmation: arg2)

@@ -1,3 +1,5 @@
+//= require charts/base
+
 //hide add new button
 $(function(){
   $(document).on("click", "a.has_many_add", function(){
@@ -111,3 +113,4 @@ $(function(){
     });
   });
 });
+

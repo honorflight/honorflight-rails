@@ -132,5 +132,9 @@ class DayOfFlight < ActiveRecord::Base
     def current
       where(flies_on: [Date.today, Date.yesterday, Date.tomorrow]).first
     end
+
+    def next_months(months = 1)
+      where(flies_on: Date.today..(Date.today + months.months + 1.day))
+    end
   end
 end
