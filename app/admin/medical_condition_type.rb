@@ -40,9 +40,7 @@ ActiveAdmin.register MedicalConditionType do
       f.input :name
       f.input :description
     end
-    f.actions do
-      f.action :submit
-    end
+    f.actions
   end
 
 

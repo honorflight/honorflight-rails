@@ -42,9 +42,7 @@ ActiveAdmin.register MedicalConditionName do
       f.input :name
       f.input :description
     end
-    f.actions do
-      f.action :submit
-    end
+    f.actions
   end
 
 

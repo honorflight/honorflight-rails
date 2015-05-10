@@ -28,9 +28,7 @@ ActiveAdmin.register War do
       f.input :end_year, as: :select, collection: 1935...2000
     end
 
-    f.actions do
-      f.action :submit
-    end
+    f.actions
   end
 
 
