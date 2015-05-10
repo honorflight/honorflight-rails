@@ -78,6 +78,7 @@ class DayOfFlight < ActiveRecord::Base
   end
 
   def build_welcome_for_volunteer
+    response = {}
     response[:numbers] = volunteers_phones
     response[:message] = "Welcome to Greater St. Louis Honor Flight. Replying to this message will send all Guardians and Volunteers the message. Please use for important broadcasts only."
 
@@ -85,6 +86,7 @@ class DayOfFlight < ActiveRecord::Base
   end
 
   def build_welcome_for_guardian
+    response = {}
     response[:numbers] = guardians_phones
     response[:message] = "Welcome to Greater St. Louis Honor Flight.  Thank you for flying with our veterans. If for any reason you need to reach the flight volunteers, reply to this message. In the case of medical emergency, please dial 911."
     

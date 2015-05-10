@@ -27,7 +27,7 @@ class SmsController < ActionController::Base
       twiml = build_twiml_response
     end
 
-    render text: twiml.text
+    render text: twiml.text unless twiml.nil?
   end
 
   private
