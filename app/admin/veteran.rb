@@ -202,8 +202,8 @@ ActiveAdmin.register Veteran do
         column :comments
         column :attachment do |attachment|
           # binding.remote_pry
-          unless attachment.nil?
-            link_to(attachment.attachment.file.try(:basename) || attachment.attachment.file.path.split("/").last, attachment.attachment_url, target: "_blank")
+          unless attachment.attachment.file.blank?
+            link_to(attachment.attachment.file.try(:basename) || attachment.attachment.file.try(:path).try(:split, "/").try(:last), attachment.attachment_url, target: "_blank")
           end
         end
       end
