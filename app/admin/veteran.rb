@@ -177,7 +177,7 @@ ActiveAdmin.register Veteran do
       panel "Medical Conditions" do
         table_for veteran.medical_conditions do
           column("Condition Type") { |condition| condition.medical_condition_type.name }
-          column("Condition Name") { |condition| condition.medical_condition_name.name }
+          column("Condition Name") { |condition| condition.try(:medical_condition_name, :name) }
           column :last_occurrence
           column("Comments") { |condition| condition.comment }
         end
