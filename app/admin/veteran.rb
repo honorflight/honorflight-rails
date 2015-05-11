@@ -8,7 +8,7 @@ ActiveAdmin.register Veteran do
     :state, :zipcode],
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
     medical_allergies_attributes: [:id, :medical_allergy],
-    medical_conditions_attributes:[:id,
+    medical_conditions_attributes: [:id,
       :medical_condition_type_id, :medical_condition_name_id, 
       :last_occurrence, :comment, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
@@ -292,7 +292,7 @@ ActiveAdmin.register Veteran do
           medical_condition.input :id, as: :hidden
           medical_condition.input :medical_condition_type, label: "Condition Type", input_html: { class: "medical_condition_type_dd" }
           medical_condition.input :medical_condition_name, label: "Condition Name", input_html: { class: "medical_condition_name_dd" }
-          medical_condition.input :last_occurrence, label: "Last Occurrence"
+          medical_condition.input :last_occurrence, label: "Last Occurrence", as: :date_picker, :order => [:month, :day, :year]
           medical_condition.input :comment
         end
       end
