@@ -1,9 +1,9 @@
 # http://stackoverflow.com/questions/8950761/google-chart-redraw-scale-with-window-resize
 # Lodash is available at _
 
-#= require /Users/artemchernyak/dev/honorflight-rails/app/assets/javascripts/charts/loader.js
-#= require /Users/artemchernyak/dev/honorflight-rails/app/assets/javascripts/charts/flight.js
-#= require /Users/artemchernyak/dev/honorflight-rails/app/assets/javascripts/charts/system.js
+#= require charts/loader
+#= require charts/flight
+#= require charts/system
 
 
 google.load 'visualization', '1.0',  {
