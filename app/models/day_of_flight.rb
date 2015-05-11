@@ -19,7 +19,11 @@ class DayOfFlight < ActiveRecord::Base
   after_save :schedule_notification
   def schedule_notification
     if self.flies_on_changed?
-      update_column(:notification_key, DofNotificationWorker.perform_at(notify_at, id))
+      begin
+        update_column(:notification_key, DofNotificationWorker.perform_at(notify_at, id))
+      rescue 
+        logger.warn "Redis is not installed or not turned on.  Please install and configure Redis for flight notifications."
+      end
     end
   end
 
