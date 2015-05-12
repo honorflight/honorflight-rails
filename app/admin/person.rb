@@ -55,7 +55,17 @@ ActiveAdmin.register Person do
     selectable_column
     actions
     column :flight_date do |person| 
-      person.try(:day_of_flight, :to_s)
+      if person.type == "Veteran" 
+        person.try(:day_of_flight, :to_s)
+      elsif person.type == "Volunteer"
+        begin
+          person.day_of_flights.last 
+        rescue Exception=>e
+            "error"
+        end
+      elsif person.type == "Guardian"
+        person.veteran.try(:day_of_flight, :to_s) 
+      end 
     end
     column :person_status
     #column :email
