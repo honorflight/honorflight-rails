@@ -2,7 +2,7 @@
 # Lodash is available at _
 
 #= require charts/loader
-#= require charts/flight
+#= require charts/flights
 #= require charts/system
 
 
@@ -22,6 +22,6 @@ $(window).resize ->
   return
 
 $(window).on 'resizeEnd', ->
-  drawChart()
+  Flights.redrawChart()
   return
 
