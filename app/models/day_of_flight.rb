@@ -132,13 +132,21 @@ class DayOfFlight < ActiveRecord::Base
     self.flies_on.at_midnight - 6.hours
   end
 
+  def veterans_branches
+    self.veterans.map { |vet| vet.branches.map(&:name) }.flatten
+  end
+
   class << self
     def current
       where(flies_on: [Date.today, Date.yesterday, Date.tomorrow]).first
     end
 
     def next_months(months = 1)
-      where(flies_on: Date.today..(Date.today + months.months + 1.day))
+      where(flies_on: Date.yesterday..(Date.today + months.months + 1.day))
+    end
+
+    def next_flight
+      next_months(6).order(flies_on: :asc).first
     end
   end
 end

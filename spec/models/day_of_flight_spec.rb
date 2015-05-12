@@ -47,6 +47,14 @@ RSpec.describe DayOfFlight, type: :model do
     end
   end
 
+  describe '#next_flight' do
+    it "should display the closest flight in the future" do
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow)
+      FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 2.days)
+      expect(DayOfFlight.next_flight.id).to eql(f.id)
+    end
+  end
+
   describe "#notify_at" do
     it "should be 6PM night before" do
       f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)

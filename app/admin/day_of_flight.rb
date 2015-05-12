@@ -26,6 +26,14 @@ ActiveAdmin.register DayOfFlight do
         end
       end
     end
+
+    # def veterans_branches
+    #   respond_to do |format|
+    #     format.json do
+    #       render json: DayOfFlight.next_flight.veterans_branches
+    #     end
+    #   end
+    # end
   end
 
   # Too Custom?
@@ -39,6 +47,15 @@ ActiveAdmin.register DayOfFlight do
       end
     end
     # This will render app/views/admin/day_of_flights/flight.pdf.slim
+  end
+
+  collection_action :veterans_branches, method: :get do
+    respond_to do |format|
+      branches = DayOfFlight.next_flight.try(:veterans_branches)
+      format.json do
+        render json: branches.blank? ? [] : branches
+      end
+    end
   end
 
   index do
@@ -88,8 +105,14 @@ ActiveAdmin.register DayOfFlight do
 
     panel "Veterans" do
       table_for day_of_flight.veterans do
-        column(:full_name) { |o| link_to(o.full_name, admin_veteran_path(o))}
-        column(:guardian) { |o| link_to(o.guardian.full_name, admin_guardian_path(o.guardian))}
+        column(:full_name) { |o| link_to(o.try(:full_name), admin_veteran_path(o))}
+        column(:guardian) do |o| 
+          if o.guardian.present? 
+            link_to(o.try(:guardian).try(:full_name), admin_guardian_path(o.try(:guardian)))
+          else 
+            ""
+          end
+        end
       end
     end
 
