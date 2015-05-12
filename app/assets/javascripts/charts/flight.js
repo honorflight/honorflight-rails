@@ -3,11 +3,12 @@
 var Flights = (function(Loader) {
 
   var nearestFlight = function() {
-    var flights = Loader.load('/admin/day_of_flights.json',
+    var branches = Loader.load('/admin/day_of_flights/veterans_branches.json',
       function() {
-        return JSON.parse(this.response);
+        return _.groupBy(JSON.parse(this.response));
       });
 
+    return branches;
   };
 
   // var wars = function() {
@@ -41,4 +42,4 @@ var Flights = (function(Loader) {
 
 })(Loader);
 
-Flights.flightData();
+console.log(Flights.flightData());
