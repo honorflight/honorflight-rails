@@ -1,38 +1,39 @@
 'use strict';
 
-var Flights = (function(Loader) {
+var Flights = (function module(Loader) {
 
   var branches = null;
 
-  var drawChart = function() {
-    Loader.load('/admin/day_of_flights/veterans_branches.json',
-      function(chart) {
-        branches = _.map(_.groupBy(JSON.parse(this.response)), function(branch) {
-          return [branch[0], branch.length];
-        });
+  function drawChart() {
+    Loader.load('/admin/day_of_flights/veterans_branches.json', getBranches);
+  }
 
-        chart();
-      }, chart);
-  };
+  function getBranches() {
+    branches = _.map(_.groupBy(JSON.parse(this.response)), function(branch) {
+      return [branch[0], branch.length];
+    });
 
-  var chart = function() {
-    var chart1, data, options;
+    draw();
+  }
+
+  function draw() {
+    var chart, data, options;
     data = new google.visualization.DataTable();
     data.addColumn('string', 'Branch');
     data.addColumn('number', 'Veterans');
     data.addRows(branches);
     options = {
       'title': 'Veteran Branches on next Flight',
-      'width': document.querySelector('#chart_div').style.width
+      'width': document.querySelector('#chart_flight_branches').style.width
     };
-    chart1 = new google.visualization.PieChart(document.getElementById('chart_div'));
-    return chart1.draw(data, options);
-  };
+    chart = new google.visualization.PieChart(document.getElementById('chart_flight_branches'));
+    return chart.draw(data, options);
+  }
 
 
   return {
     drawChart: drawChart,
-    redrawChart: chart
+    redrawChart: draw
   };
 
 })(Loader);

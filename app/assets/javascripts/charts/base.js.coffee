@@ -11,6 +11,7 @@ google.load 'visualization', '1.0',  {
 }
 
 google.setOnLoadCallback Flights.drawChart
+google.setOnLoadCallback System.drawChart
 
 $(window).resize ->
   if this.resizeTO
@@ -23,5 +24,6 @@ $(window).resize ->
 
 $(window).on 'resizeEnd', ->
   Flights.redrawChart()
+  System.redrawChart()
   return
 

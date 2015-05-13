@@ -44,11 +44,13 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Upcoming Flight Statistics" do
-          div id: "chart_div"
+          div id: "chart_flight_branches"
         end
       end
       column do
-        panel "System Statistics" 
+        panel "System Statistics" do
+          div id: "chart_application_by_month"
+        end
         # Let's do Veterans, Guardian, Volunteer applications here in a combo chart
         # https://google-developers.appspot.com/chart/interactive/docs/gallery/combochart
       end
