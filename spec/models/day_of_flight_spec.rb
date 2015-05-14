@@ -25,7 +25,7 @@ RSpec.describe DayOfFlight, type: :model do
     end
 
     it "should print as date" do
-      expect(@f.to_s).to eql(Date.today.to_s(:aa))
+      expect(@f.to_s).to eql(Date.today.to_s(:aa_long))
     end
 
     it "should persist a notification_key" do
