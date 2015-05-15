@@ -5,16 +5,19 @@ var System = (function module(Loader) {
   var applications = null;
 
   function drawChart() {
-    Loader.load('/admin/people.json', getApplications);
+    Loader.load('/admin/people/applications.json', getApplications);
   }
 
   function getApplications() {
-    applications = _.groupBy(JSON.parse(this.response),
-      function(person) {
-        return [person.first_name];
-      });
+    applications = _.map(JSON.parse(this.response),
+      function parser(person, x) {
+        var guardianCount = _.sum(_.pluck(person, 'Guardian'));
+        var volunteerCount = _.sum(_.pluck(person, 'Volunteer'));
+        var veteranCount = _.sum(_.pluck(person, 'Veteran'));
+        var average = Math.round((guardianCount + volunteerCount + veteranCount) / 3);
 
-    console.log(applications);
+        return [x, veteranCount, guardianCount, volunteerCount, average];
+      });
 
     draw();
   }
@@ -26,11 +29,7 @@ var System = (function module(Loader) {
     data.addColumn('number', 'Volunteers');
     data.addColumn('number', 'Veterans');
     data.addColumn('number', 'Average');
-    data.addRows([
-      ['March', 10, 20, 30, 20],
-      ['April', 5, 10, 5, 7],
-      ['May', 20, 5, 10, 12]
-    ]);
+    data.addRows(applications);
 
     var options = {
       title: 'Applications By Month',

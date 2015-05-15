@@ -91,9 +91,9 @@ class Person < ActiveRecord::Base
       data.inject({}) do |result, elem|
         elem.flatten!
         m = elem[0].strftime("%B")
-        stats = [elem[1] => elem[2]]
+        stats = {elem[1] => elem[2]}
 
-        result[m] ? result[m].push(stats) : result[m] = stats
+        result[m] ? result[m].push(stats) : result[m] = [stats]
 
         result
       end
