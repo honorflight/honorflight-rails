@@ -80,6 +80,26 @@ class Person < ActiveRecord::Base
     "#{first_name[0].upcase}. #{last_name.capitalize}"
   end
 
+  class << self
+    def in_months(n = 2)
+      where(created_at: (Date.today.beginning_of_month - n.months)..DateTime.now).group("DATE_TRUNC('month', created_at)").group(:type).count
+    end
+
+    def applications_by_date
+      data = in_months
+
+      data.inject({}) do |result, elem|
+        elem.flatten!
+        m = elem[0].strftime("%B")
+        stats = [elem[1] => elem[2]]
+
+        result[m] ? result[m].push(stats) : result[m] = stats
+
+        result
+      end
+    end
+  end
+
   # def birth_date
 
   #   # formatDate(self.class.decrypt_birth_date(self[:encrypted_birth_date]))

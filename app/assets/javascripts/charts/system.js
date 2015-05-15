@@ -2,16 +2,19 @@
 
 var System = (function module(Loader) {
 
-  var branches = null;
+  var applications = null;
 
   function drawChart() {
-    Loader.load('/admin/day_of_flights/veterans_branches.json', getActivity);
+    Loader.load('/admin/people.json', getApplications);
   }
 
-  function getActivity() {
-    branches = _.map(_.groupBy(JSON.parse(this.response)), function(branch) {
-      return [branch[0], branch.length];
-    });
+  function getApplications() {
+    applications = _.groupBy(JSON.parse(this.response),
+      function(person) {
+        return [person.first_name];
+      });
+
+    console.log(applications);
 
     draw();
   }
@@ -48,7 +51,6 @@ var System = (function module(Loader) {
     var chart = new google.visualization.ComboChart(document.getElementById('chart_application_by_month'));
     return chart.draw(data, options);
   }
-
 
   return {
     drawChart: drawChart,

@@ -26,9 +26,16 @@ ActiveAdmin.register Person do
       super
     end
   end
-# :nocov:
 
-# :nocov:
+  collection_action :applications, method: :get do
+    respond_to do |format|
+      stats = Person.applications_by_date
+      format.json do
+        render json: stats.blank? ? {} : stats
+      end
+    end
+  end
+
   csv do
     column :id
     column :type

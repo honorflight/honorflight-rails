@@ -45,6 +45,37 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#applications_by_date" do
+    before(:each) do
+      Person.delete_all
+      FactoryGirl.create(:veteran,
+        created_at: Time.now)
+      FactoryGirl.create(:guardian,
+        created_at: 1.months.ago)
+      FactoryGirl.create(:volunteer,
+        created_at: 2.months.ago)
+      FactoryGirl.create(:volunteer,
+        created_at: 3.months.ago)
+    end
+
+    let (:people) { Person.applications_by_date }
+
+    it { expect(Person.count).to eql(4) }
+
+    it { expect(people.length).to eql(3) }
+
+
+    # it "should return people for the last three month" do
+    #   notDisplayed = FactoryGirl.create(:veteran,
+    #     application_date: 3.months.ago)
+
+    #   # people = Person.applications_by_date
+
+
+    #   expect(people.count).to eql(3)
+    # end
+  end
+
   describe "#application_date" do
     describe "auto-generated" do
       it "should use created_at" do
