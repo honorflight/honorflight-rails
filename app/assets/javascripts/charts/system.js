@@ -24,7 +24,7 @@ var System = (function module(Loader) {
 
   function draw() {
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Month');
+    data.addColumn('string', 'Months');
     data.addColumn('number', 'Guardians');
     data.addColumn('number', 'Volunteers');
     data.addColumn('number', 'Veterans');
@@ -38,7 +38,7 @@ var System = (function module(Loader) {
         title: 'Applications'
       },
       hAxis: {
-        title: 'Month'
+        title: 'Months'
       },
       seriesType: 'bars',
       series: {
