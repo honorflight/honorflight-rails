@@ -23,7 +23,9 @@ RSpec.describe API::V1::PeopleController, type: :controller do
     # Create POST /api/v1/people
     it 'creates a veteran' do
       name_suffix = FactoryGirl.create(:name_suffix)
-      post :create, person: FactoryGirl.attributes_for(:person, type: nil, name_suffix_id: name_suffix.id)
+      attrs = FactoryGirl.attributes_for(:person, name_suffix_id: name_suffix.id)
+      attrs.delete(:type)
+      post :create, person: attrs
 
       expect(response).to be_success
       json = JSON.parse(response.body)

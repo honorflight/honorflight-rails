@@ -4,19 +4,14 @@ module API
       # POST /people
       # POST /people.json
       def create
-        @person = Person.new(person_params)
+        type = person_params.delete(:type) || "veteran"
+        type.capitalize!
 
-        if person_params[:type].blank? 
-          @person.type = "Veteran"
-        end 
-        
-        @person.type.capitalize!
+        @person = type.constantize.new(person_params)
 
-
-        if @person.type == "Veteran"
+        if type == "Veteran"
           @person.veteran = true
         end
-
 
         @person.applied_online = true
         if @person.save
@@ -40,7 +35,7 @@ module API
 
       private
       def person_params
-        params.require(:person).permit(:first_name, :last_name, :name_suffix_id, :middle_name, :email, :phone, :birth_date, :release_info, :war_id, :shirt_size_id, :type, address_attributes: [:street1, :city, :state, :zipcode])
+        params.require(:person).permit(:first_name, :last_name, :name_suffix_id, :middle_name, :email, :phone, :birth_date, :release_info, :war_id, :shirt_size_id, :type, :special_request, address_attributes: [:street1, :city, :state, :zipcode])
       end
     end
   end
