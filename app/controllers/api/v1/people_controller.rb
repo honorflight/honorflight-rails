@@ -24,7 +24,10 @@ module API
       # # PATCH/PUT /people/1
       # # PATCH/PUT /people/1.json
       def update
-        @person = Person.find(params[:id])
+        type = person_params.delete(:type) || "veteran"
+        type.capitalize!
+
+        @person = type.constantize.find(params[:id])
         if @person.update_attributes(person_params)
           render :json => @person
         else
