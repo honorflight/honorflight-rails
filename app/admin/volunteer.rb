@@ -113,9 +113,9 @@ ActiveAdmin.register Volunteer do
       #row :war
       row :shirt_size
       #bool_row :release_info
-      row "How did you learn about us?",:learned_about 
-      row "Why did you decide you want to volunteer for us?", :why_volunteer
-      row "Please list any previous volunteer experience:", :previous_experience
+      row ("How did you learn about us?"){ |person| person.learned_about }
+      row ("Why did you decide you want to volunteer for us?") { |person| person.why_volunteer }
+      row ("Please list any previous volunteer experience:") { |person| person.previous_experience }
       row :application_date
       row :updated_at
     end
