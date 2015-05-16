@@ -2,7 +2,7 @@ ActiveAdmin.register Guardian do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
-    :cell_phone, :work_phone, :work_email,
+    :special_request, :cell_phone, :work_phone, :work_email,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -108,6 +108,7 @@ ActiveAdmin.register Guardian do
       row("Date of Birth"){ |person| person.birth_date }
       row :war
       row :shirt_size
+      row :special_request
       bool_row :release_info
       row :application_date
       row :updated_at
@@ -205,6 +206,7 @@ ActiveAdmin.register Guardian do
       f.input :war
       f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
       f.input :shirt_size
+      f.input :special_request
       f.input :release_info
     end
 

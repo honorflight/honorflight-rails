@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516165510) do
+ActiveRecord::Schema.define(version: 20150516181512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -438,6 +438,16 @@ ActiveRecord::Schema.define(version: 20150516165510) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  create_table "travel_companions", force: :cascade do |t|
+    t.integer  "travel_companion_id"
+    t.integer  "veteran_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "travel_companions", ["travel_companion_id"], name: "index_travel_companions_on_travel_companion_id", using: :btree
+  add_index "travel_companions", ["veteran_id"], name: "index_travel_companions_on_veteran_id", using: :btree
 
   create_table "volunteers_roles", force: :cascade do |t|
     t.integer  "person_id"

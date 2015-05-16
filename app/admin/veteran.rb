@@ -4,8 +4,8 @@ ActiveAdmin.register Veteran do
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email, :special_request,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
-    address_attributes: [:id, :street1, :street2, :city,
-    :state, :zipcode],
+    address_attributes: [:id, :street1, :street2, :city, :state, :zipcode],
+    travel_companions_attributes: [:id, :travel_companion_id, :_destroy],
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
     medical_allergies_attributes: [:id, :medical_allergy],
     medical_conditions_attributes: [:id,
@@ -126,11 +126,17 @@ ActiveAdmin.register Veteran do
       row :war
       row :shirt_size
       row :special_request
+      # panel "Travel Companion" do
+      #   table_for veteran.travel_companions do
+      #     column("Travel Companion") { |travel_companion| travel_companions.try(:travel_companion).try(:veteran) }
+      #   end
+      # end
       bool_row :release_info
       bool_row "TLC", :tlc
       row :application_date
       row ("Update At") { |person| person.updated_at }
     end
+
 
     panel "Service History" do
       table_for veteran.service_histories do
@@ -195,6 +201,14 @@ ActiveAdmin.register Veteran do
       #     end
       #   end
       # end
+    end
+
+    panel "Travel Companion" do
+      table_for veteran.travel_companions do
+        column("Travel Companion") { |travel_companion| 
+          Veteran.find(travel_companion.travel_companion_id).full_name
+        }
+      end
     end
 
     panel "Attachments" do
@@ -303,6 +317,12 @@ ActiveAdmin.register Veteran do
           medical_allergy.input :id, as: :hidden
           medical_allergy.input :medical_allergy
         end
+      end
+    end
+    panel 'Travel Companion' do
+        f.has_many :travel_companions, heading: false, allow_destroy: true do |travel_companion|
+          travel_companion.input :id, as: :hidden
+          travel_companion.input :travel_companion_id, label: 'Travel Companion', as: :select, collection: Veteran.all.map{|v| ["#{v.last_name}, #{v.first_name}", v.id]}
       end
     end
     # panel 'Medications' do
