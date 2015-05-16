@@ -205,9 +205,13 @@ ActiveAdmin.register Veteran do
 
     panel "Travel Companion" do
       table_for veteran.travel_companions do
-        column("Travel Companion") { |travel_companion| 
-          Veteran.find(travel_companion.travel_companion_id).full_name
-        }
+        column("Travel Companion") do |travel_companion| 
+          if travel_companion.travel_companion_id.present?
+            Veteran.find(travel_companion.travel_companion_id).full_name
+          else
+            nil
+          end
+        end
       end
     end
 
