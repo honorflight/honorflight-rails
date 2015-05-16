@@ -25,9 +25,9 @@ var System = (function module(Loader) {
   function draw() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Months');
+    data.addColumn('number', 'Veterans');
     data.addColumn('number', 'Guardians');
     data.addColumn('number', 'Volunteers');
-    data.addColumn('number', 'Veterans');
     data.addColumn('number', 'Average');
     data.addRows(applications);
 
