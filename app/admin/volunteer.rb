@@ -2,7 +2,7 @@ ActiveAdmin.register Volunteer do
   actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
-    :cell_phone, :work_phone, :work_email,
+    :cell_phone, :work_phone, :work_email, :learned_about, :why_volunteer, :previous_experience,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
@@ -113,6 +113,9 @@ ActiveAdmin.register Volunteer do
       #row :war
       row :shirt_size
       #bool_row :release_info
+      row "How did you learn about us?",:learned_about 
+      row "Why did you decide you want to volunteer for us?", :why_volunteer
+      row "Please list any previous volunteer experience:", :previous_experience
       row :application_date
       row :updated_at
     end
@@ -169,7 +172,6 @@ end
         column :role
       end
     end
-
     panel "Attachments" do
       table_for volunteer.people_attachments do 
         column :name
@@ -211,13 +213,13 @@ end
         a.input :zipcode
       end
       f.input :phone
-    f.input :cell_phone
-    f.input :work_phone
-    f.input :email
-    f.input :work_email
-    f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
-    f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
-    f.input :shirt_size
+      f.input :cell_phone
+      f.input :work_phone
+      f.input :email
+      f.input :work_email
+      f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
+      f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
+      f.input :shirt_size
     end
 
 
@@ -257,6 +259,12 @@ end
       f.has_many :volunteers_roles, heading: false, allow_destroy: true  do |roles|
         roles.inputs :role
       end
+    end
+
+    f.inputs do
+      f.input :learned_about, label: " How did you learn about us?"
+      f.input :why_volunteer, label: "Why did you decide you want to volunteer for us?"
+      f.input :previous_experience, label: "Please list any previous volunteer experience:"
     end
 
     panel "Attachments" do

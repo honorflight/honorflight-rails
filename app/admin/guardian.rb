@@ -4,6 +4,7 @@ ActiveAdmin.register Guardian do
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :special_request, :cell_phone, :work_phone, :work_email,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
+    :learned_about, :why_volunteer, :previous_experience,
     address_attributes: [:id, :street1, :street2, :city,
     :state, :zipcode],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
@@ -110,6 +111,9 @@ ActiveAdmin.register Guardian do
       row :shirt_size
       row :special_request
       bool_row :release_info
+      row "How did you learn about us?",:learned_about 
+      row "Why did you decide you want to volunteer for us?", :why_volunteer
+      row "Please list any previous volunteer experience:", :previous_experience
       row :application_date
       row :updated_at
     end
@@ -155,7 +159,6 @@ ActiveAdmin.register Guardian do
         column :address
       end
     end
-
     panel "Attachments" do
       table_for guardian.people_attachments do 
         column :name
@@ -224,8 +227,6 @@ ActiveAdmin.register Guardian do
         end
       end
     end
-
-
     panel "Contacts" do
       f.has_many :contacts, heading: false do |contact|
         if contact.object.address.nil?
@@ -238,6 +239,11 @@ ActiveAdmin.register Guardian do
           a.inputs :street1, :street2, :city, :state, :zipcode
         end
       end
+    end
+    f.inputs do
+      f.input :learned_about, label: "How did you learn about us?"
+      f.input :why_volunteer, label: "Why did you decide you want to volunteer for us?"
+      f.input :previous_experience, label: "Please list any previous volunteer experience:"
     end
     panel "Attachments" do
       f.has_many :people_attachments,  heading: false, allow_destroy: true do |attachment|

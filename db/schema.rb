@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516181512) do
+ActiveRecord::Schema.define(version: 20150516211823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,6 +290,9 @@ ActiveRecord::Schema.define(version: 20150516181512) do
     t.string   "encrypted_work_email"
     t.integer  "name_suffix_id"
     t.text     "special_request"
+    t.text     "learned_about"
+    t.text     "why_volunteer"
+    t.text     "previous_experience"
   end
 
   add_index "people", ["day_of_flight_id"], name: "index_people_on_day_of_flight_id", using: :btree
