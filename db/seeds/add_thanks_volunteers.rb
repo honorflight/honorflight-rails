@@ -1,0 +1,1 @@
+SimplePage.create!({key: "thanks_volunteers", title: "Thanks for Applying", markdown: "Thank You Volunteer Message"})
