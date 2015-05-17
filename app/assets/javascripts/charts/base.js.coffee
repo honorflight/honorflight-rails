@@ -19,17 +19,17 @@ $(window).resize ->
   , 50
   return
 
-$(window).on 'resizeEnd', ->
-  Flights.redrawChart()
-  System.redrawChart()
-  return
 
-
+# Only load these when something is requesting one of them
 $ ->
   if $('#chart_flight_branches').length >= 1
     google.setOnLoadCallback Flights.drawChart
+    $(window).on 'resizeEnd', ->
+      Flights.redrawChart()
   
   if $('#chart_application_by_month').length >=1
     google.setOnLoadCallback System.drawChart
+    $(window).on 'resizeEnd', ->
+      System.redrawChart()
 
 
