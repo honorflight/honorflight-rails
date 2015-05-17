@@ -10,9 +10,6 @@ google.load 'visualization', '1.0',  {
   'packages': ['corechart']
 }
 
-google.setOnLoadCallback Flights.drawChart
-google.setOnLoadCallback System.drawChart
-
 $(window).resize ->
   if this.resizeTO
     clearTimeout(this.resizeTO)
@@ -26,4 +23,13 @@ $(window).on 'resizeEnd', ->
   Flights.redrawChart()
   System.redrawChart()
   return
+
+
+$ ->
+  if $('#chart_flight_branches').length >= 1
+    google.setOnLoadCallback Flights.drawChart
+  
+  if $('#chart_application_by_month').length >=1
+    google.setOnLoadCallback System.drawChart
+
 

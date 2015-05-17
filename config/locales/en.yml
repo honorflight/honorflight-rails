@@ -19,14 +19,14 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  date:
-    formats:
-      long: "%m/%d/%Y"
-      aa: "%m/%d/%Y"
-    time:
-      formats:
-        long: "%m/%d/%Y %H:%M:%S"
+# en:
+#   date:
+#     formats:
+#       long: "%m/%d/%Y"
+#       aa: "%m/%d/%Y"
+#     time:
+#       formats:
+#         long: "%m/%d/%Y %H:%M:%S"
 
 en:
   test: "Hello"

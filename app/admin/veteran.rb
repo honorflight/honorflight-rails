@@ -98,8 +98,8 @@ ActiveAdmin.register Veteran do
     column :middle_name
     column :last_name
     #column :phone
-    column("Date of Birth"){ |person| person.birth_date.to_s(:aa)}
-    column(:application_date) { |p| p.application_date.to_s(:aa)}
+    column "Date of Birth", :birth_date
+    column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
     bool_column :applied_online
@@ -265,9 +265,9 @@ ActiveAdmin.register Veteran do
       f.input :work_phone
       f.input :email
       f.input :work_email
-      f.input :birth_date,label: "Date of Birth", as: :datepicker, datepicker_options: { dateFormat: "mm/dd/yy" }
+      f.input :birth_date,label: "Date of Birth", as: :datepicker, datepicker_options: { date_format: "mm/dd/yy" }
       f.input :war
-      f.input :application_date,label: "Application date", as: :datepicker, datepicker_options: { dateFormat: "mm/dd/yy" }
+      f.input :application_date,label: "Application date", as: :datepicker, datepicker_options: { date_format: "mm/dd/yy" }
       #f.input :application_date
       f.input :shirt_size
       f.input :special_request
