@@ -7,6 +7,7 @@ module API
         type = person_params.delete(:type) || "veteran"
         type.capitalize!
 
+                  # "Veteran".constantize => Veteran.new(...)
         @person = type.constantize.new(person_params)
 
         if type == "Veteran"
