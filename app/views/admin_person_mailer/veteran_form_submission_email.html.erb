@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>A new veteran form has been submitted.</h1>
+    <h1>A new <%= @person.class.to_s %> form has been submitted.</h1>
     <p>
-      There is a new veteran application.  Please view this reecord at <a href="<%= @url %>"><%="#{@person.first_name} #{@person.last_name}"%></a>.<br>
+      There is a new <%= @person.class.to_s.downcase %> application.  Please view this record at <a href="<%= @url %>"><%="#{@person.first_name} #{@person.last_name}"%></a>.<br>
     </p>
   </body>
 </html>
