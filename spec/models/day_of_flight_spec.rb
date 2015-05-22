@@ -72,6 +72,23 @@ RSpec.describe DayOfFlight, type: :model do
       FactoryGirl.create(:day_of_flight)
       expect(DayOfFlight.current).to equal(nil)
     end
+
+    it "should return any flght in a full three day period" do
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow)
+      expect(DayOfFlight.current).to eql(f)
+    end
+
+    it "should return any flght in a full three day period" do
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.yesterday)
+      expect(DayOfFlight.current).to eql(f)
+    end
+
+    # Timezzone offsets
+    it "should work if today returns tomorrow" do
+      f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
+      Date.stub(:today).and_return(Date.tomorrow)
+      expect(DayOfFlight.current).to eql(f)
+    end
   end
 
   describe "#is_notifiable?" do
