@@ -59,6 +59,8 @@ $(function() {
   };
 
   var narrowList = function(data, select) {
+    console.log("Data: " + JSON.stringify(data));
+    console.log("Data: " + JSON.stringify(select));
     $names = $(select);
     var found = false;
 
