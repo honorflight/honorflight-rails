@@ -6,7 +6,7 @@ var System = (function module(Loader) {
 
   function drawChart() {
     Loader.load('/admin/people/applications.json', getApplications);
-  }
+  };
 
   function getApplications() {
     applications = _.map(JSON.parse(this.response),
@@ -20,7 +20,7 @@ var System = (function module(Loader) {
       });
 
     draw();
-  }
+  };
 
   function draw() {
     var data = new google.visualization.DataTable();
@@ -49,7 +49,7 @@ var System = (function module(Loader) {
     };
     var chart = new google.visualization.ComboChart(document.getElementById('chart_application_by_month'));
     return chart.draw(data, options);
-  }
+  };
 
   return {
     drawChart: drawChart,

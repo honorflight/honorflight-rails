@@ -6,7 +6,7 @@ var Flights = (function module(Loader) {
 
   function drawChart() {
     Loader.load('/admin/day_of_flights/veterans_branches.json', getBranches);
-  }
+  };
 
   function getBranches() {
     branches = _.map(_.groupBy(JSON.parse(this.response)), function(branch) {
@@ -14,7 +14,7 @@ var Flights = (function module(Loader) {
     });
 
     draw();
-  }
+  };
 
   function draw() {
     var chart, data, options;
@@ -28,7 +28,7 @@ var Flights = (function module(Loader) {
     };
     chart = new google.visualization.PieChart(document.getElementById('chart_flight_branches'));
     return chart.draw(data, options);
-  }
+  };
 
 
   return {

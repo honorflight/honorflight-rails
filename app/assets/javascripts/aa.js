@@ -30,7 +30,7 @@ $(function() {
     $.get("/admin/medical_condition_names.json?utf8=%E2%9C%93&q%5Bmedical_condition_type_id_eq%5D=" + $select.val() + "&commit=Filter&order=id_desc", "", function(data) {
       narrowList(data, $nameSelect);
     }, "json");
-  }
+  };
 
 
   var filterBranchRank = function(selector) {
@@ -69,10 +69,10 @@ $(function() {
       if (parseInt($names.val()) === name.id) {
         found = true;
       }
-    }
+    };
     if (!found) {
       $names.val("");
-    }
+    };
     $names.children("option").attr("style", "display:none");
     $names.children("option").each(function() {
       // data and look through it for it's there, remove style
@@ -80,8 +80,8 @@ $(function() {
         if (parseInt($(this).val()) == data[i].id) {
           $(this).removeAttr("style")
         }
-      }
-    })
+      };
+    });
     $names.prop('disabled', false);
   };
 
@@ -102,7 +102,7 @@ $(function() {
               if (parseInt($(this).val()) == data[i].id) {
                 $(this).removeAttr("style");
               }
-            }
+            };
           });
         }, "json");
         $volunteerSelect.prop('disabled', false);
@@ -115,7 +115,6 @@ $(function() {
         var roleId = data.role_id;
         narrowVolunteersOnRole(roleId, $volunteerSelect);
       }, "json");
-
     });
   });
 });
