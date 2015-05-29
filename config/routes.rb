@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :medical_conditions, shallow: true, only: [:index, :create, :destroy]
       end
 
+      get 'day_of_flight/people', to: 'day_of_flight#people'
       get 'simple_pages/:key', to: 'simple_pages#show', defaults: { format: 'json' }
     end
   end
