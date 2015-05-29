@@ -12,11 +12,14 @@ RSpec.describe API::V1::DayOfFlightController, type: :controller do
       @veteran = FactoryGirl.create(:veteran, day_of_flight_id: @flight.id)
       @veteran.guardian = @guardian
       @veteran.save
-      FactoryGirl.create(:volunteer, day_of_flight_id: @flight.id)
+      @volunteer = FactoryGirl.create(:volunteer)
+
+      # Mock the volunteer
     end
 
     # GET /api/v1/day_of_flight/people
     it 'returns the people on a flight' do
+      allow_any_instance_of(DayOfFlight).to receive(:volunteers).and_return([@volunteer])
       get :people
 
       expect(response).to be_success
@@ -24,8 +27,8 @@ RSpec.describe API::V1::DayOfFlightController, type: :controller do
 
       expect(json["id"]).to be_a(Integer)
       expect(json["id"]).to eql(@flight.id)
-      expect(json["guardians"].count).to eql(1)
       expect(json["veterans"].count).to eql(1)
+      expect(json["veterans"][0]["guardian"]).not_to be(nil)
       expect(json["volunteers"].count).to eql(1)
 
       # expect(json["veterans"]).to be([])
