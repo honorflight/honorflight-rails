@@ -61,7 +61,7 @@ $(function() {
   var narrowList = function(data, select) {
     console.log("Data: " + typeof(data));
     console.log("Data: " + select);
-    $names = $(select);
+    var $names = $(select);
     var found = false;
 
     for (var i = 0; i < data.length; i++) {
@@ -93,7 +93,7 @@ $(function() {
       var narrowVolunteersOnRole = function(roleId, volunteerSelect) {
         // get volunteers by their role
         $.get("/admin/volunteers.json?utf8=✓&q%5Bvolunteers_roles_role_id_eq%5D=" + roleId + "&commit=Filter&order=id_desc", "", function(data) {
-          $names = $(volunteerSelect);
+          var $names = $(volunteerSelect);
           $names.val("");
           $names.children("option").attr("style", "display:none");
           $names.children("option").each(function() {
