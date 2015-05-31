@@ -1,11 +1,11 @@
 'use strict';
 
-var Flights = (function module(Loader) {
+var Flights = function module(loader) {
 
   var branches = null;
 
   function drawChart() {
-    Loader.load('/admin/day_of_flights/veterans_branches.json', getBranches);
+    loader.load('/admin/day_of_flights/veterans_branches.json', getBranches);
   };
 
   function getBranches() {
@@ -36,4 +36,6 @@ var Flights = (function module(Loader) {
     redrawChart: draw
   };
 
-})(Loader);
+};
+
+var flights = new Flights(loader);

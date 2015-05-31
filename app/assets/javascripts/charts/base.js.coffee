@@ -22,9 +22,9 @@ $(window).resize ->
 # Only load these when something is requesting one of them
 $ ->
   if $('#chart_flight_branches').length >= 1
-    google.setOnLoadCallback Flights.drawChart
+    google.setOnLoadCallback flights.drawChart
     $(window).on 'resizeEnd', ->
-      Flights.redrawChart()
+      flights.redrawChart()
   
   if $('#chart_application_by_month').length >=1
     google.setOnLoadCallback system.drawChart
