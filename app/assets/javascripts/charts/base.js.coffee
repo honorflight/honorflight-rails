@@ -3,6 +3,7 @@
 
 #= require charts/loader
 #= require charts/system
+#= require charts/flights
 
 
 google.load 'visualization', '1.0',  {
