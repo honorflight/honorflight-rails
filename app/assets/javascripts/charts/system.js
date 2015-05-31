@@ -1,11 +1,11 @@
 'use strict';
 
-var System = (function module(Loader) {
+var System = function module(loader) {
 
   var applications = null;
 
   function drawChart() {
-    Loader.load('/admin/people/applications.json', getApplications);
+    loader.load('/admin/people/applications.json', getApplications);
   };
 
   function getApplications() {
@@ -56,4 +56,6 @@ var System = (function module(Loader) {
     redrawChart: draw
   };
 
-})(Loader);
+};
+
+var system = new System(loader);

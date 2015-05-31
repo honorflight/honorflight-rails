@@ -2,7 +2,7 @@
 # Lodash is available at _
 
 #= require charts/loader
-
+#= require charts/system
 
 
 google.load 'visualization', '1.0',  {
@@ -27,8 +27,8 @@ $ ->
       Flights.redrawChart()
   
   if $('#chart_application_by_month').length >=1
-    google.setOnLoadCallback System.drawChart
+    google.setOnLoadCallback system.drawChart
     $(window).on 'resizeEnd', ->
-      System.redrawChart()
+      system.redrawChart()
 
 

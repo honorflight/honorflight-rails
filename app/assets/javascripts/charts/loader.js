@@ -1,6 +1,6 @@
 'use strict';
 
-var Loader = (function() {
+var Loader = function() {
 
   var _xhrSuccess = function() {
     this.callback.apply(this, this.arguments);
@@ -24,4 +24,6 @@ var Loader = (function() {
     load: loadFile
   };
 
-})();
+};
+
+var loader = new Loader();
