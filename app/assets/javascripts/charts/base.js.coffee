@@ -1,6 +1,8 @@
 # http://stackoverflow.com/questions/8950761/google-chart-redraw-scale-with-window-resize
 # Lodash is available at _
 
+#= require charts/loader
+
 
 
 google.load 'visualization', '1.0',  {
