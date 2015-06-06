@@ -15,10 +15,13 @@ Feature: Create veteran
     And I fill in "Work email" with "test2@example.com"
     And I fill in "Cell phone" with "3147038888"
     And I fill in "Work phone" with "3147038888"
+    And I fill in "Application date" with "05/15/2015"
     And I click button "Create Veteran"
     Then I should see "Veteran was successfully created."
     And I should see "Jeff"
     And I should see "Ancel"
+    And I should see "3/20/1922"    
+    And I should see "May 15, 2015"
 
   Scenario: Entering incomplete or missing veteran's information
     Given I am logged in

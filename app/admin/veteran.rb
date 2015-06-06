@@ -265,9 +265,9 @@ ActiveAdmin.register Veteran do
       f.input :work_phone
       f.input :email
       f.input :work_email
-      f.input :birth_date,label: "Date of Birth", as: :datepicker, datepicker_options: { date_format: "mm/dd/yy" }
+      f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
       f.input :war
-      f.input :application_date,label: "Application date", as: :datepicker, datepicker_options: { date_format: "mm/dd/yy" }
+      f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
       #f.input :application_date
       f.input :shirt_size
       f.input :special_request
@@ -312,7 +312,7 @@ ActiveAdmin.register Veteran do
           medical_condition.input :id, as: :hidden
           medical_condition.input :medical_condition_type, label: "Condition Type", input_html: { class: "medical_condition_type_dd" }
           medical_condition.input :medical_condition_name, label: "Condition Name", input_html: { class: "medical_condition_name_dd" }
-          medical_condition.input :last_occurrence, label: "Last Occurrence", as: :datepicker, datepicker_options: { dateFormat: "mm/dd/yy" }
+          medical_condition.input :last_occurrence, label: "Last Occurrence", as: :date_picker, :order => [:month, :day, :year]
           medical_condition.input :comment
         end
       end
