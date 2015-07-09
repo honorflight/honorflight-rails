@@ -8,6 +8,7 @@ module ApplicationHelper
 	end
 
 	def wash_phone(p)
+    return nil if p.blank?
     p.gsub!(/\s?x.*$/, "")
     p.gsub!(/[^0-9]*/, "")
     p.gsub!(/^1/, "") if p.length == 11

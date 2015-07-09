@@ -7,4 +7,5 @@ class Volunteer < Person
 
   accepts_nested_attributes_for :volunteers_roles, allow_destroy: true
 
+  validates :cell_phone, presence: true
 end

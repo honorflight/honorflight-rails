@@ -59,6 +59,7 @@ gem 'thin'
 
 # process runner
 gem 'sidekiq'
+gem 'sidekiq-failures'
 gem 'sinatra', require: false
 
 gem 'virtus'

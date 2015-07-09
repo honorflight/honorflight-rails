@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Guardian, type: :model do
   it { should validate_presence_of(:first_name)}
+  it { should validate_presence_of(:cell_phone)}
 
   describe "text_phone number" do
     it "should have a text cleansed number" do

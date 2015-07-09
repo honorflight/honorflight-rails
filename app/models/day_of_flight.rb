@@ -70,11 +70,11 @@ class DayOfFlight < ActiveRecord::Base
   end
 
   def volunteers_phones
-    volunteers.map(&:text_phone)
+    volunteers.map(&:text_phone).compact
   end
 
   def guardians_phones
-    guardians.map(&:text_phone)
+    guardians.map(&:text_phone).compact
   end
 
   def volunteers_guardians_phones

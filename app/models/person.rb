@@ -63,6 +63,7 @@ class Person < ActiveRecord::Base
   end
 
   def text_phone
+    return nil if cell_phone.blank?
     "+1" + cell_phone.gsub(/[^0-9]*/, "")
   end
 

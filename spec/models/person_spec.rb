@@ -45,6 +45,13 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#text_phone" do
+    subject(:person) { FactoryGirl.create(:person, cell_phone: nil) }
+    it "returns nil if no cell phone" do
+      expect(person.text_phone).to be_nil
+    end
+  end
+
   describe "#applications_by_date" do
     before(:each) do
       Person.delete_all
