@@ -48,7 +48,7 @@ class DayOfFlight < ActiveRecord::Base
   end
 
   def guardians
-    veterans.map(&:guardian)
+    veterans.map(&:guardian).compact
     # veterans.map() { |v| v.guardian_id }
   end
 
@@ -74,7 +74,7 @@ class DayOfFlight < ActiveRecord::Base
   end
 
   def guardians_phones
-    guardians.map(&:text_phone).compact
+    guardians.compact.map(&:text_phone).compact
   end
 
   def volunteers_guardians_phones
