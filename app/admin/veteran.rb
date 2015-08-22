@@ -245,7 +245,7 @@ ActiveAdmin.register Veteran do
     f.inputs name: "General" do
       if !f.object.new_record?
         f.input :day_of_flight
-        f.input :guardian
+        f.input :guardian, as: :select, collection: Guardian.order(:first_name).collect { |g| [g.full_name, g.id] }
         f.input :person_status
       end
       f.input :last_name
@@ -285,7 +285,8 @@ ActiveAdmin.register Veteran do
         service_history.inputs :activity, :story
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden
-          a.inputs :award, :quantity, :comment
+          a.input :award, as: :select, collection: Award.order(:name).collect { |a| [a.name, a.id] }
+          a.inputs :quantity, :comment
         end
       end
     end
