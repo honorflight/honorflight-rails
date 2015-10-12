@@ -2,6 +2,7 @@ class SmsController < ActionController::Base
   def receiver
     # Make it more ruby like
     sms_hash = Hash[params.map{ |k, v| [k.underscore.to_sym, v] }]
+    sms_hash = sms_hash.slice(*SmsMessage.column_names)
 
     # If DayOfFlight is notifiable and the person sending message is on flight
     # then go ahead and send stuff out
@@ -13,7 +14,8 @@ class SmsController < ActionController::Base
         # flight = DayOfFlight.current;sms_message = SmsMessage.last; flight.build_response_from_sms(sms_message)
         #
         # Persist the incoming message, 
-        if sms_message = flight.sms_messages.create!(sms_hash.slice(*SmsMessage.column_names))
+        # if sms_message = flight.sms_messages.create!(sms_hash.slice(*SmsMessage.column_names))
+        if sms_message = flight.sms_messages.create(sms_hash)
           flight.build_response_from_sms(sms_message)
           twiml = build_twiml_response "Message was received and processed. Thank you!" if person.class == Guardian
         else
