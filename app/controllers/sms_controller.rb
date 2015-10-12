@@ -3,7 +3,7 @@ class SmsController < ActionController::Base
     # Make it more ruby like
     sms_hash = Hash[params.map{ |k, v| [k.underscore.to_sym, v] }]
     sms_hash = sms_hash.slice(*SmsMessage.column_names)
-
+    puts sms_hash
     # If DayOfFlight is notifiable and the person sending message is on flight
     # then go ahead and send stuff out
     # Else build a invalid responder
