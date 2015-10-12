@@ -2,8 +2,8 @@ class SmsController < ActionController::Base
   def receiver
     # Make it more ruby like
     sms_hash = Hash[params.map{ |k, v| [k.underscore.to_sym, v] }]
-    sms_hash = sms_hash.slice(*SmsMessage.column_names)
-    puts sms_hash
+    sms_hash.delete_if { |k,v| !SmsMessage.column_names.include?(k.to_s) }
+
     # If DayOfFlight is notifiable and the person sending message is on flight
     # then go ahead and send stuff out
     # Else build a invalid responder
@@ -12,6 +12,7 @@ class SmsController < ActionController::Base
         # Legit... GO GO GO
         # Blecht
         # flight = DayOfFlight.current;sms_message = SmsMessage.last; flight.build_response_from_sms(sms_message)
+        #
         #
         # Persist the incoming message, 
         # if sms_message = flight.sms_messages.create!(sms_hash.slice(*SmsMessage.column_names))
