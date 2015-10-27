@@ -27,10 +27,14 @@ class Person < ActiveRecord::Base
   validates :birth_date, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :phone, presence: true
   validates :type, presence: true
 
-  # validates :phone_or_email
+  validate :phone_xor_cell_phone
+  def phone_xor_cell_phone
+    if phone.blank? && cell_phone.blank?
+      errors.add(:base, "Phone or cell phone can't be blank")
+    end
+  end
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :service_histories, allow_destroy: true

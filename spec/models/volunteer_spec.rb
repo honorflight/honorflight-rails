@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Volunteer, type: :model do
   it { should validate_presence_of(:first_name)}
-  it { should validate_presence_of(:cell_phone)}
+  # it { should validate_presence_of(:cell_phone)}
   it { should have_many(:day_of_flights_volunteers)}
   it { should have_many(:day_of_flights).through(:day_of_flights_volunteers)}
   it { should have_many(:roles).through(:volunteers_roles)}

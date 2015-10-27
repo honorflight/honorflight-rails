@@ -32,6 +32,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       expect(json["id"]).to be_a(Integer)
       expect(json["applied_online"]).to be(true)
       expect(json["name_suffix_id"]).to eql(name_suffix.id)
+      expect(json["cell_phone"]).to be(attrs["cell_phone"])
       expect(Person.last.veteran?).to eql(true)
     end
 
