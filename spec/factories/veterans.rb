@@ -6,7 +6,6 @@ FactoryGirl.define do
     middle_name { Faker::Name.name }
     email { Faker::Internet.email }
     work_email { Faker::Internet.email }
-    phone { Faker::PhoneNumber.phone_number }
     cell_phone { Faker::PhoneNumber.phone_number }
     work_phone { Faker::PhoneNumber.phone_number }
     birth_date { Faker::Date.birthday(48, 91) }

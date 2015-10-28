@@ -46,7 +46,7 @@ RSpec.describe Person, type: :model do
   end
 
   describe "#text_phone" do
-    subject(:person) { FactoryGirl.create(:person, cell_phone: nil) }
+    subject(:person) { FactoryGirl.create(:person, phone: "3147038829", cell_phone: nil) }
     it "returns nil if no cell phone" do
       expect(person.text_phone).to be_nil
     end
