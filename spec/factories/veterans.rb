@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :veteran, aliases: [:person] do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
+    nick_name { Faker::Name.first_name }
     # name_suffix_id { 1 }
     middle_name { Faker::Name.name }
     email { Faker::Internet.email }

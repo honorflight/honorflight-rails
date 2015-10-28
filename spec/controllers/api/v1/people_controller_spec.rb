@@ -23,7 +23,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
     # Create POST /api/v1/people
     it 'creates a veteran' do
       name_suffix = FactoryGirl.create(:name_suffix)
-      attrs = FactoryGirl.attributes_for(:person, name_suffix_id: name_suffix.id)
+      attrs = FactoryGirl.attributes_for(:person, name_suffix_id: name_suffix.id, nick_name: "jancel")
       attrs.delete(:type)
       post :create, person: attrs
 
@@ -33,6 +33,7 @@ RSpec.describe API::V1::PeopleController, type: :controller do
       expect(json["applied_online"]).to be(true)
       expect(json["name_suffix_id"]).to eql(name_suffix.id)
       expect(json["cell_phone"]).to be(attrs["cell_phone"])
+      expect(json["nick_name"]).to eql("jancel")
       expect(Person.last.veteran?).to eql(true)
     end
 
