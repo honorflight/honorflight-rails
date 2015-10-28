@@ -142,7 +142,7 @@ ActiveAdmin.register DayOfFlight do
 
     f.inputs do
       f.input :war
-      f.input :flies_on, as: :datepicker, datepicker_options: { dateFormat: "mm/dd/yy" }
+      f.input :flies_on, as: :datepicker, datepicker_options: { dateFormat: "dd/mm/yy" }
       f.input :tickets_purchased
       f.input :group_number
       f.input :special_instruction
