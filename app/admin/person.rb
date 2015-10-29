@@ -1,7 +1,7 @@
 ActiveAdmin.register Person do
   actions :none
   config.batch_actions = false
-  config.sort_order = 'last_name_asc'
+  #config.sort_order = 'last_name_asc'
 
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean

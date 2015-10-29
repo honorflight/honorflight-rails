@@ -1,6 +1,6 @@
 ActiveAdmin.register Veteran do
   actions :all, :except => [:destroy]
-  permit_params :first_name, :middle_name, :last_name, :Veteran,
+  permit_params :first_name, :middle_name, :last_name, :nick_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email, :special_request,
     :release_info, :tlc, :person_status_id, :mobility_device_id, :guardian_id, :name_suffix_id,
@@ -64,6 +64,7 @@ ActiveAdmin.register Veteran do
     column :email
     column :full_name
     column :first_name
+    column :nick_name
     column :middle_name
     column :last_name
     column :name_suffix
@@ -95,6 +96,7 @@ ActiveAdmin.register Veteran do
     end
     #column :email
     column :first_name
+    column :nick_name
     column :middle_name
     column :last_name
     #column :phone
@@ -113,6 +115,7 @@ ActiveAdmin.register Veteran do
       row :guardian
       row :person_status
       row :first_name
+      row :nick_name
       row :middle_name
       row :last_name
       row :name_suffix
@@ -250,6 +253,7 @@ ActiveAdmin.register Veteran do
       end
       f.input :last_name
       f.input :first_name
+      f.input :nick_name
       f.input :middle_name
       f.input :name_suffix
       f.semantic_fields_for :address do |a|
