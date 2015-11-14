@@ -161,6 +161,7 @@ ActiveAdmin.register Veteran do
       table_for veteran.service_awards do
         column :quantity
         column :comment
+        column :name
         column :award do |service_award|
           service_award.try(:award).try(:name)
         end
@@ -290,7 +291,7 @@ ActiveAdmin.register Veteran do
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden
           a.input :award, as: :select, collection: Award.order(:name).collect { |a| [a.name, a.id] }
-          a.inputs :quantity, :comment
+          a.inputs :name, :quantity, :comment
         end
       end
     end
