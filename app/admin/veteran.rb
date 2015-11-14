@@ -164,6 +164,7 @@ ActiveAdmin.register Veteran do
         column :name
         column :award do |service_award|
           service_award.try(:award).try(:name)
+          link_to(service_award.try(:award).try(:name), admin_service_award_path(service_award))
         end
       end
     end
