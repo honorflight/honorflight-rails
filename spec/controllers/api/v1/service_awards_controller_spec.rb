@@ -13,10 +13,10 @@ RSpec.describe API::V1::ServiceAwardsController, type: :controller do
 
   it 'return a list' do
     get :index, service_history_id: @service_history.id
-
     expect(response).to be_success            # test for the 200 status-code
     json = JSON.parse(response.body)
     expect(json.length).to eq(10) # check to make sure the right amount of messages are returned
+    expect(json[0]["name"]).to eq("Custom Name")
   end
 
   it 'deletes the award' do

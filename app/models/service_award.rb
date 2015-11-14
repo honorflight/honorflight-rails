@@ -22,4 +22,5 @@ class ServiceAward < ActiveRecord::Base
   def name=(name)
     self[:name] = name if self[:award_id].blank? 
   end
+
 end
