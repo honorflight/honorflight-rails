@@ -18,6 +18,44 @@ RSpec.describe API::V1::ServiceHistoriesController, type: :controller do
 		expect(json["id"]).to be_a(Integer)
   end
 
+  it 'creates a person\'s service history with predefined award' do
+    award = FactoryGirl.create(:award)
+    service_history = FactoryGirl.attributes_for(:service_history, service_awards_attributes: [FactoryGirl.attributes_for(:service_award, award_id: award.id)])
+
+    post :create, person_id: @person.id, service_history: service_history
+    expect(response).to be_success
+    json = JSON.parse(response.body)
+    expect(ServiceHistory.find(json["id"]).service_awards.length).to eql(1)
+    expect(json["id"]).to be_a(Integer)
+  end
+
+  it 'creates a person\'s service history with predefined award' do
+    award = FactoryGirl.create(:award)
+    service_history = FactoryGirl.attributes_for(:service_history, service_awards_attributes: [FactoryGirl.attributes_for(:service_award, award_id: award.id, name: "Custom Name")])
+
+    post :create, person_id: @person.id, service_history: service_history
+    expect(response).to be_success
+    json = JSON.parse(response.body)
+    sh = ServiceHistory.find(json["id"])
+    expect(sh.service_awards.length).to eql(1)
+    sa = sh.service_awards.first
+    expect(sa.name).to eql(award.name)
+    expect(json["id"]).to be_a(Integer)
+  end
+
+  it 'creates a person\'s service history with custom award' do
+    service_history = FactoryGirl.attributes_for(:service_history, service_awards_attributes: [FactoryGirl.attributes_for(:service_award, award_id: nil, name: "Custom Name")])
+
+    post :create, person_id: @person.id, service_history: service_history
+    expect(response).to be_success
+    json = JSON.parse(response.body)
+    sh = ServiceHistory.find(json["id"])
+    expect(sh.service_awards.length).to eql(1)
+    sa = sh.service_awards.first
+    expect(sa.name).to eql("Custom Name")
+    expect(json["id"]).to be_a(Integer)
+  end
+
   # Update
   it 'updates a service history' do
   	service_history = FactoryGirl.create(:service_history)

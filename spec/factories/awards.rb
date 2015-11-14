@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :award do
     name "MyString"
-description "MyText"
+    description "MyText"
   end
 
 end

@@ -4,6 +4,22 @@ RSpec.describe ServiceAward, type: :model do
   it { should belong_to(:service_history) }
   it { should belong_to(:award) }
 
+  describe "name with award_id" do
+    let(:new_award) { FactoryGirl.create(:award, name: "Custom Award") }
+    subject(:award) { FactoryGirl.create(:service_award, award_id: new_award.id, name: "Custom Name") }
+
+    it "should have award name" do
+      expect(award.name).to eql("Custom Award")
+    end
+  end
+
+  describe "name without award_id" do
+    subject(:award) { FactoryGirl.create(:service_award, name: "Custom Name") }
+
+    it "should have award name" do
+      expect(award.name).to eql("Custom Name")
+    end
+  end
 
   describe "quantity" do
     subject(:award) { FactoryGirl.create(:service_award, quantity: nil) }

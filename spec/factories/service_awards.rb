@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :service_award do
   quantity 1
-  comment "MyText"
-  service_history nil
+  # comment "MyText"
+  # name "Custom Name"
+  # service_history nil
   award nil
   end
 

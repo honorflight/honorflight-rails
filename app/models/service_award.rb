@@ -10,4 +10,16 @@ class ServiceAward < ActiveRecord::Base
       self.quantity = 1
     end
   end
+
+  def name
+    if self[:award_id].blank? 
+      return self[:name]
+    else
+      return award.name
+    end
+  end
+
+  def name=(name)
+    self[:name] = name if self[:award_id].blank? 
+  end
 end

@@ -32,7 +32,7 @@ class API::V1::ServiceHistoriesController < SessionController
   end
 
   def service_history_params
-    params.require(:service_history).permit(:start_year, :end_year, :activity, :story, :branch_id, :rank_type_id, :rank_id, service_awards_attributes: [:quantity, :comment, :award_id, :id])
+    params.require(:service_history).permit(:start_year, :end_year, :activity, :story, :branch_id, :rank_type_id, :rank_id, service_awards_attributes: [:name, :quantity, :comment, :award_id, :id])
       # :first_name, :last_name, :middle_name, :email, :phone, :birth_date, :war_id, :shirt_size_id, address_attributes: [:street1, :city, :state, :zipcode])
   end
   def set_service_history
