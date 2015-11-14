@@ -179,6 +179,7 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
    config.register_javascript 'https://www.google.com/jsapi' 
    config.register_javascript 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.8.0/lodash.min.js'
+   config.register_javascript 'https://cdnjs.cloudflare.com/ajax/libs/ramda/0.18.0/ramda.min.js'
    config.register_javascript 'aa.js'
 
   # == CSV options
