@@ -5,7 +5,7 @@ class API::V1::ServiceAwardsController < SessionController
 	# GET /service_histories/:service_history_id/service_awards
 	# GET /service_histories/:service_history_id/service_awards.json
 	def index
-    render :json => @service_history.service_awards.to_json(only: [:id, :name, :quantity, :description])
+    render :json => @service_history.service_awards.to_json(only: [:id, :name, :quantity, :description, :comment])
 	end
 
 	def destroy
