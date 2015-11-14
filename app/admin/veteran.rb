@@ -14,7 +14,7 @@ ActiveAdmin.register Veteran do
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
       :branch_id, :rank_type_id, :rank_id, :service_awards_id, :_destroy,
         service_awards_attributes: [:id, :award, :award_id, :quantity,
-          :comment, :_destroy ]],
+          :comment, :_destroy, :name]],
     contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
@@ -151,7 +151,7 @@ ActiveAdmin.register Veteran do
         column :activity
         column :story
         column :service_awards do |person| #person.service_awards do |service_awards|
-          person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path(sa)) : "unknown"}.join(", ").html_safe
+          person.service_awards.collect {|sa| sa.award.present? ? link_to(sa.award.name, admin_service_award_path(sa)) : sa.try(:name)}.join(", ").html_safe
         end
 
       end
@@ -163,8 +163,7 @@ ActiveAdmin.register Veteran do
         column :comment
         column :name
         column :award do |service_award|
-          service_award.try(:award).try(:name)
-          link_to(service_award.try(:award).try(:name), admin_service_award_path(service_award))
+          link_to(service_award.name, admin_service_award_path(service_award))
         end
       end
     end
