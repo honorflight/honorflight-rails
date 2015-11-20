@@ -187,9 +187,9 @@ end
 
     active_admin_comments
   end
-
+  # form(html: { autocomplete: :off })
   # form partial: 'form'
-  form do |f|
+  form(html: { autocomplete: :off }) do |f|
 
     if f.object.address.nil?
       f.object.build_address
