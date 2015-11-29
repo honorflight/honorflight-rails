@@ -18,7 +18,7 @@ describe Admin::DayOfFlightsController, type: :controller do
   describe "get branches" do
     before(:each) do
       @dof = FactoryGirl.create(:day_of_flight, flies_on: Date.tomorrow + 10.days)
-      DayOfFlight.should_receive(:next_flight).at_least(:once).and_return(@dof)
+      expect(DayOfFlight).to receive(:next_flight).at_least(:once) { @dof }
       # get :comments, :id => @post.id
     end
 

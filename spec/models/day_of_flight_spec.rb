@@ -86,7 +86,7 @@ RSpec.describe DayOfFlight, type: :model do
     # Timezzone offsets
     it "should work if today returns tomorrow" do
       f = FactoryGirl.create(:day_of_flight, flies_on: Date.today)
-      Date.stub(:today).and_return(Date.tomorrow)
+      allow(Date).to receive(:today).and_return(Date.tomorrow)
       expect(DayOfFlight.current).to eql(f)
     end
   end
