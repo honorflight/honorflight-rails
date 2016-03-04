@@ -1,5 +1,9 @@
 ActiveAdmin.register Veteran do
+  # disallowed = []
+  # disallowed << :destroy unless proc{ current_admin_user.can_delete? }
+  # actions :all, except: disallowed
   actions :all, :except => [:destroy]
+
   permit_params :first_name, :middle_name, :last_name, :nick_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email, :special_request,
@@ -86,6 +90,9 @@ ActiveAdmin.register Veteran do
   index do
     selectable_column
     actions
+    # actions do |action|
+    #   remote_pry
+    # end
     column(:day_of_flight)
     column :person_status
     column :guardian do |person|
@@ -332,7 +339,7 @@ ActiveAdmin.register Veteran do
     panel 'Travel Companion' do
         f.has_many :travel_companions, heading: false, allow_destroy: true do |travel_companion|
           travel_companion.input :id, as: :hidden
-          travel_companion.input :travel_companion_id, label: 'Travel Companion', as: :select, collection: Veteran.all.map{|v| ["#{v.last_name}, #{v.first_name}", v.id]}
+          travel_companion.input :travel_companion_id, label: 'Travel Companion', as: :select, collection: Veteran.order(:first_name).map { |v| ["#{v.last_name}, #{v.first_name}", v.id] }
       end
     end
     # panel 'Medications' do

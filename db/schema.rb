@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114191521) do
+ActiveRecord::Schema.define(version: 20160228040753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20151114191521) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
+    t.boolean  "can_delete"
   end
 
   add_index "admin_users", ["apikey"], name: "index_admin_users_on_apikey", unique: true, using: :btree

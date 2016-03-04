@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone, :email_on_event
+  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone, :email_on_event, :can_delete
   menu priority: 98
 
   filter :first_name
@@ -26,6 +26,7 @@ ActiveAdmin.register AdminUser do
     column :first_name
     column :last_name
     column :phone
+    column :can_delete
   end
 
   show do
@@ -37,6 +38,7 @@ ActiveAdmin.register AdminUser do
       row :phone
       row :apikey
       row :created_at
+      row :can_delete
     end
     active_admin_comments
   end
@@ -50,6 +52,7 @@ ActiveAdmin.register AdminUser do
       f.input :last_name
       f.input :phone
       f.input :email_on_event
+      f.input :can_delete
     end
     f.actions
   end
