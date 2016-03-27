@@ -18,6 +18,7 @@ class DayOfFlight < ActiveRecord::Base
 
   after_save :schedule_notification
   def schedule_notification
+    require "resolv-replace.rb"
     if self.flies_on_changed?
       begin
         update_column(:notification_key, DofNotificationWorker.perform_at(notify_at, id))
