@@ -9,6 +9,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 require 'wicked_pdf'
+require "resolv-replace.rb"
 
 # require "rails/test_unit/railtie"
 
