@@ -1,3 +1,5 @@
+require "resolv-replace.rb"
+
 class DofNotificationWorker
   include Sidekiq::Worker
 
