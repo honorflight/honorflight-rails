@@ -6,9 +6,7 @@ Sidekiq.configure_server do |config|
   config.redis = {
     url: redis_url
   }
-
   config.redis[:password] = redis_password if redis_password
-
   ActiveRecord::Base.establish_connection if database_url
 end
 
@@ -16,6 +14,6 @@ Sidekiq.configure_client do |config|
   config.redis = {
     url: redis_url
   }
-
+  config.redis[:password] = redis_password if redis_password
   ActiveRecord::Base.establish_connection if database_url
 end
