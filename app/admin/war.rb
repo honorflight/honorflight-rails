@@ -1,5 +1,4 @@
 ActiveAdmin.register War do
-  actions :all, :except => [:destroy]
   permit_params :name, :abbreviation, :begin_year, :end_year
 
   menu parent: "Reference Data"

@@ -1,6 +1,6 @@
 # :nocov:
 ActiveAdmin.register Airline do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description
   menu parent: "Reference Data"
 

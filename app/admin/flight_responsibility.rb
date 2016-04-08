@@ -1,5 +1,5 @@
 ActiveAdmin.register FlightResponsibility do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description, :role_id
 
   filter :name

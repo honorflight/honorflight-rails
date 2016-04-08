@@ -1,6 +1,6 @@
 # :nocov:
 ActiveAdmin.register ShirtSize do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description, :abbreviation
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"

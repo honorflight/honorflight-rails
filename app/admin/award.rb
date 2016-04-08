@@ -1,6 +1,6 @@
 # :nocov:
 ActiveAdmin.register Award do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description, :branch_id
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"

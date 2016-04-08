@@ -1,5 +1,5 @@
 ActiveAdmin.register Role do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description, :short_code
 
   filter :name

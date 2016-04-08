@@ -1,6 +1,6 @@
 # :nocov:
 ActiveAdmin.register PersonStatus do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :descriptions
 
   menu parent: "Reference Data"

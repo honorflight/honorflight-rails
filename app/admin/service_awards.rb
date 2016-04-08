@@ -1,6 +1,6 @@
 # :nocov:
 ActiveAdmin.register ServiceAward do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name
   menu false
 #menu parent: "Reference Data"

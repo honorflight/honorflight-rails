@@ -1,5 +1,5 @@
 ActiveAdmin.register DayOfFlight do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :war_id, :flies_on, :special_instruction, :group_number,
     :tickets_purchased,
     flight_details_attributes: [:id, :airline_id, :flight_number, :departs_at,

@@ -2,7 +2,7 @@ ActiveAdmin.register Veteran do
   # disallowed = []
   # disallowed << :destroy unless proc{ current_admin_user.can_delete? }
   # actions :all, except: disallowed
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
 
   permit_params :first_name, :middle_name, :last_name, :nick_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,

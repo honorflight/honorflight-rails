@@ -1,5 +1,5 @@
 ActiveAdmin.register Guardian do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :day_of_flight_id, :shirt_size_id,
     :special_request, :cell_phone, :work_phone, :work_email,

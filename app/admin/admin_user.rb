@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone, :email_on_event, :can_delete
+  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone, :email_on_event
   menu priority: 98
 
   filter :first_name
@@ -52,7 +52,6 @@ ActiveAdmin.register AdminUser do
       f.input :last_name
       f.input :phone
       f.input :email_on_event
-      f.input :can_delete
     end
     f.actions
   end

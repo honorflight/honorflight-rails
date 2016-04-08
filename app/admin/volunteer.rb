@@ -1,5 +1,4 @@
 ActiveAdmin.register Volunteer do
-  actions :all, :except => [:destroy]
   permit_params :first_name, :middle_name, :last_name, :Veteran,
     :email, :phone, :birth_date, :application_date, :war_id, :flight_id, :shirt_size_id,
     :cell_phone, :work_phone, :work_email, :learned_about, :why_volunteer, :previous_experience,

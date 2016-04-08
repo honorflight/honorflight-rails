@@ -1,5 +1,5 @@
 ActiveAdmin.register MedicalConditionName do
-  actions :all, :except => [:destroy]
+  # actions :all, :except => [:destroy]
   permit_params :name, :description, :medical_condition_type_id
   # filter :id, as: :numeric, label: 'ID'
   menu parent: "Reference Data"
