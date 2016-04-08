@@ -127,6 +127,12 @@ ActiveAdmin.register DayOfFlight do
         end
       end
     end
+
+    # panel "Shirt Sizes" do
+    #   table_for "Shirt Sizes" do
+    #     column :size
+    #   end
+    # end
   end
 
   sidebar :flights, :only => :show do

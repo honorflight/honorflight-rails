@@ -65,8 +65,7 @@ ActiveAdmin.register Veteran do
     column(:day_of_flight) { |person| person.try(:day_of_flight, :flies_on) }
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column(:guardian) { |person| person.try(:guardian).try(:full_name) }
-    column(:war) { |person| person.try(:war).try(:name)}
-    column(:branches) { |person| person.try(:branches).try(:map, &:name).try(:join, ", ")}
+    column(:guardian_shirt_size) { |person| person.try(:guardian).try(:shirt_size).try(:name) }
     column :email
     column :full_name
     column :first_name
@@ -74,6 +73,9 @@ ActiveAdmin.register Veteran do
     column :middle_name
     column :last_name
     column :name_suffix
+    column(:branches) { |person| person.try(:branches).try(:map, &:name).try(:join, ", ")}
+    column(:war) { |person| person.try(:war).try(:name)}
+    column(:shirt_size) { |person| person.try(:shirt_size).try(:name)}
     column :phone
     column :cell_phone
     column :work_phone
@@ -83,7 +85,7 @@ ActiveAdmin.register Veteran do
     column :tlc
     column :applied_online
     column :application_date
-    column(:shirt) { |person| person.try(:shirt_size).try(:name)}
+    column(:shirt_size) { |person| person.try(:shirt_size).try(:name)}
     column(:address){ |person| person.try(:address) }
     # column(:address)
   end
