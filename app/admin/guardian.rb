@@ -58,7 +58,6 @@ ActiveAdmin.register Guardian do
     column :name_suffix
     column :cell_phone
     column :phone
-    column :work_phone
     column (:birth_date)
     column :created_at
     column :release_info
