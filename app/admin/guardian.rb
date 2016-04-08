@@ -86,6 +86,7 @@ ActiveAdmin.register Guardian do
     column :last_name
     #column :phone
     column "Date of Birth", :birth_date
+    column :age 
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
@@ -109,6 +110,7 @@ ActiveAdmin.register Guardian do
       row :email
       row :work_email
       row("Date of Birth"){ |person| person.birth_date }
+      row :age
       row :war
       row :shirt_size
       row :special_request

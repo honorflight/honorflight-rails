@@ -80,6 +80,7 @@ ActiveAdmin.register Veteran do
     column :cell_phone
     column :work_phone
     column("Date of Birth") { |person| person.birth_date }
+    column :age
     column :created_at
     column :release_info
     column :tlc
@@ -113,6 +114,7 @@ ActiveAdmin.register Veteran do
     column :last_name
     #column :phone
     column "Date of Birth", :birth_date
+    column :age
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
@@ -138,6 +140,7 @@ ActiveAdmin.register Veteran do
       row :email
       row :work_email
       row("Date of Birth"){ |person| person.birth_date.to_s(:aa) }
+      row :age
       row :war
       row :shirt_size
       row :special_request
