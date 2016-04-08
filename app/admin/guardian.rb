@@ -59,6 +59,7 @@ ActiveAdmin.register Guardian do
     column :cell_phone
     column :phone
     column (:birth_date)
+    column(:shirt_size) { |person| person.try(:shirt_size).try(:name)}
     column :created_at
     column :release_info
     column :tlc
