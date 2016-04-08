@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228040753) do
+ActiveRecord::Schema.define(version: 20160408124543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -295,9 +295,11 @@ ActiveRecord::Schema.define(version: 20160228040753) do
     t.text     "why_volunteer"
     t.text     "previous_experience"
     t.string   "nick_name"
+    t.datetime "deleted_at"
   end
 
   add_index "people", ["day_of_flight_id"], name: "index_people_on_day_of_flight_id", using: :btree
+  add_index "people", ["deleted_at"], name: "index_people_on_deleted_at", using: :btree
   add_index "people", ["mobility_device_id"], name: "index_people_on_mobility_device_id", using: :btree
   add_index "people", ["name_suffix_id"], name: "index_people_on_name_suffix_id", using: :btree
   add_index "people", ["person_status_id"], name: "index_people_on_person_status_id", using: :btree
@@ -374,9 +376,11 @@ ActiveRecord::Schema.define(version: 20160228040753) do
     t.integer  "person_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "deleted_at"
   end
 
   add_index "service_histories", ["branch_id"], name: "index_service_histories_on_branch_id", using: :btree
+  add_index "service_histories", ["deleted_at"], name: "index_service_histories_on_deleted_at", using: :btree
   add_index "service_histories", ["person_id"], name: "index_service_histories_on_person_id", using: :btree
   add_index "service_histories", ["rank_id"], name: "index_service_histories_on_rank_id", using: :btree
   add_index "service_histories", ["rank_type_id"], name: "index_service_histories_on_rank_type_id", using: :btree

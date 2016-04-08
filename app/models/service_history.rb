@@ -1,4 +1,6 @@
 class ServiceHistory < ActiveRecord::Base
+  acts_as_paranoid 
+  
   belongs_to :branch
   belongs_to :rank
   belongs_to :rank_type

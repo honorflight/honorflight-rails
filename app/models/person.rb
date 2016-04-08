@@ -2,6 +2,8 @@ include ActionView::Helpers::NumberHelper
 include ApplicationHelper
 
 class Person < ActiveRecord::Base
+  acts_as_paranoid
+  
   attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON']
   attr_encrypted :birth_date, key: ENV['ENCRYPTION_KEY_PERSON'], marshal: true, marshaler: Marshel::Date
 
