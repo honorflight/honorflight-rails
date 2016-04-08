@@ -23,8 +23,8 @@ ActiveAdmin.register War do
     f.inputs do
       f.input :name
       f.input :abbreviation
-      f.input :begin_year, as: :select, collection: 1935...2000
-      f.input :end_year, as: :select, collection: 1935...2000
+      f.input :begin_year, as: :select, collection: 1935...Time.now.to_date.year
+      f.input :end_year, as: :select, collection: 1935...Time.now.to_date.year # current year
     end
 
     f.actions
