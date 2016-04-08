@@ -28,6 +28,7 @@ ActiveAdmin.register Volunteer do
   filter :birth_date
   filter :created_at
   filter :release_info
+  filter :person_status
   filter :roles
 
 # :nocov:
@@ -73,6 +74,7 @@ ActiveAdmin.register Volunteer do
     actions
     #column :flight
     #column :person_status
+    column :person_status
     column :veteran do |person|
       begin
         link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))
@@ -97,7 +99,7 @@ ActiveAdmin.register Volunteer do
     attributes_table do
       #row :flight
       #row(:veteran) {|person| person.try(:veteran)}
-      #row :person_status
+      row :person_status
       row :first_name
       row :middle_name
       row :last_name
@@ -199,6 +201,7 @@ end
     f.actions 
 
     f.inputs name: "General" do
+      f.input :person_status
       f.input :last_name
       f.input :first_name
       f.input :middle_name
