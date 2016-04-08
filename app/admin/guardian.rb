@@ -73,7 +73,7 @@ ActiveAdmin.register Guardian do
   index do
     selectable_column
     actions
-    column :person_status
+    column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :veteran do |person|
       begin
         link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))
@@ -98,7 +98,7 @@ ActiveAdmin.register Guardian do
 
     attributes_table do
       row(:veteran) {|person| person.try(:veteran)}
-      row :person_status
+      row(:person_status) { |person| person.try(:person_status).try(:name) }
       row :first_name
       row :middle_name
       row :last_name

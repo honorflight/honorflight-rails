@@ -74,7 +74,7 @@ ActiveAdmin.register Volunteer do
     actions
     #column :flight
     #column :person_status
-    column :person_status
+    column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :veteran do |person|
       begin
         link_to(person.try(:veteran).try(:full_name), admin_veteran_path(person.try(:veteran).try(:id)))

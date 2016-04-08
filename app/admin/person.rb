@@ -75,7 +75,7 @@ ActiveAdmin.register Person do
         person.veteran.try(:day_of_flight, :to_s) 
       end 
     end
-    column :person_status
+    column(:person_status) { |person| person.try(:person_status).try(:name) }
     #column :email
     column :first_name
     column :middle_name

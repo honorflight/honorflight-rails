@@ -100,7 +100,7 @@ ActiveAdmin.register Veteran do
     #   remote_pry
     # end
     column(:day_of_flight)
-    column :person_status
+    column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :guardian do |person|
       begin
         link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id)))
