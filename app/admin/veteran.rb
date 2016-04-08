@@ -72,7 +72,7 @@ ActiveAdmin.register Veteran do
     column :nick_name
     column :middle_name
     column :last_name
-    column :name_suffix
+    column(:name_suffix) { |person| person.try(:name_suffix).try(:name) }
     column(:branches) { |person| person.try(:branches).try(:map, &:name).try(:join, ", ")}
     column(:war) { |person| person.try(:war).try(:name)}
     column(:shirt_size) { |person| person.try(:shirt_size).try(:name)}
