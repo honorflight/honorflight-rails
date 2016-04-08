@@ -347,7 +347,7 @@ ActiveAdmin.register Veteran do
     panel 'Travel Companion' do
         f.has_many :travel_companions, heading: false, allow_destroy: true do |travel_companion|
           travel_companion.input :id, as: :hidden
-          travel_companion.input :travel_companion_id, label: 'Travel Companion', as: :select, collection: Veteran.order(:last_name).map { |v| ["#{v.last_name}, #{v.first_name}", v.id] }
+          travel_companion.input :travel_companion_id, label: 'Travel Companion', as: :select, collection: Veteran.all.where(day_of_flight: nil).order(:last_name).map { |v| ["#{v.last_name}, #{v.first_name}", v.id] }
       end
     end
     # panel 'Medications' do
