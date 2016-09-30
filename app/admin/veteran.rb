@@ -31,7 +31,7 @@ ActiveAdmin.register Veteran do
 # :nocov:
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :day_of_flight, collection: -> { DayOfFlight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.order(:flies_on).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
