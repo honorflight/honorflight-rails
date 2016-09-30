@@ -172,7 +172,7 @@ ActiveAdmin.register DayOfFlight do
     panel 'Flight Volunteers' do
       f.has_many :day_of_flights_volunteers, heading: false, allow_destroy: true do |volunteer|
         volunteer.input :flight_responsibility, input_html: { class: "flight_responsibility_type_dd" }
-        volunteer.input :volunteer, input_html: { class: "volunteer_type_dd" }
+        volunteer.input :volunteer, as: :select, collection: Volunteer.order(:last_name), input_html: { class: "volunteer_type_dd" }
       end
     end
 
