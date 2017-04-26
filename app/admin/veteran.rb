@@ -13,7 +13,7 @@ ActiveAdmin.register Veteran do
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
     medical_allergies_attributes: [:id, :medical_allergy],
     medical_conditions_attributes: [:id,
-      :medical_condition_type_id, :medical_condition_name_id, 
+      :medical_condition_type_id, :medical_condition_name_id,
       :last_occurrence, :comment, :_destroy],
     service_histories_attributes: [:id, :start_year, :end_year, :activity, :story,
       :branch_id, :rank_type_id, :rank_id, :service_awards_id, :_destroy,
@@ -23,7 +23,7 @@ ActiveAdmin.register Veteran do
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
-    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment,
       :_destroy]
 
   menu parent: "People", priority: 2
@@ -162,7 +162,7 @@ ActiveAdmin.register Veteran do
         column :start_year
         column :end_year
         column :rank_type
-        column :rank        
+        column :rank
         column :activity
         column :story
         column :service_awards do |person| #person.service_awards do |service_awards|
@@ -224,7 +224,7 @@ ActiveAdmin.register Veteran do
 
     panel "Travel Companion" do
       table_for veteran.travel_companions do
-        column("Travel Companion") do |travel_companion| 
+        column("Travel Companion") do |travel_companion|
           if travel_companion.travel_companion_id.present?
             Veteran.find(travel_companion.travel_companion_id).full_name
           else
@@ -235,7 +235,7 @@ ActiveAdmin.register Veteran do
     end
 
     panel "Attachments" do
-      table_for veteran.people_attachments do 
+      table_for veteran.people_attachments do
         column :name
         column :comments
         column :attachment do |attachment|
@@ -258,7 +258,7 @@ ActiveAdmin.register Veteran do
     end
     f.semantic_errors *f.object.errors.keys
 
-    f.actions 
+    f.actions
 
     #binding.remote_pry
     f.inputs name: "General" do
@@ -301,7 +301,7 @@ ActiveAdmin.register Veteran do
         service_history.input :branch, input_html: {class: "branch_dd"}
         service_history.inputs :start_year, :end_year
         service_history.input :rank_type, input_html: {class: "rank_type_dd"}
-        service_history.input :rank, input_html: {class: "rank_dd"}       
+        service_history.input :rank, input_html: {class: "rank_dd"}
         service_history.inputs :activity, :story
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden

@@ -20,7 +20,8 @@ ActiveAdmin.register Volunteer do
   menu parent: "People", priority: 4
 
 # :nocov:
-  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  # TODO: Figure out how to display this through relation?
+  # filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name

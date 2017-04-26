@@ -59,7 +59,7 @@ ActiveAdmin.register Guardian do
     column :name_suffix
     column :cell_phone
     column :phone
-    column (:birth_date)
+    column(:birth_date)
     column(:shirt_size) { |person| person.try(:shirt_size).try(:name)}
     column :created_at
     column :release_info
@@ -82,6 +82,7 @@ ActiveAdmin.register Guardian do
       end
     end
     #column :email
+    column :day_of_flight
     column :first_name
     column :middle_name
     column :last_name
