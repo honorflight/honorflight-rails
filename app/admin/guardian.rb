@@ -15,7 +15,7 @@ ActiveAdmin.register Guardian do
      :full_name, :email, :phone,
      :alternate_phone, :relationship,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
-    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment,
       :_destroy]
 
   menu parent: "People", priority: 3
@@ -23,7 +23,8 @@ ActiveAdmin.register Guardian do
 # :nocov:
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :day_of_flight, collection: -> { DayOfFlight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  # filter :day_of_flight, collection: -> { DayOfFlight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -86,7 +87,7 @@ ActiveAdmin.register Guardian do
     column :last_name
     #column :phone
     column "Date of Birth", :birth_date
-    column :age 
+    column :age
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
@@ -129,7 +130,7 @@ ActiveAdmin.register Guardian do
         column :start_year
         column :end_year
         column :rank_type
-        column :rank        
+        column :rank
         column :activity
         column :story
         column :service_awards do |person| #person.service_awards do |service_awards|
@@ -164,7 +165,7 @@ ActiveAdmin.register Guardian do
       end
     end
     panel "Attachments" do
-      table_for guardian.people_attachments do 
+      table_for guardian.people_attachments do
         column :name
         column :comments
         column :attachment do |attachment|
@@ -185,7 +186,7 @@ ActiveAdmin.register Guardian do
     end
     f.semantic_errors *f.object.errors.keys
 
-    f.actions 
+    f.actions
 
     f.inputs name: "General" do
       if !f.object.new_record?
@@ -223,7 +224,7 @@ ActiveAdmin.register Guardian do
         service_history.input :branch, input_html: {class: "branch_dd"}
         service_history.inputs :start_year, :end_year
         service_history.input :rank_type, input_html: {class: "rank_type_dd"}
-        service_history.input :rank, input_html: {class: "rank_dd"}       
+        service_history.input :rank, input_html: {class: "rank_dd"}
         service_history.inputs :activity, :story
         service_history.has_many :service_awards, allow_destroy: true do |a|
           a.input :id, as: :hidden
@@ -258,6 +259,6 @@ ActiveAdmin.register Guardian do
       end
     end
 
-    f.actions 
+    f.actions
   end
 end

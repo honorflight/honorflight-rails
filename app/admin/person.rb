@@ -5,7 +5,8 @@ ActiveAdmin.register Person do
 
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  # filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -62,18 +63,18 @@ ActiveAdmin.register Person do
   index do
     selectable_column
     actions
-    column :flight_date do |person| 
-      if person.type == "Veteran" 
+    column :flight_date do |person|
+      if person.type == "Veteran"
         person.try(:day_of_flight, :to_s)
       elsif person.type == "Volunteer"
         begin
-          person.day_of_flights.last 
+          person.day_of_flights.last
         rescue Exception=>e
             "error"
         end
       elsif person.type == "Guardian"
-        person.veteran.try(:day_of_flight, :to_s) 
-      end 
+        person.veteran.try(:day_of_flight, :to_s)
+      end
     end
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     #column :email
@@ -85,9 +86,9 @@ ActiveAdmin.register Person do
     column :application_date
     bool_column :release_info
     bool_column "TLC", :tlc
-    column "People", (:veteran)  do |person| 
+    column "People", (:veteran)  do |person|
       status_tag(person.type)
-    end 
+    end
     bool_column :applied_online
     #column :address
   end
