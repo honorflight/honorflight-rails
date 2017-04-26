@@ -94,7 +94,7 @@ class DayOfFlight < ActiveRecord::Base
     response = {}
     response[:numbers] = guardians_phones
     response[:message] = "Welcome to Greater St. Louis Honor Flight.  Thank you for flying with our veterans. If for any reason you need to reach the flight volunteers, reply to this message. In the case of medical emergency, please dial 911."
-    
+
     send_sms(response)
   end
 

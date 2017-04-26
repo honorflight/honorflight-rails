@@ -14,13 +14,13 @@ ActiveAdmin.register Volunteer do
      :alternate_phone, :relationship,
       address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
     volunteers_roles_attributes: [:id, :role_id, :_destroy],
-    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment, 
+    people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment,
       :_destroy]
 
   menu parent: "People", priority: 4
 
 # :nocov:
-  filter :flight, collection: -> { Flight.all.collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -124,7 +124,7 @@ ActiveAdmin.register Volunteer do
 def row(row_name, &block)
   # run arbitrary code
   yield(block) if block_given?
-  # run arbitrary code  
+  # run arbitrary code
 end
 
     panel "Service History" do
@@ -133,7 +133,7 @@ end
         column :start_year
         column :end_year
         column :rank_type
-        column :rank        
+        column :rank
         column :activity
         column :story
         column :service_awards do |person| #person.service_awards do |service_awards|
@@ -174,7 +174,7 @@ end
       end
     end
     panel "Attachments" do
-      table_for volunteer.people_attachments do 
+      table_for volunteer.people_attachments do
         column :name
         column :comments
         column :attachment do |attachment|
@@ -198,7 +198,7 @@ end
 
     f.semantic_errors *f.object.errors.keys
 
-    f.actions 
+    f.actions
 
     f.inputs name: "General" do
       f.input :person_status
@@ -232,7 +232,7 @@ end
         service_history.input :branch, input_html: {class: "branch_dd"}
         service_history.inputs :start_year, :end_year
         service_history.input :rank_type, input_html: {class: "rank_type_dd"}
-        service_history.input :rank, input_html: {class: "rank_dd"}       
+        service_history.input :rank, input_html: {class: "rank_dd"}
         service_history.inputs :activity, :story
 
         service_history.has_many :service_awards, allow_destroy: true do |a|
@@ -278,6 +278,6 @@ end
       end
     end
 
-    f.actions 
+    f.actions
   end
 end
