@@ -1,0 +1,144 @@
+Fetching git://github.com/attr-encrypted/attr_encrypted.git
+Fetching git://github.com/activeadmin/activeadmin.git
+Fetching gem metadata from https://rubygems.org/.............
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Resolving dependencies......
+Installing rake 12.0.0 (was 10.4.2)
+Installing i18n 0.8.1 (was 0.7.0)
+Installing json 1.8.6 (was 1.8.3) with native extensions
+Installing minitest 5.10.1 (was 5.7.0)
+Installing thread_safe 0.3.6 (was 0.3.5)
+Installing builder 3.2.3 (was 3.2.2)
+Installing erubis 2.7.0
+Installing mini_portile2 2.1.0
+Installing rack 1.6.5 (was 1.6.1)
+Installing mime-types-data 3.2016.0521
+Installing sass 3.4.23 (was 3.4.14)
+Installing thor 0.19.4 (was 0.19.1)
+Installing coffee-script-source 1.12.2 (was 1.9.1.1)
+Installing execjs 2.7.0 (was 2.5.2)
+Installing formtastic_i18n 0.6.0 (was 0.4.1)
+Installing kaminari-core 1.0.1
+Installing arel 6.0.4 (was 6.0.0)
+Installing concurrent-ruby 1.0.5
+Installing tilt 2.0.7 (was 1.4.1)
+Installing public_suffix 2.0.5
+Installing awesome_print 1.7.0
+Installing ffi 1.9.18 (was 1.9.8) with native extensions
+Installing rubyzip 1.2.1 (was 1.1.7)
+Installing websocket 1.2.4 (was 1.2.1)
+Installing tomlrb 1.2.4
+Installing encryptor 3.0.0 (was 1.3.0)
+Installing aws-sigv4 1.0.0
+Installing jmespath 1.3.1
+Installing ice_nine 0.11.2 (was 0.11.1)
+Installing bcrypt 3.1.11 (was 3.1.10) with native extensions
+Installing coderay 1.1.1 (was 1.1.0)
+Installing debug_inspector 0.0.2 with native extensions
+Installing brakeman 3.6.1 (was 3.0.2)
+Using bundler 1.14.6
+Installing byebug 9.0.6 (was 4.0.1) with native extensions
+Installing chunky_png 1.3.8 (was 1.3.4)
+Installing connection_pool 2.2.1 (was 2.2.0)
+Installing gherkin 4.1.1 (was 2.12.2)
+Installing cucumber-wire 0.0.1
+Installing diff-lcs 1.3 (was 1.2.5)
+Installing multi_json 1.12.1 (was 1.11.0)
+Installing multi_test 0.1.2
+Installing daemons 1.2.4 (was 1.2.1)
+Installing database_cleaner 1.5.3 (was 1.4.1)
+Installing orm_adapter 0.5.0
+Installing docile 1.1.5
+Installing dotenv 2.2.1 (was 2.0.1)
+Installing request_store 1.3.2 (was 1.1.0)
+Installing equalizer 0.0.11 (was 0.0.9)
+Installing eventmachine 1.2.3 (was 1.0.7) with native extensions
+Installing fakeweb 1.3.0
+Installing jwt 1.5.6 (was 1.4.1)
+Installing method_source 0.8.2
+Installing pg 0.20.0 (was 0.18.1) with native extensions
+Installing slop 3.6.0
+Installing rails_serve_static_assets 0.0.5 (was 0.0.4)
+Installing rails_stdout_logging 0.0.5 (was 0.0.3)
+Installing rdoc 4.3.0 (was 4.2.0)
+Installing redcarpet 3.4.0 (was 3.2.2) with native extensions
+Installing redis 3.3.3 (was 3.2.1)
+Installing rspec-support 3.5.0 (was 3.2.2)
+Installing simplecov-html 0.10.0 (was 0.9.0)
+Installing temple 0.7.7 (was 0.7.5)
+Installing turbolinks-source 5.0.1
+Installing wicked_pdf 1.1.0 (was 0.11.0)
+Installing wkhtmltopdf-binary 0.12.3.1 (was 0.9.9.3)
+Installing wkhtmltopdf-heroku 2.12.4.0 (was 2.12.2.1)
+Installing faker 1.7.3 (was 1.4.3)
+Installing tzinfo 1.2.3 (was 1.2.2)
+Installing descendants_tracker 0.0.4
+Installing nokogiri 1.7.1 (was 1.6.6.2) with native extensions
+Installing rack-test 0.6.3
+Installing warden 1.2.7 (was 1.2.3)
+Installing rack-protection 1.5.3
+Installing mime-types 3.1 (was 2.6.1)
+Installing bourbon 4.3.4 (was 4.2.3)
+Installing coffee-script 2.4.1
+Installing autoprefixer-rails 4.0.2.2
+Installing uglifier 3.2.0 (was 2.7.1)
+Installing sprockets 3.7.1 (was 3.2.0)
+Installing sucker_punch 2.0.2 (was 1.4.0)
+Installing addressable 2.5.1 (was 2.3.8)
+Installing childprocess 0.6.3 (was 0.5.5)
+Using attr_encrypted 3.0.3 (was 1.3.3) from git://github.com/attr-encrypted/attr_encrypted.git (at master@6053b3b)
+Installing aws-sdk-core 2.9.14
+Installing better_errors 2.1.1
+Installing pry-theme 1.2.0 (was 1.1.3)
+Installing binding_of_caller 0.7.2 with native extensions
+Installing cucumber-core 1.5.0
+Installing thin 1.7.0 (was 1.6.3) with native extensions
+Installing twilio-ruby 4.13.0 (was 4.0.0)
+Installing pry 0.10.4 (was 0.10.1)
+Installing rails_12factor 0.0.3
+Installing sdoc 0.4.2 (was 0.4.1)
+Installing rspec-core 3.5.4 (was 3.2.2)
+Installing rspec-expectations 3.5.0 (was 3.2.0)
+Installing rspec-mocks 3.5.0 (was 3.2.1)
+Installing simplecov 0.14.1 (was 0.9.2)
+Installing slim 3.0.7 (was 3.0.3)
+Installing turbolinks 5.0.1 (was 2.5.3)
+Installing activesupport 4.2.0
+Installing axiom-types 0.1.1
+Installing coercible 1.0.0
+Installing loofah 2.0.3 (was 2.0.2)
+Installing xpath 2.0.0
+Installing sidekiq 5.0.0 (was 3.3.4)
+Installing sinatra 1.4.8 (was 1.4.6)
+Installing mail 2.6.5 (was 2.6.3)
+Installing launchy 2.1.2
+Installing selenium-webdriver 3.4.0 (was 2.45.0)
+Installing aws-sdk-resources 2.9.14
+Installing cucumber 2.4.0 (was 1.3.19)
+Installing pry-nav 0.2.4
+Installing pry-rails 0.3.6 (was 0.3.4)
+Installing pry-remote 0.1.8
+Installing pry-stack_explorer 0.4.9.2
+Installing rspec 3.5.0
+Installing rails-deprecated_sanitizer 1.0.3
+Installing globalid 0.4.0 (was 0.3.5)
+Installing arbre 1.1.1 (was 1.0.3)
+Installing activemodel 4.2.0
+Installing delayed_job 4.1.2 (was 4.0.6)
+Installing factory_girl 4.8.0 (was 4.5.0)
+Installing jbuilder 2.6.3 (was 2.2.11)
+Installing shoulda-callback-matchers 1.1.4 (was 1.1.3) with native extensions
+Installing shoulda-matchers 3.1.1 (was 2.8.0)
+Installing spring 2.0.1 (was 1.3.3)
+Installing virtus 1.0.5 (was 1.0.4)
+Installing rails-html-sanitizer 1.0.3 (was 1.0.2)
+Installing capybara 2.14.0 (was 2.4.4)
+Installing sidekiq-failures 0.4.5 (was 0.4.4)
+Installing appium_lib 9.4.3
+Installing aws-sdk 2.9.14 (was 1.64.0)
+Installing rails-dom-testing 1.0.8 (was 1.0.6)
+Installing activejob 4.2.0
+Installing activerecord 4.2.0
+Installing carrierwave 1.1.0 (was 0.10.0)
+Installing spring-commands-rspec 1.0.4
