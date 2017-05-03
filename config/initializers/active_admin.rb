@@ -1,10 +1,10 @@
 
-class MyFooter < ActiveAdmin::Component
-  def build
-    super(id: "footer")
-    para "Copyright &copy; 2014-#{Date.today.year} Greater St. Louis Honor Flight, Inc.".html_safe
-  end
-end
+# class MyFooter < ActiveAdmin::Component
+#   def build
+#     super(id: "footer")
+#     para "Copyright &copy; 2014-#{Date.today.year} Greater St. Louis Honor Flight, Inc.".html_safe
+#   end
+# end
 
 ActiveAdmin.setup do |config|
   # == Site Title
@@ -235,7 +235,7 @@ ActiveAdmin.setup do |config|
   #
   end
 
-  config.view_factory.footer = MyFooter
+  # config.view_factory.footer = MyFooter
 
   # == Pagination
   #
