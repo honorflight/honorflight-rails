@@ -31,6 +31,8 @@ RSpec.describe API::V1::DayOfFlightController, type: :controller do
       expect(json["veterans"][0]["guardian"]).not_to be(nil)
       expect(json["volunteers"].count).to eql(1)
 
+      expect(json["flies_on"]).to eql(Date.tomorrow.to_s)
+
       # expect(json["veterans"]).to be([])
       # expect(Person.last.veteran?).to eql(true)
     end

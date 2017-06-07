@@ -7,7 +7,7 @@ module API
         dof = DayOfFlight.current
         if dof.present?
           render json: dof.as_json(
-            only: [:id],
+            only: [:id, :flies_on],
             include: {
               veterans: {
                 only: [:id, :first_name, :last_name],
