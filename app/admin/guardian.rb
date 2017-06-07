@@ -67,6 +67,11 @@ ActiveAdmin.register Guardian do
     column :applied_online
     column :application_date
     column(:address){ |person| person.try(:address) }
+    column(:street1) { |person| person.try(:address).try(:street1) }
+    column(:street2) { |person| person.try(:address).try(:street2) }
+    column(:city) { |person| person.try(:address).try(:city) }
+    column(:state) { |person| person.try(:address).try(:state) }
+    column(:zipcode) { |person| person.try(:address).try(:zipcode) }
     # column(:address)
   end
 # :nocov:

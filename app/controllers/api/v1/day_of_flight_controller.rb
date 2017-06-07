@@ -4,7 +4,7 @@ module API
 
       # GET 
       def people
-        dof = DayOfFlight.current
+        dof = DayOfFlight.next_flight
         if dof.present?
           render json: dof.as_json(
             only: [:id, :flies_on],
