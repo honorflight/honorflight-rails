@@ -15,10 +15,12 @@ class ApplicationController < ActionController::Base
 
   # Needed for sessions controller and some admin functionality
   def authenticate_admin_user!
-    logger.debug "Trying to authenticate through APIKEY #{headers['HTTP_X_ADMIN_APIKEY']}"
+    logger.debug "Authenticating Admin User"
     if request.headers['HTTP_X_ADMIN_APIKEY'].present?
+      logger.debug "Trying to authenticate through APIKEY #{headers['HTTP_X_ADMIN_APIKEY']}"
       redirect_to new_admin_user_session_path unless AdminUser.authenticate_by_apikey(request.headers['HTTP_X_ADMIN_APIKEY'])
     else
+      logger.debug "Using typical ActiveAdmin Authentication"
       super
     end
   end

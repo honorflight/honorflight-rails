@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.3'
+gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -48,7 +48,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'autoprefixer-rails', '~> 4.0.2.2'
 gem 'responders',  '~> 2.0'
 gem 'draper', '1.4.0'
-# gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
+gem 'inherited_resources', github: 'josevalim/inherited_resources'#, branch: 'rails-4-2'
 
 gem 'delayed_job_active_record', '4.0.3'
 gem 'timers', '= 4.1.2'
