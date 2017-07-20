@@ -40,8 +40,8 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :service_histories, allow_destroy: true
-  accepts_nested_attributes_for :contacts
-  accepts_nested_attributes_for :service_awards
+  accepts_nested_attributes_for :contacts, allow_destroy: true
+  accepts_nested_attributes_for :service_awards, allow_destroy: true
   accepts_nested_attributes_for :people_attachments, allow_destroy: true
 
   after_create :send_admin_emailers

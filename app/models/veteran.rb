@@ -10,6 +10,6 @@ class Veteran < Person
 
   accepts_nested_attributes_for :medical_conditions, allow_destroy: true
   accepts_nested_attributes_for :medications
-  accepts_nested_attributes_for :medical_allergies
+  accepts_nested_attributes_for :medical_allergies, allow_destroy: true
   accepts_nested_attributes_for :travel_companions, allow_destroy: true
 end

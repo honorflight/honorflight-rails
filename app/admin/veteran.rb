@@ -11,7 +11,7 @@ ActiveAdmin.register Veteran do
     address_attributes: [:id, :street1, :street2, :city, :state, :zipcode],
     travel_companions_attributes: [:id, :travel_companion_id, :_destroy],
     medications_attributes: [:id, :medication, :dose, :frequency, :route, :medication_route_id],
-    medical_allergies_attributes: [:id, :medical_allergy],
+    medical_allergies_attributes: [:id, :medical_allergy, :_destroy],
     medical_conditions_attributes: [:id,
       :medical_condition_type_id, :medical_condition_name_id,
       :last_occurrence, :comment, :_destroy],
@@ -21,7 +21,7 @@ ActiveAdmin.register Veteran do
           :comment, :_destroy, :name]],
     contacts_attributes: [:id, :contact_category_id, :contact_relationship_id,
      :full_name, :email, :phone,
-     :alternate_phone, :relationship,
+     :alternate_phone, :relationship, :_destroy,
         address_attributes: [:id, :street1, :street2, :city, :state, :zipcode]],
     people_attachments_attributes: [:id, :name, :comments, :person_id, :attachment,
       :_destroy]
@@ -208,6 +208,12 @@ ActiveAdmin.register Veteran do
           column("Comments") { |condition| condition.comment }
         end
       end
+
+      panel "Medical Allergies" do
+        table_for veteran.medical_allergies do
+          column("Allergy Type") { |allergy| allergy.try(:medical_allergy) } 
+        end
+      end
       # panel "Medications" do
       #   table_for veteran.medications do
       #     column :medication
@@ -313,7 +319,7 @@ ActiveAdmin.register Veteran do
 
 
     panel "Contacts" do
-      f.has_many :contacts, heading: false do |contact|
+      f.has_many :contacts, heading: false, allow_destroy: true do |contact|
         if contact.object.address.nil?
           contact.object.build_address
         end
