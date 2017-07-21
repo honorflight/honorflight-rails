@@ -26,7 +26,8 @@ RSpec.describe Person, type: :model do
       @veteran = FactoryGirl.create(:veteran, 
         phone: Faker::PhoneNumber.phone_number, 
         cell_phone: Faker::PhoneNumber.cell_phone, 
-        work_phone: Faker::PhoneNumber.phone_number)
+        work_phone: Faker::PhoneNumber.phone_number,
+        middle_name: nil)
     end
     it "should validate phone as 14 digits" do
       expect(@veteran.phone.length).to eql(14)
@@ -36,6 +37,9 @@ RSpec.describe Person, type: :model do
     end
     it "should validate work_phone as 14 digits" do
       expect(@veteran.work_phone.length).to eql(14)
+    end
+    it "should have full name" do
+      expect(@veteran.full_name).to eql("#{@veteran.first_name} #{@veteran.last_name}")
     end
   end
   describe "#uuid" do
