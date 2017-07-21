@@ -8,12 +8,12 @@ class MedicalCondition < ActiveRecord::Base
   belongs_to :medical_condition_type
   belongs_to :medical_condition_name
 
-  before_validation :set_last_occurrence
-  def set_last_occurrence
-    if self.last_occurrence.blank?
-      self.last_occurrence=Date.today
-    end
-  end
+  # before_validation :set_last_occurrence
+  # def set_last_occurrence
+  #   if self.last_occurrence.blank?
+  #     self.last_occurrence=Date.today
+  #   end
+  # end
 
   def last_occurrence=(d)
     self[:encrypted_last_occurrence] = MedicalCondition.encrypt_last_occurrence(d)
