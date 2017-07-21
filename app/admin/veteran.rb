@@ -102,7 +102,9 @@ ActiveAdmin.register Veteran do
     column(:day_of_flight)
     column(:person_status) { |person| person.try(:person_status).try(:name) }
     column :guardian do |person|
-      link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id)))
+      begin
+        link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id)))
+      rescue;end
     end
     #column :email
     column :first_name
@@ -123,7 +125,11 @@ ActiveAdmin.register Veteran do
 
     attributes_table do
       row :day_of_flight
-      row(:guardian) { |person| link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id))) }
+      row(:guardian) { |person| 
+        begin
+          link_to(person.try(:guardian).try(:full_name), admin_guardian_path(person.try(:guardian).try(:id))) 
+        rescue;end
+      }
       row :person_status
       row :first_name
       row :nick_name
