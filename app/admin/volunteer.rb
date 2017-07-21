@@ -22,6 +22,7 @@ ActiveAdmin.register Volunteer do
 # :nocov:
   # TODO: Figure out how to display this through relation?
   # filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :war
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -62,6 +63,7 @@ ActiveAdmin.register Volunteer do
     column (:birth_date)
     column :created_at
     column :release_info
+    column :war
     #column :tlc
     column :applied_online
     column :application_date
@@ -92,6 +94,7 @@ ActiveAdmin.register Volunteer do
     bool_column :release_info
     bool_column "TLC", :tlc
     bool_column :applied_online
+    column :war
     #column :address
   end
 
@@ -112,7 +115,7 @@ ActiveAdmin.register Volunteer do
       row :email
       row :work_email
       row("Date of Birth"){ |person| person.birth_date }
-      #row :war
+      row :war
       row :shirt_size
       #bool_row :release_info
       row ("How did you learn about us?"){ |person| person.learned_about }
@@ -221,6 +224,7 @@ end
       f.input :email
       f.input :work_email
       f.input :birth_date,label: "Date of Birth", as: :date_picker, :order => [:month, :day, :year]
+      f.input :war
       f.input :application_date,label: "Application date", as: :date_picker, :order => [:month, :day, :year]
       f.input :shirt_size
     end
