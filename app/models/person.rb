@@ -7,6 +7,14 @@ class Person < ActiveRecord::Base
   attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON']
   attr_encrypted :birth_date, key: ENV['ENCRYPTION_KEY_PERSON'], marshal: true, marshaler: Marshel::Date
 
+  scope :has_flown, -> {
+    where(day_of_flight_id: !nil)
+  }
+
+  scope :has_not_flown, -> {
+    where(day_of_flight_id: nil)
+  }
+
   has_many :service_histories
   has_many :service_awards, through: :service_histories
   has_many :branches, through: :service_histories
@@ -81,6 +89,11 @@ class Person < ActiveRecord::Base
     end
   end
   
+  ransacker :day_of_flight_id_eq, formatter: proc { |value| 
+    results = has_not_flown if value == "nil"
+    results || super
+  }
+
   def application_date
     self[:application_date] || self[:created_at].try(:to_date)
   end
