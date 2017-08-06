@@ -44,13 +44,13 @@ ActiveAdmin.register Veteran do
 
 # :nocov:
   controller do
-    # def index
-    #   if params[:q].present? && params[:q][:day_of_flight_id_eq]=="nil"
-    #     params[:q][:day_of_flight_id_null]=true
-    #     params[:q].delete(:day_of_flight_id_eq)
-    #   end
-    #   super
-    # end
+    def index
+      if params[:q].present? && params[:q][:day_of_flight_id_eq]=="nil"
+        params[:q][:day_of_flight_id_null]=true
+        params[:q].delete(:day_of_flight_id_eq)
+      end
+      super
+    end
 
     # def update
     #   binding.remote_pry

@@ -89,11 +89,6 @@ class Person < ActiveRecord::Base
     end
   end
   
-  ransacker :day_of_flight_id_eq, formatter: proc { |value| 
-    results = has_not_flown if value == "nil"
-    results || super
-  }
-
   def application_date
     self[:application_date] || self[:created_at].try(:to_date)
   end
