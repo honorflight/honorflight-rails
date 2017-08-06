@@ -38,10 +38,16 @@ ActiveAdmin.register Guardian do
   controller do
     def index # This is for catching the Day Of Flight filter.
       if params[:q].present? && params[:q][:day_of_flight_id_eq]=="nil"
-        # params[:q][:day_of_flight_id_null]=true
-        # params[:q].delete(:day_of_flight_id_eq)
+        params[:q][:day_of_flight_id_null]=true
+        params[:q].delete(:day_of_flight_id_eq)
       end
+
       super
+
+      if params[:q].present? && params[:q][:day_of_flight_id_null]==true
+        params[:q][:day_of_flight_id_eq]="nil"
+        params[:q].delete(:day_of_flight_id_null)
+      end     
     end
   end
 # :nocov:
