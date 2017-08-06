@@ -46,8 +46,8 @@ ActiveAdmin.register Veteran do
   controller do
     def index
       if params[:q].present? && params[:q][:day_of_flight_id_eq]=="nil"
-        params[:q][:day_of_flight_id_null]=true
-        params[:q].delete(:day_of_flight_id_eq)
+        # params[:q][:day_of_flight_id_null]=true
+        # params[:q].delete(:day_of_flight_id_eq)
       end
       super
     end
