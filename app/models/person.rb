@@ -30,6 +30,7 @@ class Person < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :type, presence: true
+  validates :application_date, presence: true
 
   validate :phone_xor_cell_phone
   def phone_xor_cell_phone
@@ -68,6 +69,18 @@ class Person < ActiveRecord::Base
     end
   end
 
+
+  # We need to always set an application date.  If it's null,
+  # Let's set it to created at...
+  before_validation :set_application_date
+  def set_application_date
+    if self[:application_date].blank? && self[:created_at].blank?
+      self[:application_date] = Date.today
+    elsif self[:application_date].blank?
+      self[:application_date] = self[:created_at].to_date
+    end
+  end
+  
   def application_date
     self[:application_date] || self[:created_at].try(:to_date)
   end
