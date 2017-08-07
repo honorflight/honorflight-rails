@@ -153,3 +153,33 @@ FlightResponsibility.create!([
 ])
 
 SimplePage.create!({key: "thanks_volunteers", title: "Thanks for Applying", markdown: "Thank You Volunteer Message"})
+# 53.times do 
+#   Veteran.create(
+#     first_name: Faker::Name.first_name, 
+#     last_name: Faker::Name.last_name, 
+#     birth_date: Faker::Date.birthday(18, 65),
+#     war_id: 1, 
+#     cell_phone: Faker::PhoneNumber.cell_phone
+#   )
+# end
+
+
+# 53.times do 
+#   Veteran.create(
+#     first_name: Faker::Name.first_name, 
+#     last_name: Faker::Name.last_name, 
+#     birth_date: Faker::Date.birthday(18, 65),
+#     war_id: 2, 
+#     cell_phone: Faker::PhoneNumber.cell_phone
+#   )
+# end
+
+# 53.times do
+#   Veteran.create(
+#     first_name: Faker::Name.first_name, 
+#     last_name: Faker::Name.last_name, 
+#     birth_date: Faker::Date.birthday(18, 65),
+#     war_id: 3, 
+#     cell_phone: Faker::PhoneNumber.cell_phone
+#   )
+# end
