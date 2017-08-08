@@ -20,3 +20,4 @@ public/uploads
 
 .DS_Store
 .idea
+.byebug_history

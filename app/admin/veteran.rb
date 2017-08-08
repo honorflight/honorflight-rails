@@ -31,7 +31,7 @@ ActiveAdmin.register Veteran do
 # :nocov:
   filter :war
   # filter :flight_id_blank, label: "Never Flown", as: :boolean
-  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]}.insert(0,["None", "nil"]) }
+  filter :day_of_flight, collection: -> { DayOfFlight.order(flies_on: :desc).collect(){|f| [f.flies_on.to_s(:long), f.id]} }
   filter :shirt_size
   filter :first_name
   filter :last_name
@@ -40,6 +40,10 @@ ActiveAdmin.register Veteran do
   filter :created_at
   filter :release_info
   filter :tlc
+
+  scope :all, default: true
+  scope("Hasn't Flown") { |scope| scope.where(day_of_flight_id: nil)}
+  scope("On Next Flight") { |scope| scope.where(day_of_flight_id: DayOfFlight.next_flight)}
 # :nocov:
 
 # :nocov:
