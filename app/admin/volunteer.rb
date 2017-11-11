@@ -47,10 +47,7 @@ ActiveAdmin.register Volunteer do
   end
 
   collection_action :by_role, method: :get do
-    puts "HELELLLLLLLELELELELLLELLE"
-    puts "params: #{params}"
-    puts "rendering all by role id: #{params[:role_id]}"
-    respond_to do |format|
+   respond_to do |format|
       format.json do
         render json: Volunteer.in_volunteer_role(params[:role_id])
       end

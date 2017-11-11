@@ -92,7 +92,7 @@ $(function() {
 
       var narrowVolunteersOnRole = function(roleId, volunteerSelect) {
         // get volunteers by their role
-        $.get("/admin/volunteers.json?utf8=✓&q%5Bvolunteers_roles_role_id_eq%5D=" + roleId + "&commit=Filter&order=id_desc", "", function(data) {
+        $.get("/admin/volunteers/by_role.json?role_id=" + roleId, "", function(data) {
           var $names = $(volunteerSelect);
           $names.val("");
           $names.children("option").attr("style", "display:none");
