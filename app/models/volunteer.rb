@@ -8,4 +8,11 @@ class Volunteer < Person
   accepts_nested_attributes_for :volunteers_roles, allow_destroy: true
 
   # validates :cell_phone, presence: true
+
+  def self.in_volunteer_role(role_id)
+    # Map the IDs
+    volunteers = VolunteersRole.where(role_id: role_id).map(&:person_id)
+
+    where(id: volunteers).order(:last_name)
+  end
 end
