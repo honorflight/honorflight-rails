@@ -279,8 +279,6 @@ GEM
     pry-theme (1.2.0)
       coderay (~> 1.1)
     public_suffix (2.0.5)
-    quiet_assets (1.1.0)
-      railties (>= 3.1, < 5.0)
     rack (1.6.8)
     rack-protection (1.5.3)
       rack
@@ -490,14 +488,13 @@ DEPENDENCIES
   jquery-rails
   launchy (~> 2.1.2)
   paranoia (~> 2.0)
-  pg
+  pg (>= 0.18, < 1.0)
   pry
   pry-nav
   pry-rails
   pry-remote
   pry-stack_explorer
   pry-theme
-  quiet_assets
   rails (= 4.2.10)
   rails_12factor (= 0.0.3)
   rake (< 11.0)
