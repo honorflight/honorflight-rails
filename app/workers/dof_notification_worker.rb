@@ -1,5 +1,6 @@
-require "resolv-replace.rb"
+require 'resolv-replace.rb'
 
+### Class to notify everyone on day of flight (Welcome)
 class DofNotificationWorker
   include Sidekiq::Worker
 
