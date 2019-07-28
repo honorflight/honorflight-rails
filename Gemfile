@@ -138,4 +138,4 @@ group :development, :test do
   gem 'brakeman', require: false
 end
 
-ruby '2.3.8'
+ruby '2.4.6'
