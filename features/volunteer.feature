@@ -31,4 +31,4 @@ Feature: Create volunteer
     Then I should see "Birth date can't be blank"
     And I should see "First name can't be blank"
     And I should see "Last name can't be blank"
-    And I should see "Phone can't be blank"
+    And I should see "phone can't be blank"

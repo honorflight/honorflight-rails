@@ -2,6 +2,7 @@ Feature: Create veteran
   As an administrator
   I would like to manually enter veterans
 
+  @wip
   Scenario: Entering a veteran's information
     Given I am logged in
     And I click "Veterans"
@@ -16,6 +17,7 @@ Feature: Create veteran
     And I fill in "Cell phone" with "3147038888"
     And I fill in "Work phone" with "3147038888"
     And I fill in "Application date" with "05/15/2015"
+    And it should save and open page
     And I click button "Create Veteran"
     Then I should see "Veteran was successfully created."
     And I should see "Jeff"
@@ -32,7 +34,7 @@ Feature: Create veteran
     Then I should see "Birth date can't be blank"
     And I should see "First name can't be blank"
     And I should see "Last name can't be blank"
-    And I should see "Phone can't be blank"
+    And I should see "phone can't be blank"
 
   Scenario: Editting a veteran should not require previously entered information
     Given I am logged in
