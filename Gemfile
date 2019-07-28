@@ -44,7 +44,8 @@ gem 'attr_encrypted', '~> 1.3.0' #, github: 'attr-encrypted/attr_encrypted'
 # gem 'attr_encrypted', "~> 3.0.0"
 
 # Active Admin
-gem "devise", "~> 3.4.1"
+# gem "devise", "~> 3.4.1"
+gem 'devise', :git => "git://github.com/plataformatec/devise.git", :branch => "3-stable"
 gem 'activeadmin', github: 'activeadmin'
 gem 'autoprefixer-rails', '~> 4.0.2.2'
 gem 'responders',  '~> 2.0'
