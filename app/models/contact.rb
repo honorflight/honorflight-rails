@@ -2,7 +2,7 @@ include ActionView::Helpers::NumberHelper
 include ApplicationHelper
 
 class Contact < ActiveRecord::Base
-  attr_encrypted :phone, :email, :alternate_phone, key: ENV['ENCRYPTION_KEY_CONTACT']
+  attr_encrypted :phone, :email, :alternate_phone, key: ENV['ENCRYPTION_KEY_CONTACT'], mode: :attr_encrypted, algorithm: 'aes-256-cbc'
   belongs_to :contact_relationship
   belongs_to :address
 

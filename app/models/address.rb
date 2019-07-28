@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  attr_encrypted :street1, :street2, key: :encryption_key
+  attr_encrypted :street1, :street2, key: :encryption_key, mode: :attr_encrypted, algorithm: 'aes-256-cbc'
 
   belongs_to :person
   belongs_to :contact

@@ -4,8 +4,8 @@ include ApplicationHelper
 class Person < ActiveRecord::Base
   acts_as_paranoid
 
-  attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON']
-  attr_encrypted :birth_date, key: ENV['ENCRYPTION_KEY_PERSON'], marshal: true, marshaler: Marshel::Date
+  attr_encrypted :email, :work_email, :phone, :work_phone, :cell_phone, key: ENV['ENCRYPTION_KEY_PERSON'], mode: :attr_encrypted, algorithm: 'aes-256-cbc'
+  attr_encrypted :birth_date, key: ENV['ENCRYPTION_KEY_PERSON'], marshal: true, marshaler: Marshel::Date, mode: :attr_encrypted, algorithm: 'aes-256-cbc'
 
   scope :has_flown, -> {
     where(day_of_flight_id: !nil)

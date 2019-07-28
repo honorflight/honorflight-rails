@@ -41,9 +41,10 @@ gem 'twilio-ruby', '~> 4.0.0'
 
 # Encryption
 gem 'attr_encrypted', '~> 1.3.0' #, github: 'attr-encrypted/attr_encrypted'
+# gem 'attr_encrypted', "~> 3.0.0"
 
 # Active Admin
-gem 'devise', '3.4.1'
+gem "devise", "~> 3.4.1"
 gem 'activeadmin', github: 'activeadmin'
 gem 'autoprefixer-rails', '~> 4.0.2.2'
 gem 'responders',  '~> 2.0'
@@ -74,6 +75,12 @@ gem 'virtus', '1.0.4'
 gem 'redcarpet', '3.2.2'
 
 gem "paranoia", "~> 2.0"
+
+# Security fixes - remove on broaded update
+gem "rack-protection", ">= 1.5.5"
+gem "ffi", ">= 1.9.24"
+gem "rubyzip", ">= 1.2.2"
+# End security
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
