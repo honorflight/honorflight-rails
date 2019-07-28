@@ -1,7 +1,7 @@
 class MedicalCondition < ActiveRecord::Base
-  attr_encrypted :diagnosed_at,  key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"], marshal: true, marshaler: Marshel::Date
-  attr_encrypted :last_occurrence, key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"], marshal: true, marshaler: Marshel::Date
-  attr_encrypted :comment, key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"]
+  attr_encrypted :diagnosed_at,  key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"], marshal: true, marshaler: Marshel::Date, mode: :attr_encrypted, algorithm: 'aes-256-cbc'
+  attr_encrypted :last_occurrence, key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"], marshal: true, marshaler: Marshel::Date, mode: :attr_encrypted, algorithm: 'aes-256-cbc'
+  attr_encrypted :comment, key: ENV["ENCRYPTION_KEY_MEDICALCONDITION"], mode: :attr_encrypted, algorithm: 'aes-256-cbc'
   # attr_encrypted :diagnosed_last, :description, key: 'future key alg', marshal: true, marshaler: Marshel::Date
 
   belongs_to :person

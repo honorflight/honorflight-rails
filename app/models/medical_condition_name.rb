@@ -1,5 +1,5 @@
 class MedicalConditionName < ActiveRecord::Base
-  attr_encrypted :name, key: ENV['ENCRYPTION_KEY_MEDICALCONDITIONNAME']
+  attr_encrypted :name, key: ENV['ENCRYPTION_KEY_MEDICALCONDITIONNAME'], mode: :attr_encrypted, algorithm: 'aes-256-cbc'
 
   belongs_to :medical_condition_type
 
