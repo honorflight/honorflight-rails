@@ -5,7 +5,7 @@ gem 'dotenv-rails'
 gem 'rake', '< 11.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 1.0'
 # Use SCSS for stylesheets
@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Upgrade
-gem 'sprockets', '= 3.2.0'
+gem 'sprockets', '< 4.0'
 gem 'sprockets-rails', '= 2.3.1'
 
 # Attachments
@@ -130,4 +130,4 @@ group :development, :test do
   gem 'brakeman', require: false
 end
 
-ruby '2.2.6'
+ruby '2.3.8'
