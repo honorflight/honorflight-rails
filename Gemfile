@@ -81,6 +81,7 @@ gem "paranoia", "~> 2.0"
 gem "rack-protection", ">= 1.5.5"
 gem "ffi", ">= 1.9.24"
 gem "rubyzip", ">= 1.2.2"
+gem "nokogiri", ">= 1.10.4"
 # End security
 
 # Use ActiveModel has_secure_password
