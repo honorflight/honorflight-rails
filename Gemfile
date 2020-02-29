@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'dotenv-rails'
 
-gem 'rake', '< 11.0'
+gem 'rake', '< 14.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
