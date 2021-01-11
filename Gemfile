@@ -73,7 +73,7 @@ gem 'sinatra', '1.4.6', require: false
 
 gem 'virtus', '1.0.4'
 
-gem 'redcarpet', '3.2.2'
+gem 'redcarpet', '3.5.1'
 
 gem "paranoia", "~> 2.0"
 
